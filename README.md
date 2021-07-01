@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dating tool
 
 Tool to help people find more friends who have a similar hoppy, passion..., then we can connect to make a date
@@ -34,3 +35,7 @@ yarn add
 **Step 3** Install expo app on Google Play\Appstore and scan QR in the terminal.
 
 **Your dev device and phone are same network**
+=======
+# dating-ui
+Tool to help people find more friends who have a similar hoppy, passion..., then we can connect to make a date
+>>>>>>> 736af84 (init project)
