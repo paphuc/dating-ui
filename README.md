@@ -14,7 +14,7 @@ npm install --global expo-cli
 ```
 or
 ```
-yarn install --global expo-cli
+yarn add --global expo-cli
 ```
 ### Install node_module
 
@@ -23,7 +23,7 @@ npm install
 ```
 or
 ```
-yarn add
+yarn install 
 ```
 ## Usage
 
