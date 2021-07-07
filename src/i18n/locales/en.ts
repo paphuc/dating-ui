@@ -1,2 +1,4 @@
-'contact': 'Contact',
-'setting': 'Setting',
+export default {
+	'contact': 'Contact',
+    'setting': 'Setting',
+};
