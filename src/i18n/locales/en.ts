@@ -1,0 +1,2 @@
+'contact': 'Contact',
+'setting': 'Setting',
