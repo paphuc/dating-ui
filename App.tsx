@@ -2,8 +2,9 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk'
 import appReducers from './src/redux/reducers';
 
 import useCachedResources from './src/hooks/useCachedResources';
@@ -12,7 +13,8 @@ import Navigation from './src/navigation';
 import Container from './src/components/Container'
 
 export const store = createStore(
-  appReducers
+  appReducers,
+  applyMiddleware(thunk)
 )
 
 export default function App() {

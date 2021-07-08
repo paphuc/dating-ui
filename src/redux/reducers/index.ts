@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import languageReducer from './language';
+import languageStore from './language';
+import authStore from './auth'
 
 const appReducers = combineReducers({
-    languageReducer
+    languageStore,
+    authStore
 });
 
 export default appReducers;

@@ -11,7 +11,7 @@ import { ColorSchemeName } from 'react-native';
 import { RootStackParamList } from '../../types';
 // import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
-import Login from '../screens/Register'
+import Login from '../screens/Login'
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
