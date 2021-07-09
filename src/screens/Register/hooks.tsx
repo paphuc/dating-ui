@@ -13,6 +13,7 @@ export default function Hook(props: any) {
         dispatch(Actions.register(user))
     }
 
+
     const handleLogin = () => {
         props.navigation.navigate("Login")
     }

@@ -19,6 +19,7 @@
     "@react-navigation/native": "~5.8.10",
     "@react-navigation/stack": "~5.12.8",
     "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
     "ex-react-native-i18n": "^0.0.6",
     "expo": "~41.0.1",
     "expo-asset": "~8.3.1",
@@ -40,7 +41,8 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

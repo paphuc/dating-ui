@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { clearLocalStorage, getToken } from './Utils'
-import Config from '../config'
+import Config from '../../config'
 class axiosService {
     constructor() {
         const instance = axios.create({ headers: { "Content-Type": "application/json;charset=utf-8" } })
