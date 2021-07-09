@@ -4,7 +4,7 @@
  */
 
 import { NavigatorScreenParams } from "@react-navigation/native";
-
+import { UserProps } from "../interfaces"
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
@@ -34,18 +34,3 @@ export type MeParamList = {
   MeScreen: undefined;
 };
 
-export interface UserProps {
-  name: string;
-  email: string;
-  media: string[];
-  age: number;
-  gender: string;
-  sex: string;
-  country: string;
-  hobby: string[];
-  about: string;
-  like_id: string[];
-  match_id: string[];
-  lookingFor: string;
-  relationship: string;
-}

@@ -2,21 +2,25 @@
  * Learn more about createBottomTabNavigator:
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
+import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import * as React from "react";
 
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+import HomeScreen from "../screens/Home/index";
+import AddScreen from "../screens/Profile";
+import InboxScreen from "../screens/Home/index";
+import MeScreen from "../screens/Profile";
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import HomeScreen from '../screens/Home';
-import AddScreen from '../screens/Profile';
-
-import InboxScreen from '../screens/Home';
-import MeScreen from '../screens/Profile';
-
-import { BottomTabParamList, HomeParamList, AddParamList, InboxParamList, MeParamList } from '../../types';
+import {
+  BottomTabParamList,
+  HomeParamList,
+  AddParamList,
+  InboxParamList,
+  MeParamList,
+} from "./types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -26,12 +30,15 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
       <BottomTab.Screen
         name="Home"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart-circle-outline" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="heart-circle-outline" color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -47,7 +54,10 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Ionicons>["name"];
+  color: string;
+}) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
@@ -61,7 +71,7 @@ function TabOneNavigator() {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Home',  headerShown: false  }}
+        options={{ headerTitle: "Home", headerShown: false }}
       />
     </HomeStack.Navigator>
   );
@@ -75,7 +85,7 @@ function TabTwoNavigator() {
       <MeStack.Screen
         name="MeScreen"
         component={MeScreen}
-        options={{ headerTitle: 'Me', headerShown: false }}
+        options={{ headerTitle: "Me", headerShown: false }}
       />
     </MeStack.Navigator>
   );

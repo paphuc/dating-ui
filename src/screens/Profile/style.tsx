@@ -43,5 +43,11 @@ export default StyleSheet.create({
 		alignItems: "center",
 		borderRadius:10,
 		backgroundColor:"white",
+	},
+	CardListImageContainer: {
+		margin: 5,
+		backgroundColor: "black",
+		alignItems: "center",
+		justifyContent: "center",
 	}
 })
