@@ -1,35 +1,33 @@
-/**
- * If you are not familiar with React Navigation, check out the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import React, { FC } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
-import { ColorSchemeName } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import Login from '../screens/Login'
+import Register from '../screens/Register'
+import Home from '../screens/Home'
 
-import { RootStackParamList } from '../../types';
-// import BottomTabNavigator from './BottomTabNavigator';
-import LinkingConfiguration from './LinkingConfiguration';
-import Login from '../screens/Register'
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function RootNavigator() {
+
+  const Stack = createStackNavigator<any>();
+  const user = useSelector((value: any) => value.authStore)
+
+  //restore tokens in here
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {user?.isLogged ? (
+          <>
+            <Stack.Screen name="Home" component={Home} />
+          </>
+        )
+          :
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+          </>
+        }
+      </Stack.Navigator>
     </NavigationContainer>
-  );
-}
-
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
-const Stack = createStackNavigator<RootStackParamList>();
-
-function RootNavigator() {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={Login} />
-    </Stack.Navigator>
   );
 }

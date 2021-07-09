@@ -12,17 +12,20 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
-            screens: {
-              TabOneScreen: 'one',
-            },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
-            },
-          },
-        },
+          Register: 'Register'
+        }
+        // screens: {
+        //   TabOne: {
+        //     screens: {
+        //       TabOneScreen: 'one',
+        //     },
+        //   },
+        //   TabTwo: {
+        //     screens: {
+        //       TabTwoScreen: 'two',
+        //     },
+        //   },
+        // },
       },
       NotFound: '*',
     },
