@@ -6,7 +6,7 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { UserProps } from "../interfaces"
 export type RootStackParamList = {
-  Root: undefined;
+  List: undefined;
   NotFound: undefined;
   BottomTab: NavigatorScreenParams<BottomTabParamList>;
 };

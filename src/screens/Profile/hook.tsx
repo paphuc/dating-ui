@@ -5,14 +5,10 @@ import { RootStackParamList } from "../../navigation/types";
 import { JwtProps, UserProps } from "../../interfaces";
 import { useSelector, useDispatch } from "react-redux";
 import API from "../../common/Api";
+import navigation from "../../navigation";
 
-type ListScreenNavigationProp = StackNavigationProp<RootStackParamList, "Root">;
 
-export type PropsInterface = {
-  navigation: ListScreenNavigationProp;
-};
-
-export default function Hook(props?: PropsInterface) {
+export default function Hook() {
   const [user, setUser] = useState<UserProps | null>(null);
 
   const state = useSelector((value: any) => value.authStore);

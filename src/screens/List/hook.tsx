@@ -7,7 +7,7 @@ import Actions from "../../redux/actions/auth";
 import { useSelector, useDispatch } from "react-redux";
 import API from "../../common/Api";
 
-type ListScreenNavigationProp = StackNavigationProp<RootStackParamList, "Root">;
+type ListScreenNavigationProp = StackNavigationProp<RootStackParamList, "List">;
 
 export type PropsInterface = {
   navigation: ListScreenNavigationProp;

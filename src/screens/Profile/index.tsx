@@ -4,7 +4,7 @@ import { Image, Text, Header, Avatar, Chip } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import useHook, { PropsInterface } from "./hook";
+import useHook from "./hook";
 import AuthActions from "../../redux/actions/auth";
 import styles from "./style";
 
