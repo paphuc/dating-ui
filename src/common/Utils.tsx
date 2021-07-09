@@ -1,9 +1,11 @@
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
 export function clearLocalStorage() {
-	["access_token", "refresh_token", "user_info", "user_id"].forEach((item) => {
-		localStorage.removeItem(item)
+	["user"].forEach((item) => {
+		AsyncStorage.removeItem(item)
 	})
 }
 
 export function getToken(tokenType : string) {
-	return localStorage.getItem(tokenType)
+	return AsyncStorage.getItem(tokenType)
 }

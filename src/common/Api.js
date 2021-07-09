@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 import { clearLocalStorage, getToken } from './Utils'
-import { checkTokenExpired } from './JWT'
-
+import Config from '../config'
 class axiosService {
     constructor() {
         const instance = axios.create({ headers: { "Content-Type": "application/json;charset=utf-8" } })
@@ -11,37 +10,18 @@ class axiosService {
 
         instance.interceptors.request.use(async (config) => {
             if (!config.headers.Authorization) {
-                const token = getToken('access_token');
-                if (token) {
-                    const isExpire = checkTokenExpired(token)
-                    if (!isExpire) {
-                        config.headers.Authorization = `Bearer ${token}`;
-                    } else {
-                        let refreshToken = getToken('refresh_token')
-                        await accessTokenRequest({ 'refresh_token': refreshToken })
-                            .then((res) => {
-                                const newAccessToken = res.data.access_token;
-                                const newRefreshToken = res.data.refresh_token;
-                                localStorage.setItem("access_token", newAccessToken)
-                                localStorage.setItem("refresh_token", newRefreshToken)
-                                config.headers.Authorization = `Bearer ${newAccessToken}`
-                            })
-                            .catch((err) => {
-                                clearLocalStorage()
-                                // window.location.href = CONSTANTS.url.login
-                            })
-                    }
-
-                } else {
-                    clearLocalStorage()
-                    // window.location.href = URL.login
+                const user = await getToken('user');
+                if (user) {
+                    const { token } = JSON.parse(user)
+                    config.headers.Authorization = `Bearer ${token}`;
                 }
 
             }
             return config;
-        }, error => {
-            Promise.reject(error)
-        })
+        }
+            , error => {
+                Promise.reject(error)
+            })
         this.instance = instance
     }
 
@@ -54,23 +34,24 @@ class axiosService {
     }
 
     get(url) {
-        return this.instance.get(url)
+        return this.instance.get(`${Config.Host}:${Config.Port}${url}`)
+
     }
 
     post(url, payload) {
-        return this.instance.post(url, payload)
+        return this.instance.post(`${Config.Host}:${Config.Port}${url}`, payload)
     }
 
     put(url, payload) {
-        return this.instance.put(url, payload)
+        return this.instance.put(`${Config.Host}:${Config.Port}${url}`, payload)
     }
 
     delete(url, payload) {
-        return this.instance.delete(url, payload)
+        return this.instance.delete(`${Config.Host}:${Config.Port}${url}`, payload)
     }
 
     upload(url, formData) {
-        return this.instance.post(url, formData, {
+        return this.instance.post(`${Config.Host}:${Config.Port}${url}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -78,7 +59,7 @@ class axiosService {
     }
 
     export(url) {
-        return this.instance.get(url, {
+        return this.instance.get(`${Config.Host}:${Config.Port}${url}`, {
             responseType: 'blob'
         })
     }

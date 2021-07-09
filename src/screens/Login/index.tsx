@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import useHook from './hooks'
 import styles from './style'
 
-export default function LoginScreen() {
-	const { user, setUser, handleLogin } = useHook()
+export default function LoginScreen(props: any) {
+	const { user, setUser, handleLogin, handleRegister } = useHook(props)
 
 	return (
 		<View style={styles.Container}>
@@ -14,6 +14,7 @@ export default function LoginScreen() {
 			</View>
 			{/* INPUT FORM */}
 			<View style={styles.FormContainer}>
+
 				<Input
 					placeholder='email@adress.com'
 					label="Your email"
@@ -41,7 +42,7 @@ export default function LoginScreen() {
 					}
 				/>
 				<Button title="Login" onPress={handleLogin} />
-				<Button type="clear" title="I don't have account" />
+				<Button type="clear" onPress={handleRegister} title="I don't have account" />
 			</View>
 		</View>
 	)
