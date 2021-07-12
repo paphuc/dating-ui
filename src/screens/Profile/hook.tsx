@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import API from "../../common/Api";
 import navigation from "../../navigation";
 
-
 export default function Hook() {
   const [user, setUser] = useState<UserProps | null>(null);
 

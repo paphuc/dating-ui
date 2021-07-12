@@ -19,7 +19,7 @@ export default function Hook(props: any) {
     }
 
     useEffect(() => {
-        console.log(state)
+
     }, [state])
 
     return {

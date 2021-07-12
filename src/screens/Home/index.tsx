@@ -39,23 +39,23 @@ export default function HomeScreen({ route, navigation }: Props) {
         <View style={styles.OverlayContainer}>
           <SafeAreaView style={{ flex: 1 }}>
             <ScrollView horizontal pagingEnabled style={{ flex: 1 }}>
-              {item?.media.map((e, i) => {
-                return (
-                  <View key={i} style={{ flex: 1, width: Layout.window.width }}>
-                    <TouchableOpacity onPress={() => console.log("click view Profile user")}>
-                      <Image
-                        source={{ uri: e }}
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          borderRadius: 5,
-                        }}
-                        PlaceholderContent={<ActivityIndicator />}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                );
-              })}
+              {item?.media.map((e, i) => (
+                <View key={i} style={{ flex: 1, width: Layout.window.width }}>
+                  <TouchableOpacity
+                    onPress={() => console.log("click view Profile user")}
+                  >
+                    <Image
+                      source={{ uri: e }}
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        borderRadius: 5,
+                      }}
+                      PlaceholderContent={<ActivityIndicator />}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ))}
             </ScrollView>
           </SafeAreaView>
         </View>

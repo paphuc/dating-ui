@@ -14,7 +14,7 @@ import useHook, { PropsInterface } from "./hook";
 import styles from "./style";
 
 export default function ListScreen({ navigation }: PropsInterface) {
-  const { handleNavigate, userList } = useHook({ navigation });
+  const { handleNavigate, listUsers } = useHook({ navigation });
   
   const getFooter = () => {
     return (
@@ -51,7 +51,7 @@ export default function ListScreen({ navigation }: PropsInterface) {
           ListFooterComponent={getFooter}
           scrollEnabled={true}
           nestedScrollEnabled={true}
-          data={userList}
+          data={listUsers}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {

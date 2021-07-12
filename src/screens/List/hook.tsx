@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../navigation/types";
 import { UserProps } from "../../interfaces";
-import Actions from "../../redux/actions/auth";
-
 import { useSelector, useDispatch } from "react-redux";
-import API from "../../common/Api";
+
+import Actions from "../../redux/actions/userList";
+
 
 type ListScreenNavigationProp = StackNavigationProp<RootStackParamList, "List">;
 
@@ -14,9 +14,9 @@ export type PropsInterface = {
 };
 
 export default function Hook(props: PropsInterface) {
-  const [userList, setUserList] = useState<UserProps[]>([]);
 
-  const state = useSelector((value: any) => value.authStore);
+  const { listUsers } = useSelector((value: any) => value.userListStore);
+  const dispatch = useDispatch()
 
   const handleNavigate = (item: UserProps) => {
     props.navigation.navigate("BottomTab", {
@@ -29,13 +29,11 @@ export default function Hook(props: PropsInterface) {
   };
 
   useEffect(() => {
-    API.get("/users").then(({ data }) => {
-      setUserList(data.listUsers);
-    });
-  }, [state]);
+    dispatch(Actions.getList())
+  }, []);
 
   return {
-    userList,
+    listUsers,
     handleNavigate,
   };
 }
