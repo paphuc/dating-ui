@@ -15,7 +15,6 @@ export default function authReducer(state: Object = initState, action: any) {
 			return { isLogged: true, ...action.payload };
 		}
 		case constants.AUTH_LOGOUT: {
-
 			return initState
 		}
 		case constants.AUTH_ERROR: {
