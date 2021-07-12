@@ -71,7 +71,7 @@ export default function ProfileScreen({}) {
             })}
           </View>
           <InfoItem icon="map-marker" content={user ? user.country : ""} />
-          <InfoItem icon="genderless" content={"Sexsual: " + user?.sex} />
+          <InfoItem icon="genderless" content={"Sexual: " + user?.sex} />
           <InfoItem
             icon="genderless"
             content={"Status: " + user?.relationship}
