@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import useHook from "./hook";
-import AuthActions from "../../redux/actions/auth";
+import AuthActions from "../../../redux/actions/auth";
 import styles from "./style";
 
 interface ItemProps {
@@ -15,7 +15,7 @@ interface ItemProps {
 
 export default function ProfileScreen({}) {
   const dispatch = useDispatch();
-  const { user } = useHook();
+  const { user, getAge } = useHook();
   const InfoItem = ({ icon, content }: ItemProps) => {
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -48,7 +48,8 @@ export default function ProfileScreen({}) {
               color: "#204761",
             }}
           >
-            {user?.name}, {user?.age} - {user?.gender}
+            {user?.name}, {user ? getAge(user.birthday.toString()) : ""} -{" "}
+            {user?.gender}
           </Text>
         </View>
         {/* info */}
@@ -78,7 +79,7 @@ export default function ProfileScreen({}) {
           />
           <InfoItem
             icon="genderless"
-            content={"Looking For: " + user?.lookingFor}
+            content={"Looking For: " + user?.looking_for}
           />
           {/* About */}
           <View

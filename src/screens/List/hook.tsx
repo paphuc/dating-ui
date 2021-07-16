@@ -6,20 +6,18 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Actions from "../../redux/actions/userList";
 
-
 type ListScreenNavigationProp = StackNavigationProp<RootStackParamList, "List">;
 
 export type PropsInterface = {
   navigation: ListScreenNavigationProp;
 };
 
-export default function Hook(props: PropsInterface) {
-
+export default function Hook(props?: PropsInterface) {
   const { listUsers } = useSelector((value: any) => value.userListStore);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleNavigate = (item: UserProps) => {
-    props.navigation.navigate("BottomTab", {
+    props?.navigation.navigate("BottomTab", {
       screen: "Home",
       params: {
         screen: "HomeScreen",
@@ -27,12 +25,15 @@ export default function Hook(props: PropsInterface) {
       },
     });
   };
-
+  const getAge = (age: string): string => {
+    return (new Date().getFullYear() - new Date(age).getFullYear()).toString();
+  };
   useEffect(() => {
-    dispatch(Actions.getList())
+    dispatch(Actions.getList());
   }, []);
 
   return {
+    getAge,
     listUsers,
     handleNavigate,
   };

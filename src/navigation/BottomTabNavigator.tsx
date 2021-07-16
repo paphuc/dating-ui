@@ -6,21 +6,29 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import HomeScreen from "../screens/Home/index";
-import AddScreen from "../screens/Profile";
-import InboxScreen from "../screens/Home/index";
-import MeScreen from "../screens/Profile";
+import {
+  HomeScreen,
+  ProfileScreen,
+  LikeScreens,
+  InboxScreens,
+  MatchScreens,
+} from "../screens/TabsBottom";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+import Layout from "../constants/Layout";
 import {
   BottomTabParamList,
   HomeParamList,
-  AddParamList,
+  LikeTabParamList,
   InboxParamList,
-  MeParamList,
+  ProfileParamList,
+  LikeTabScreensParamList,
 } from "./types";
+import { View } from "react-native";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -34,7 +42,7 @@ export default function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={TabOneNavigator}
+        component={TabHomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="heart-circle-outline" color={color} />
@@ -42,8 +50,26 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Me"
-        component={TabTwoNavigator}
+        name="Like"
+        component={TabLikeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="contrast" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Inbox"
+        component={TabInboxNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="chatbubbles" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={TabProfileNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="person" color={color} />,
         }}
@@ -61,11 +87,43 @@ function TabBarIcon(props: {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
+const TopTabLikedScreen =
+  createMaterialTopTabNavigator<LikeTabScreensParamList>();
+
+function LikeTabScreens() {
+  return (
+    <View style={{ flex: 1 }}>
+      <TopTabLikedScreen.Navigator
+        initialRouteName="Like"
+        tabBarOptions={{
+          tabStyle: {
+            borderRadius: 20,
+            margin: 2,
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          labelStyle: { fontSize: 15 },
+          contentContainerStyle: { justifyContent: "center" },
+          activeTintColor: "#56BBFF",
+          inactiveTintColor: "silver",
+          indicatorStyle: {
+            width: Layout.window.width / 4,
+            left: (Layout.window.width / 2 - Layout.window.width / 4) / 2,
+          },
+          style: { margin: 20, borderRadius: 20 },
+        }}
+      >
+        <TopTabLikedScreen.Screen name="Like" component={LikeScreens} />
+        <TopTabLikedScreen.Screen name="Match" component={MatchScreens} />
+      </TopTabLikedScreen.Navigator>
+    </View>
+  );
+}
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const HomeStack = createStackNavigator<HomeParamList>();
 
-function TabOneNavigator() {
+function TabHomeNavigator() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -76,17 +134,43 @@ function TabOneNavigator() {
     </HomeStack.Navigator>
   );
 }
+const LikeStack = createStackNavigator<LikeTabParamList>();
 
-const MeStack = createStackNavigator<MeParamList>();
-
-function TabTwoNavigator() {
+function TabLikeNavigator() {
   return (
-    <MeStack.Navigator>
-      <MeStack.Screen
-        name="MeScreen"
-        component={MeScreen}
+    <LikeStack.Navigator>
+      <LikeStack.Screen
+        name="LikeTabScreens"
+        component={LikeTabScreens}
         options={{ headerTitle: "Me", headerShown: false }}
       />
-    </MeStack.Navigator>
+    </LikeStack.Navigator>
+  );
+}
+const InboxStack = createStackNavigator<InboxParamList>();
+
+function TabInboxNavigator() {
+  return (
+    <InboxStack.Navigator>
+      <InboxStack.Screen
+        name="InboxScreen"
+        component={InboxScreens}
+        options={{ headerTitle: "Inbox", headerShown: false }}
+      />
+    </InboxStack.Navigator>
+  );
+}
+
+const ProfileStack = createStackNavigator<ProfileParamList>();
+
+function TabProfileNavigator() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerTitle: "Me", headerShown: false }}
+      />
+    </ProfileStack.Navigator>
   );
 }

@@ -4,7 +4,7 @@
  */
 
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { UserProps } from "../interfaces"
+import { UserProps } from "../interfaces";
 export type RootStackParamList = {
   List: undefined;
   NotFound: undefined;
@@ -13,24 +13,26 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: NavigatorScreenParams<HomeParamList> | undefined;
-  Add: undefined;
+  Like: NavigatorScreenParams<LikeTabParamList> | undefined;
   Inbox: undefined;
-  Me: undefined;
+  Profile: undefined;
 };
 
 export type HomeParamList = {
   HomeScreen: { item: UserProps } | undefined;
 };
-
-export type AddParamList = {
-  AddScreen: undefined;
+export type LikeTabScreensParamList = {
+  Like: undefined;
+  Match: undefined;
+};
+export type LikeTabParamList = {
+  LikeTabScreens: NavigatorScreenParams<LikeTabScreensParamList> | undefined;
 };
 
 export type InboxParamList = {
   InboxScreen: undefined;
 };
 
-export type MeParamList = {
-  MeScreen: undefined;
+export type ProfileParamList = {
+  ProfileScreen: undefined;
 };
-
