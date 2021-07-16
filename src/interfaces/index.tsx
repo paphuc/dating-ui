@@ -25,7 +25,7 @@ export interface UserProps {
   name: string;
   email: string;
   media: string[];
-  age: number;
+  birthday: Date;
   gender: string;
   sex: string;
   country: string;
@@ -33,7 +33,7 @@ export interface UserProps {
   about: string;
   like_id: string[];
   match_id: string[];
-  lookingFor: string;
+  looking_for: string;
   relationship: string;
   created_at?: Date;
   updated_at?: Date;

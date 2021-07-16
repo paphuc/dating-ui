@@ -11,8 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeParamList } from "../../navigation/types";
-import Layout from "../../constants/Layout";
+import { HomeParamList } from "../../../navigation/types";
+import Layout from "../../../constants/Layout";
+import useHook from "./hook";
 import styles from "./style";
 
 type ProfileScreenRouteProp = RouteProp<HomeParamList, "HomeScreen">;
@@ -29,7 +30,7 @@ type Props = {
 
 export default function HomeScreen({ route, navigation }: Props) {
   const item = route.params?.item;
-
+  const { getAge } = useHook();
   const user = useSelector((value: any) => value.authStore);
   const dispatch = useDispatch();
   return (
@@ -64,7 +65,7 @@ export default function HomeScreen({ route, navigation }: Props) {
           <View style={{ margin: 20 }}>
             <Text style={styles.TextInfo}>{item?.name}</Text>
             <Text style={styles.TextInfo}>
-              {item?.age} - {item?.gender}
+              {item ? getAge(item?.birthday.toString()) : ""} - {item?.gender}
             </Text>
           </View>
           <View style={{ margin: 8, alignItems: "flex-end" }}>
@@ -79,9 +80,6 @@ export default function HomeScreen({ route, navigation }: Props) {
               <Icon name="heart-outline" size={50} color="#56BBFF" />
               <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <Icon name="heart" size={50} color="#56BBFF" />
-                <Text style={styles.Text}>
-                  {item ? item.like_id.length : 0}
-                </Text>
               </View>
             </View>
           </View>

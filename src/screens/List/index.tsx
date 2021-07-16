@@ -14,8 +14,8 @@ import useHook, { PropsInterface } from "./hook";
 import styles from "./style";
 
 export default function ListScreen({ navigation }: PropsInterface) {
-  const { handleNavigate, listUsers } = useHook({ navigation });
-  
+  const { handleNavigate, listUsers, getAge } = useHook({ navigation });
+
   const getFooter = () => {
     return (
       <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -23,7 +23,7 @@ export default function ListScreen({ navigation }: PropsInterface) {
       </View>
     );
   };
-  
+
   return (
     <View style={styles.Container}>
       <Header
@@ -66,7 +66,7 @@ export default function ListScreen({ navigation }: PropsInterface) {
                   <View style={styles.InfoContainer}>
                     <Text style={styles.Text}>{item.name}</Text>
                     <Text style={styles.Text}>
-                      {item.age} - {item.gender}
+                      {getAge(item.birthday)} - {item.gender}
                     </Text>
                   </View>
                 </TouchableOpacity>

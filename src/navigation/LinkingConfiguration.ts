@@ -20,8 +20,11 @@ export default {
               Home: {
                 HomeScreen: "HomeScreen",
               },
-              Me: {
-                MeScreen: "MeScreen",
+              Like:{ 
+                
+              },
+              Profile: {
+                ProfileScreen: "ProfileScreen",
               },
             },
           },
