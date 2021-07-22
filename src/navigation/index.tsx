@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector, useDispatch } from "react-redux";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import List from "../screens/List";
 import BottomTab from "./BottomTabNavigator";
 export default function RootNavigator() {
   const Stack = createStackNavigator<any>();
@@ -17,7 +16,6 @@ export default function RootNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user?.isLogged ? (
           <>
-            <Stack.Screen name="List" component={List} />
             <Stack.Screen name="BottomTab" component={BottomTab} />
           </>
         ) : (

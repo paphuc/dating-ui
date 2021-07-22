@@ -25,9 +25,11 @@ export default function Hook(props?: PropsInterface) {
       },
     });
   };
+
   const getAge = (age: string): string => {
     return (new Date().getFullYear() - new Date(age).getFullYear()).toString();
   };
+
   useEffect(() => {
     dispatch(Actions.getList());
   }, []);

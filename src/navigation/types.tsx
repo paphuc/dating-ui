@@ -1,8 +1,3 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
-
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { UserProps } from "../interfaces";
 export type RootStackParamList = {
@@ -12,8 +7,8 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  Home: NavigatorScreenParams<HomeParamList> | undefined;
-  Like: NavigatorScreenParams<LikeTabParamList> | undefined;
+  Heart: NavigatorScreenParams<HomeParamList> | undefined;
+  Matched: NavigatorScreenParams<LikeTabParamList> | undefined;
   Inbox: undefined;
   Profile: undefined;
 };

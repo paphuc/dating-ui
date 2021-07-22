@@ -30,6 +30,7 @@ export default function App() {
           <Container>
             <Navigation />
           </Container>
+          <StatusBar style="dark" />
         </SafeAreaProvider>
       </Provider>
     );

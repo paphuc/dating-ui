@@ -1,10 +1,7 @@
 import * as React from "react";
 import {
-  TouchableOpacity,
   View,
-  ActivityIndicator,
-  SafeAreaView,
-  ScrollView,
+  FlatList
 } from "react-native";
 import { Input, Button, Image, Text, Avatar } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,13 +12,10 @@ import { HomeParamList } from "../../../navigation/types";
 import Layout from "../../../constants/Layout";
 import useHook from "./hook";
 import styles from "./style";
+import UserCard from "../../../components/skeletons/UserCard"
 
 type ProfileScreenRouteProp = RouteProp<HomeParamList, "HomeScreen">;
-
-type ProfileScreenNavigationProp = StackNavigationProp<
-  HomeParamList,
-  "HomeScreen"
->;
+type ProfileScreenNavigationProp = StackNavigationProp<HomeParamList, "HomeScreen">;
 
 type Props = {
   route: ProfileScreenRouteProp;
@@ -35,8 +29,22 @@ export default function HomeScreen({ route, navigation }: Props) {
   const dispatch = useDispatch();
   return (
     <View style={styles.Container}>
+      <FlatList
+        data={[1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+        renderItem={(e) => (
+          <View style={{ backgroundColor: 'white', flex: 1, flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>
+            <UserCard />
+          </View>
+        )}
+        numColumns={2}
+      />
+    </View>
+  );
+}
+
+/*
       <View style={styles.Card}>
-        {/* overlay picture */}
+        {/* overlay picture
         <View style={styles.OverlayContainer}>
           <SafeAreaView style={{ flex: 1 }}>
             <ScrollView horizontal pagingEnabled style={{ flex: 1 }}>
@@ -60,7 +68,6 @@ export default function HomeScreen({ route, navigation }: Props) {
             </ScrollView>
           </SafeAreaView>
         </View>
-        {/* information */}
         <View style={styles.OverlayInfoContainer}>
           <View style={{ margin: 20 }}>
             <Text style={styles.TextInfo}>{item?.name}</Text>
@@ -69,22 +76,4 @@ export default function HomeScreen({ route, navigation }: Props) {
             </Text>
           </View>
           <View style={{ margin: 8, alignItems: "flex-end" }}>
-            <Avatar
-              containerStyle={styles.AvatarContainer}
-              size={50}
-              rounded
-              source={{ uri: item?.media[0] }}
-              title={item?.name}
-            />
-            <View style={{ flexDirection: "row", margin: 5 }}>
-              <Icon name="heart-outline" size={50} color="#56BBFF" />
-              <View style={{ justifyContent: "center", alignItems: "center" }}>
-                <Icon name="heart" size={50} color="#56BBFF" />
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-}
+      </View>*/
