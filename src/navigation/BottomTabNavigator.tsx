@@ -1,65 +1,90 @@
-import * as React from "react";
-import { FontAwesome} from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import { BottomTabParamList } from "./types";
+import * as React from 'react'
+import { FontAwesome } from '@expo/vector-icons'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Colors from '../constants/Colors'
+import useColorScheme from '../hooks/useColorScheme'
+import { BottomTabParamList } from './types'
 import HomeNav from './HomeNavigator'
 import ProfileNav from './ProfileNavigator'
 import LikeNav from './LikeNavigator'
 import InboxNav from './InboxNavigator'
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const BottomTab =
+  createBottomTabNavigator<BottomTabParamList>()
 
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
+  name: React.ComponentProps<
+    typeof FontAwesome
+  >['name']
+  color: string
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return (
+    <FontAwesome
+      size={30}
+      style={{ marginBottom: -3 }}
+      {...props}
+    />
+  )
 }
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Heart"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      initialRouteName='Heart'
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+      }}
     >
       <BottomTab.Screen
-        name="Heart"
+        name='Heart'
         component={HomeNav}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="heart" color={color} />
+            <TabBarIcon
+              name='heart'
+              color={color}
+            />
           ),
         }}
       />
       <BottomTab.Screen
-        name="Matched"
+        name='Matched'
         component={LikeNav}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="thumbs-up" color={color} />
+            <TabBarIcon
+              name='thumbs-up'
+              color={color}
+            />
           ),
         }}
       />
       <BottomTab.Screen
-        name="Inbox"
+        name='Inbox'
         component={InboxNav}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="comments" color={color} />
+            <TabBarIcon
+              name='comments'
+              color={color}
+            />
           ),
         }}
       />
       <BottomTab.Screen
-        name="Profile"
+        name='Profile'
         component={ProfileNav}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon
+              name='user'
+              color={color}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
-  );
+  )
 }

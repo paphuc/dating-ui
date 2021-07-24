@@ -1,4 +1,4 @@
 export default {
-	'contact': 'Contact',
-    'setting': 'Setting',
-};
+  contact: 'Contact',
+  setting: 'Setting',
+}

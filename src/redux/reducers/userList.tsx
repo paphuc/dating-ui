@@ -1,22 +1,22 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import constants from "../constants/userList";
-import { UserProps } from "../../interfaces";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import constants from '../constants/userList'
+import { UserProps } from '../../interfaces'
 
 export type initProps = {
-  totalPages: number | undefined;
-  currentPage: number | undefined;
-  listUsers: UserProps[] | undefined;
-};
+  totalPages: number | undefined
+  currentPage: number | undefined
+  listUsers: UserProps[] | undefined
+}
 
 const initState: initProps = {
   totalPages: undefined,
   currentPage: undefined,
   listUsers: [],
-};
+}
 
 export interface ActionType {
-  type: string;
-  payload: initProps;
+  type: string
+  payload: initProps
 }
 
 export default function authUserList(
@@ -25,12 +25,12 @@ export default function authUserList(
 ) {
   switch (action.type) {
     case constants.USER_LIST: {
-      return { ...action.payload };
+      return { ...action.payload }
     }
     case constants.USER_ERROR: {
-      return { errors: action.payload };
+      return { errors: action.payload }
     }
     default:
-      return state;
+      return state
   }
 }

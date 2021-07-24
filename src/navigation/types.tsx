@@ -1,33 +1,39 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
-import { UserProps } from "../interfaces";
+import { NavigatorScreenParams } from '@react-navigation/native'
+import { UserProps } from '../interfaces'
 export type RootStackParamList = {
-  List: undefined;
-  NotFound: undefined;
-  BottomTab: NavigatorScreenParams<BottomTabParamList>;
-};
+  List: undefined
+  NotFound: undefined
+  BottomTab: NavigatorScreenParams<BottomTabParamList>
+}
 
 export type BottomTabParamList = {
-  Heart: NavigatorScreenParams<HomeParamList> | undefined;
-  Matched: NavigatorScreenParams<LikeTabParamList> | undefined;
-  Inbox: undefined;
-  Profile: undefined;
-};
+  Heart:
+    | NavigatorScreenParams<HomeParamList>
+    | undefined
+  Matched:
+    | NavigatorScreenParams<LikeTabParamList>
+    | undefined
+  Inbox: undefined
+  Profile: undefined
+}
 
 export type HomeParamList = {
-  HomeScreen: { item: UserProps } | undefined;
-};
+  HomeScreen: { item: UserProps } | undefined
+}
 export type LikeTabScreensParamList = {
-  Like: undefined;
-  Match: undefined;
-};
+  Like: undefined
+  Match: undefined
+}
 export type LikeTabParamList = {
-  LikeTabScreens: NavigatorScreenParams<LikeTabScreensParamList> | undefined;
-};
+  LikeTabScreens:
+    | NavigatorScreenParams<LikeTabScreensParamList>
+    | undefined
+}
 
 export type InboxParamList = {
-  InboxScreen: undefined;
-};
+  InboxScreen: undefined
+}
 
 export type ProfileParamList = {
-  ProfileScreen: undefined;
-};
+  ProfileScreen: undefined
+}

@@ -1,45 +1,70 @@
-import * as React from "react";
+import * as React from 'react'
+import { View, FlatList } from 'react-native'
 import {
-  View,
-  FlatList
-} from "react-native";
-import { Input, Button, Image, Text, Avatar } from "react-native-elements";
-import { useDispatch, useSelector } from "react-redux";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeParamList } from "../../../navigation/types";
-import Layout from "../../../constants/Layout";
-import useHook from "./hook";
-import styles from "./style";
-import UserCard from "../../../components/skeletons/UserCard"
+  Input,
+  Button,
+  Image,
+  Text,
+  Avatar,
+} from 'react-native-elements'
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { HomeParamList } from '../../../navigation/types'
+import Layout from '../../../constants/Layout'
+import useHook from './hook'
+import styles from './style'
+import UserCard from '../../../components/skeletons/UserCard'
 
-type ProfileScreenRouteProp = RouteProp<HomeParamList, "HomeScreen">;
-type ProfileScreenNavigationProp = StackNavigationProp<HomeParamList, "HomeScreen">;
+type ProfileScreenRouteProp = RouteProp<
+  HomeParamList,
+  'HomeScreen'
+>
+type ProfileScreenNavigationProp =
+  StackNavigationProp<HomeParamList, 'HomeScreen'>
 
 type Props = {
-  route: ProfileScreenRouteProp;
-  navigation: ProfileScreenNavigationProp;
-};
+  route: ProfileScreenRouteProp
+  navigation: ProfileScreenNavigationProp
+}
 
-export default function HomeScreen({ route, navigation }: Props) {
-  const item = route.params?.item;
-  const { getAge } = useHook();
-  const user = useSelector((value: any) => value.authStore);
-  const dispatch = useDispatch();
+export default function HomeScreen({
+  route,
+  navigation,
+}: Props) {
+  const item = route.params?.item
+  const { getAge } = useHook()
+  const user = useSelector(
+    (value: any) => value.authStore
+  )
+  const dispatch = useDispatch()
   return (
     <View style={styles.Container}>
       <FlatList
-        data={[1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+        data={[
+          1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        ]}
         renderItem={(e) => (
-          <View style={{ backgroundColor: 'white', flex: 1, flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>
+          <View
+            style={{
+              backgroundColor: 'white',
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <UserCard />
           </View>
         )}
         numColumns={2}
       />
     </View>
-  );
+  )
 }
 
 /*

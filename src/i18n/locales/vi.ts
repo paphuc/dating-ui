@@ -1,4 +1,4 @@
 export default {
-	'username': 'Tài khoản',
-	'password': 'Mật khẩu',
-};
+  username: 'Tài khoản',
+  password: 'Mật khẩu',
+}

@@ -1,25 +1,35 @@
-import React from "react";
+import React from 'react'
 import {
   View,
   SafeAreaView,
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
-} from "react-native";
-import { Tab, TabView, Text, Image } from "react-native-elements";
-import useHook from "./hook";
-import styles from "./style";
+} from 'react-native'
+import {
+  Tab,
+  TabView,
+  Text,
+  Image,
+} from 'react-native-elements'
+import useHook from './hook'
+import styles from './style'
 
 export default function MatchScreens({}) {
-  const { matchedList, getAge } = useHook();
+  const { matchedList, getAge } = useHook()
 
   const getFooter = () => {
     return (
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Text>{"Loading..."}</Text>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text>{'Loading...'}</Text>
       </View>
-    );
-  };
+    )
+  }
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
@@ -30,29 +40,51 @@ export default function MatchScreens({}) {
             nestedScrollEnabled={true}
             data={matchedList}
             numColumns={2}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item, index) =>
+              index.toString()
+            }
             renderItem={({ item, index }) => {
               return (
-                <View key={item} style={styles.CardContainer}>
-                  <TouchableOpacity onPress={() => console.log(item.name)}>
+                <View
+                  key={item}
+                  style={styles.CardContainer}
+                >
+                  <TouchableOpacity
+                    onPress={() =>
+                      console.log(item.name)
+                    }
+                  >
                     <Image
-                      source={{ uri: item.media[0] }}
-                      style={{ width: 165, height: 204, borderRadius: 10 }}
-                      PlaceholderContent={<ActivityIndicator />}
+                      source={{
+                        uri: item.media[0],
+                      }}
+                      style={{
+                        width: 165,
+                        height: 204,
+                        borderRadius: 10,
+                      }}
+                      PlaceholderContent={
+                        <ActivityIndicator />
+                      }
                     />
-                    <View style={styles.InfoContainer}>
-                      <Text style={styles.Text}>{item.name}</Text>
+                    <View
+                      style={styles.InfoContainer}
+                    >
                       <Text style={styles.Text}>
-                        {getAge(item.birthday)} - {item.gender}
+                        {item.name}
+                      </Text>
+                      <Text style={styles.Text}>
+                        {getAge(item.birthday)} -{' '}
+                        {item.gender}
                       </Text>
                     </View>
                   </TouchableOpacity>
                 </View>
-              );
+              )
             }}
           />
         </SafeAreaView>
       </View>
     </View>
-  );
+  )
 }
