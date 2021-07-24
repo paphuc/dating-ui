@@ -1,2 +1,1 @@
-import types from '../constants/language';
-
+import types from '../constants/language'

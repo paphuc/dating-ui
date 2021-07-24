@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   Container: {
@@ -14,18 +14,18 @@ export default StyleSheet.create({
   CardContainer: {
     margin: 5,
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   InfoContainer: {
-    position: "absolute",
+    position: 'absolute',
     margin: 5,
     bottom: 0,
     flex: 1,
   },
   Text: {
-    color: "white",
+    color: 'white',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
-    textShadowColor: "black",
+    textShadowColor: 'black',
   },
-});
+})

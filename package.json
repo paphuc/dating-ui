@@ -5,8 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "prettier": "prettier --check .src",
-    "prettier-fix": "prettier --write .src",
+    "prettier": "prettier --check ./src",
+    "prettier-fix": "prettier --write ./src",
     "lint-staged": {
       "./src/**": [
         "prettier --write ."

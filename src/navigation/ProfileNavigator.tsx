@@ -1,18 +1,22 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { ProfileScreen } from "../screens/TabsBottom";
-import { ProfileParamList} from "./types";
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import { ProfileScreen } from '../screens/TabsBottom'
+import { ProfileParamList } from './types'
 
-const ProfileStack = createStackNavigator<ProfileParamList>();
+const ProfileStack =
+  createStackNavigator<ProfileParamList>()
 
 export default function TabProfileNavigator() {
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
-        name="ProfileScreen"
+        name='ProfileScreen'
         component={ProfileScreen}
-        options={{ headerTitle: "Me", headerShown: false }}
+        options={{
+          headerTitle: 'Me',
+          headerShown: false,
+        }}
       />
     </ProfileStack.Navigator>
-  );
+  )
 }
