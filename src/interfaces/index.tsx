@@ -1,4 +1,4 @@
-export interface IUser {
+export interface ILogin {
   email: string
   password: string
 }
@@ -20,7 +20,7 @@ export interface JwtProps {
   email: string
   exp: number
 }
-export interface UserProps {
+export interface IUser {
   _id?: string
   name: string
   email: string

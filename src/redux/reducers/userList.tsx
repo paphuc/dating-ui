@@ -1,14 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/userList'
-import { UserProps } from '../../interfaces'
+import { IUser } from '../../interfaces'
 
 export type initProps = {
+  isLoading: boolean
   totalPages: number | undefined
   currentPage: number | undefined
-  listUsers: UserProps[] | undefined
+  listUsers: IUser[] | undefined
 }
 
 const initState: initProps = {
+  isLoading: true,
   totalPages: undefined,
   currentPage: undefined,
   listUsers: [],
@@ -24,11 +26,13 @@ export default function authUserList(
   action: ActionType
 ) {
   switch (action.type) {
+    case constants.USER_LOADING:
+      return { ...state, isLoading: true }
     case constants.USER_LIST: {
-      return { ...action.payload }
+      return { ...action.payload, isLoading: false }
     }
     case constants.USER_ERROR: {
-      return { errors: action.payload }
+      return { errors: action.payload, isLoading: false }
     }
     default:
       return state

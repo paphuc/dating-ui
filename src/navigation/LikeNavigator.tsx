@@ -1,21 +1,14 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import {
-  LikeScreens,
-  MatchScreens,
-} from '../screens/TabsBottom'
-import {
-  LikeTabParamList,
-  LikeTabScreensParamList,
-} from './types'
+import { LikeScreens, MatchScreens } from '../screens/TabsBottom'
+import { LikeTabParamList, LikeTabScreensParamList } from './types'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Layout from '../constants/Layout'
 
 const TopTabLikedScreen =
   createMaterialTopTabNavigator<LikeTabScreensParamList>()
-const LikeStack =
-  createStackNavigator<LikeTabParamList>()
+const LikeStack = createStackNavigator<LikeTabParamList>()
 
 function LikeTabScreens() {
   return (
@@ -37,22 +30,13 @@ function LikeTabScreens() {
           inactiveTintColor: 'silver',
           indicatorStyle: {
             width: Layout.window.width / 4,
-            left:
-              (Layout.window.width / 2 -
-                Layout.window.width / 4) /
-              2,
+            left: (Layout.window.width / 2 - Layout.window.width / 4) / 2,
           },
           style: { margin: 20, borderRadius: 20 },
         }}
       >
-        <TopTabLikedScreen.Screen
-          name='Like'
-          component={LikeScreens}
-        />
-        <TopTabLikedScreen.Screen
-          name='Match'
-          component={MatchScreens}
-        />
+        <TopTabLikedScreen.Screen name='Like' component={LikeScreens} />
+        <TopTabLikedScreen.Screen name='Match' component={MatchScreens} />
       </TopTabLikedScreen.Navigator>
     </View>
   )

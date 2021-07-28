@@ -6,16 +6,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native'
-import {
-  Text,
-  Image,
-} from 'react-native-elements'
+import { Text, Image } from 'react-native-elements'
 import useHook from './hook'
 import styles from './style'
 
 export default function LikeScreens({}) {
-  const [index, setIndex] =
-    React.useState<number>(0)
+  const [index, setIndex] = React.useState<number>(0)
   const { likedList, getAge } = useHook()
 
   const getFooter = () => {
@@ -40,20 +36,11 @@ export default function LikeScreens({}) {
             nestedScrollEnabled={true}
             data={likedList}
             numColumns={2}
-            keyExtractor={(item, index) =>
-              index.toString()
-            }
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => {
               return (
-                <View
-                  key={item}
-                  style={styles.CardContainer}
-                >
-                  <TouchableOpacity
-                    onPress={() =>
-                      console.log(item.name)
-                    }
-                  >
+                <View key={item} style={styles.CardContainer}>
+                  <TouchableOpacity onPress={() => console.log(item.name)}>
                     <Image
                       source={{
                         uri: item.media[0],
@@ -63,19 +50,12 @@ export default function LikeScreens({}) {
                         height: 204,
                         borderRadius: 10,
                       }}
-                      PlaceholderContent={
-                        <ActivityIndicator />
-                      }
+                      PlaceholderContent={<ActivityIndicator />}
                     />
-                    <View
-                      style={styles.InfoContainer}
-                    >
+                    <View style={styles.InfoContainer}>
+                      <Text style={styles.Text}>{item.name}</Text>
                       <Text style={styles.Text}>
-                        {item.name}
-                      </Text>
-                      <Text style={styles.Text}>
-                        {getAge(item.birthday)} -{' '}
-                        {item.gender}
+                        {getAge(item.birthday)} - {item.gender}
                       </Text>
                     </View>
                   </TouchableOpacity>

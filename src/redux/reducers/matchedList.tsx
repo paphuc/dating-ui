@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/matchList'
-import { UserProps } from '../../interfaces'
+import { IUser } from '../../interfaces'
 
 export type MatchedListProps = {
-  matchedList: UserProps[] | undefined
+  matchedList: IUser[] | undefined
 }
 
 const initMatchedListState: MatchedListProps = {

@@ -13,8 +13,6 @@ const appReducers = combineReducers({
   matchedListStore,
 })
 
-export type ApplicationState = ReturnType<
-  typeof appReducers
->
+export type ApplicationState = ReturnType<typeof appReducers>
 
 export default appReducers

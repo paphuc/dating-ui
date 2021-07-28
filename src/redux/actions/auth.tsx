@@ -1,9 +1,6 @@
 import { Alert } from 'react-native'
 import constants from '../constants/auth'
-import {
-  IRegisterUser,
-  IUser,
-} from '../../interfaces'
+import { IRegisterUser, ILogin } from '../../interfaces'
 import API from '../../common/Api'
 export default {
   login,
@@ -11,7 +8,7 @@ export default {
   logout,
 }
 
-function login(user: IUser) {
+function login(user: ILogin) {
   return (dispatch: any) => {
     API.post('/login', user)
       .then(({ data }) => {
@@ -27,10 +24,7 @@ function login(user: IUser) {
           payload: { ...err.response.data },
         })
 
-        Alert.alert(
-          'Login failed',
-          JSON.stringify(err.response.data)
-        )
+        Alert.alert('Login failed', JSON.stringify(err.response.data))
       })
   }
 }
@@ -50,10 +44,7 @@ function register(user: IRegisterUser) {
           payload: { ...err.response.data },
         })
 
-        Alert.alert(
-          'Register failed',
-          JSON.stringify(err.response.data)
-        )
+        Alert.alert('Register failed', JSON.stringify(err.response.data))
       })
   }
 }

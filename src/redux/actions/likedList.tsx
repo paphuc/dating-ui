@@ -1,15 +1,13 @@
 import { Alert } from 'react-native'
 import constants from '../constants/likedList'
-import { UserProps } from '../../interfaces'
+import { IUser } from '../../interfaces'
 import API from '../../common/Api'
 import { ActionType } from '../reducers/likedList'
 export default {
   getListLiked,
 }
 
-export type DispatchType = (
-  args: ActionType
-) => ActionType
+export type DispatchType = (args: ActionType) => ActionType
 
 function getListLiked(id: string) {
   return (dispatch: DispatchType) => {
@@ -26,10 +24,7 @@ function getListLiked(id: string) {
           type: constants.LIST_ERROR,
           payload: { ...err.response.data },
         })
-        Alert.alert(
-          'Get failed',
-          JSON.stringify(err.response.data)
-        )
+        Alert.alert('Get failed', JSON.stringify(err.response.data))
       })
   }
 }

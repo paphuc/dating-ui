@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/likedList'
-import { UserProps } from '../../interfaces'
+import { IUser } from '../../interfaces'
 
 export type likedListProps = {
-  likedList: UserProps[] | undefined
+  likedList: IUser[] | undefined
 }
 
 const initLikedListState: likedListProps = {

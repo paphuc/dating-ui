@@ -9,22 +9,13 @@ import ProfileNav from './ProfileNavigator'
 import LikeNav from './LikeNavigator'
 import InboxNav from './InboxNavigator'
 
-const BottomTab =
-  createBottomTabNavigator<BottomTabParamList>()
+const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
 function TabBarIcon(props: {
-  name: React.ComponentProps<
-    typeof FontAwesome
-  >['name']
+  name: React.ComponentProps<typeof FontAwesome>['name']
   color: string
 }) {
-  return (
-    <FontAwesome
-      size={30}
-      style={{ marginBottom: -3 }}
-      {...props}
-    />
-  )
+  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />
 }
 
 export default function BottomTabNavigator() {
@@ -41,12 +32,7 @@ export default function BottomTabNavigator() {
         name='Heart'
         component={HomeNav}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon
-              name='heart'
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name='heart' color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -54,10 +40,7 @@ export default function BottomTabNavigator() {
         component={LikeNav}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon
-              name='thumbs-up'
-              color={color}
-            />
+            <TabBarIcon name='thumbs-up' color={color} />
           ),
         }}
       />
@@ -66,10 +49,7 @@ export default function BottomTabNavigator() {
         component={InboxNav}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon
-              name='comments'
-              color={color}
-            />
+            <TabBarIcon name='comments' color={color} />
           ),
         }}
       />
@@ -77,12 +57,7 @@ export default function BottomTabNavigator() {
         name='Profile'
         component={ProfileNav}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon
-              name='user'
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name='user' color={color} />,
         }}
       />
     </BottomTab.Navigator>

@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { IUser } from '../../../interfaces'
+import { IUser } from '../../interfaces'
 import { useDispatch, useSelector } from 'react-redux'
-import Actions from '../../../redux/actions/userList'
 
+interface Props {
+  initUser: IUser
+}
 export default function Hook() {
+  const [currentUser, setCurrentUser] = useState({} as IUser)
   const [users, setUsers] = useState([] as IUser[])
   const UserStore = useSelector((value: any) => value.userListStore)
   const dispatch = useDispatch()
-
-  const handleRefresh = () => {
-    dispatch(Actions.getList())
-  }
 
   useEffect(() => {
     if (UserStore?.totalItems >= 0) {
       setUsers(UserStore.listUsers)
     }
-    console.log(UserStore)
   }, [UserStore])
-
   return {
+    currentUser,
+    setCurrentUser,
     users,
-    setUsers,
     dispatch,
     UserStore,
-    handleRefresh,
   }
 }
