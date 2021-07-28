@@ -13,7 +13,19 @@ import {
 import API from '../../../common/Api'
 import navigation from '../../../navigation'
 
-export default function Hook() {
+export type InboxScreenNavigationProp =
+  StackNavigationProp<
+    RootStackParamList,
+    'BottomTab'
+  >
+
+export type PropsInterface = {
+  navigation: InboxScreenNavigationProp
+}
+
+export default function Hook(
+  props?: PropsInterface
+) {
   const [user, setUser] =
     useState<UserProps | null>(null)
 
@@ -29,10 +41,23 @@ export default function Hook() {
       API.get(
         '/users/' + decodedHeader?._id
       ).then(({ data }) => {
+        
+        if(data.media === null){
+          props?.navigation.navigate(
+            'UpdateProfileScreens', {item: data }
+          )
+        }
         setUser(data)
       })
     }
   }, [state])
+
+  const handleNavigate = (item: UserProps| null) => {
+    props?.navigation.navigate(
+      'UpdateProfileScreens', {item: item }
+    )
+  }
+
   const getAge = (age: string): string => {
     return (
       new Date().getFullYear() -
@@ -42,5 +67,6 @@ export default function Hook() {
   return {
     getAge,
     user,
+    handleNavigate,
   }
 }

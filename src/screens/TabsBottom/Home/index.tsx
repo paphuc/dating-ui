@@ -48,8 +48,12 @@ export default function HomeScreen({
         data={[
           1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         ]}
+        keyExtractor={(item, index) =>
+          index.toString()
+        }
         renderItem={(e) => (
           <View
+            key={e.index}
             style={{
               backgroundColor: 'white',
               flex: 1,
