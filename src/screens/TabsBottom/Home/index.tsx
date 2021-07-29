@@ -18,7 +18,7 @@ type Props = {
 }
 
 export default function HomeScreen({ route, navigation }: Props) {
-  const { UserStore, users, handleRefresh } = useHook()
+  const { UserStore, users, handleRefresh, State, handleLike } = useHook()
 
   //Run once in init
   useEffect(() => {
@@ -30,18 +30,25 @@ export default function HomeScreen({ route, navigation }: Props) {
       <FlatList
         contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
         data={users}
-        keyExtractor={(item, idx) => item.toString()}
-        renderItem={({ item }) => (
+        keyExtractor={(item, idx) => idx.toString()}
+        renderItem={({ item, index }) => (
           <View
             style={{
-              flex:0.5,
+              flex: 0.5,
               backgroundColor: 'white',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            <UserCard data={item} navigation={navigation} />
+            <UserCard
+              key={index}
+              data={item}
+              navigation={navigation}
+              onPress={() => {
+                handleLike(item._id)
+              }}
+            />
           </View>
         )}
         numColumns={2}

@@ -10,7 +10,7 @@ export default function ({
   onPress = () => {},
 }: any) {
   return (
-    <TouchableOpacity onPress={() => onPress()}>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={[
           styles.Container,

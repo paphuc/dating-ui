@@ -8,7 +8,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: NavigatorScreenParams<HomeParamList> | undefined
-  Matched: NavigatorScreenParams<LikeTabParamList> | undefined
+  Like: NavigatorScreenParams<LikeParamList> | undefined
   Inbox: undefined
   Profile: undefined
 }
@@ -17,14 +17,9 @@ export type HomeParamList = {
   Home: undefined
   UserDetail: { item: IUser }
 }
-export type LikeTabScreensParamList = {
+export type LikeParamList = {
   Like: undefined
-  Match: undefined
 }
-export type LikeTabParamList = {
-  LikeTabScreens: NavigatorScreenParams<LikeTabScreensParamList> | undefined
-}
-
 export type InboxParamList = {
   InboxScreen: undefined
 }

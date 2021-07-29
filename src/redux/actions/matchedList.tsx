@@ -19,7 +19,6 @@ function getListLiked(id: string) {
         })
       })
       .catch((err) => {
-        console.log(err)
         dispatch({
           type: constants.LIST_ERROR,
           payload: { ...err.response.data },

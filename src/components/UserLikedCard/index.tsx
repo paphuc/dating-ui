@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Button, Rating } from 'react-native-elements'
 import SkeletonContent from 'react-native-skeleton-content'
-import { IUser } from './../../interfaces'
+import { IUser } from '../../interfaces'
 import { getAge } from '../../common/Utils'
 import { FontAwesome5 as Icon } from '@expo/vector-icons'
 import IconFloatButton from '../IconFloatButton'
@@ -11,10 +11,9 @@ import styles from './style'
 type Props = {
   data: IUser
   navigation: any
-  onPress: any
 }
 
-const App = ({ data, navigation, onPress }: Props) => {
+const App = ({ data, navigation }: Props) => {
   const handlePress = () => {
     navigation.navigate('UserDetail', { currentUser: data })
   }
@@ -37,7 +36,6 @@ const App = ({ data, navigation, onPress }: Props) => {
             bottom: -22.5,
             backgroundColor: '#F38BA0',
           }}
-          onPress={onPress}
         />
       </View>
     </TouchableOpacity>

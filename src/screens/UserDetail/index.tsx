@@ -21,7 +21,7 @@ const Colors = [
 ]
 
 export default function UserDetail({ route, navigation }: any) {
-  const { currentUser, setCurrentUser } = useHook()
+  const { currentUser, setCurrentUser, handleLike } = useHook()
 
   useEffect(() => {
     setCurrentUser(route.params.currentUser)
@@ -57,6 +57,7 @@ export default function UserDetail({ route, navigation }: any) {
             data={currentUser?.hobby}
             renderItem={({ item, index }) => (
               <Chip
+                key={index}
                 title={item}
                 containerStyle={{ margin: 5 }}
                 buttonStyle={{ backgroundColor: Colors[index % 7] }}
@@ -85,6 +86,10 @@ export default function UserDetail({ route, navigation }: any) {
           size={30}
           containerStyle={{
             backgroundColor: '#F38BA0',
+          }}
+          onPress={() => {
+            handleLike(currentUser._id)
+            navigation.goBack()
           }}
         />
       </View>

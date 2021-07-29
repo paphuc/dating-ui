@@ -36,7 +36,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name='Matched'
+        name='Like'
         component={LikeNav}
         options={{
           tabBarIcon: ({ color }) => (

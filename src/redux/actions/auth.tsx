@@ -18,7 +18,6 @@ function login(user: ILogin) {
         })
       })
       .catch((err) => {
-        console.log(err)
         dispatch({
           type: constants.AUTH_ERROR,
           payload: { ...err.response.data },

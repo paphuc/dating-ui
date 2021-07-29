@@ -21,7 +21,7 @@ export interface JwtProps {
   exp: number
 }
 export interface IUser {
-  _id?: string
+  _id: string
   name: string
   email: string
   media: string[]
@@ -37,4 +37,9 @@ export interface IUser {
   relationship: string
   created_at?: Date
   updated_at?: Date
+}
+
+export interface IActionType {
+  type: string
+  payload: any
 }
