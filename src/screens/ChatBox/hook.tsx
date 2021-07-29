@@ -4,12 +4,14 @@ import React, {
   useCallback,
 } from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList } from '../../navigation/types'
+
 import { RouteProp } from '@react-navigation/native'
 import {
   GiftedChat,
   IMessage,
 } from 'react-native-gifted-chat'
+import { ImessagesAPI } from '../../interfaces'
+import { RootStackParamList } from '../../navigation/types'
 import Config from '../.../../../../config'
 import Api from '../../common/Api'
 
@@ -27,14 +29,6 @@ type ProfileScreenNavigationProp =
 export type Props = {
   route: ProfileScreenRouteProp
   navigation: ProfileScreenNavigationProp
-}
-interface messagesAPI {
-  _id: string
-  attachments: string
-  content: string
-  created_at: string
-  room_id: string
-  sender_id: string
 }
 
 export default function Hook(props?: Props) {
@@ -85,7 +79,7 @@ export default function Hook(props?: Props) {
     Api.get('/messages/' + roomID?._id).then(
       ({ data }) => {
         const messageLast:
-          | messagesAPI[]
+          | ImessagesAPI[]
           | undefined = data
         const messageList: IMessage[] =
           messageLast

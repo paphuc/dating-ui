@@ -52,3 +52,13 @@ export interface UserUpdateProps {
   looking_for: string
   relationship: string
 }
+
+export interface ImessagesAPI {
+  _id: string
+  attachments: string
+  content: string
+  created_at: string
+  room_id: string
+  sender_id: string
+}
+
