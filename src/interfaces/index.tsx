@@ -11,6 +11,7 @@ export interface IRegisterUser {
 }
 
 export interface IConfig {
+  WS: string
   Host: string
   Port: string
 }

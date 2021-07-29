@@ -14,7 +14,7 @@ import DateTimePicker, {
   WindowsDatePickerChangeEvent,
 } from '@react-native-community/datetimepicker'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import styles from "./style"
+import styles from './style'
 interface DatePickerProps {
   birthday?: Date
   onChange?: (value: string) => void
@@ -22,7 +22,7 @@ interface DatePickerProps {
 
 export default function DatePicker({
   birthday,
-  onChange
+  onChange,
 }: DatePickerProps) {
   const [date, setDate] = React.useState(
     new Date(birthday ? birthday : '')
@@ -33,8 +33,8 @@ export default function DatePicker({
     event: any,
     selectedDate: any
   ) => {
-    if(onChange){
-        onChange(selectedDate?.toJSON())
+    if (onChange) {
+      onChange(selectedDate?.toJSON())
     }
     const currentDate = selectedDate || date
     setShow(Platform.OS === 'ios')
@@ -47,24 +47,34 @@ export default function DatePicker({
 
   return (
     <View>
-     <View>
+      <View>
         <Text style={styles.Title}>Birthday</Text>
       </View>
-      <View style={{
-            flexDirection: "row",
-            // flexWrap: "wrap",
-            justifyContent: "space-around",
-            alignItems: "center"
-            
-        }} >
+      <View
+        style={{
+          flexDirection: 'row',
+          // flexWrap: "wrap",
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
         <View>
-        <Text style={{
-            fontSize: 20
-        }}> {date?.getDate()}/{date?.getMonth()}/{date?.getFullYear()} </Text>
+          <Text
+            style={{
+              fontSize: 20,
+            }}
+          >
+            {' '}
+            {date?.getDate()}/
+            {date
+              ? Number(date.getMonth()) + 1
+              : ''}
+            /{date?.getFullYear()}{' '}
+          </Text>
         </View>
         <Button
           onPress={showMode}
-          buttonStyle={{ width:100}}
+          buttonStyle={{ width: 100 }}
           title='change'
         />
       </View>
