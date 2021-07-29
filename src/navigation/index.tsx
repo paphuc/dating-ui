@@ -7,6 +7,7 @@ import {
 } from 'react-redux'
 import Login from '../screens/Login'
 import UpdateProfile from '../screens/UpdateProfile'
+import ChatBox from '../screens/ChatBox'
 import Register from '../screens/Register'
 import BottomTab from './BottomTabNavigator'
 import { RootStackParamList } from './types'
@@ -33,7 +34,20 @@ export default function RootNavigator() {
             <Stack.Screen
               name='UpdateProfileScreens'
               component={UpdateProfile}
-              options={{ headerShown: true, headerTitle: "Update Profile"}}
+              options={{
+                headerShown: true,
+                headerTitle: 'Update Profile',
+                headerStatusBarHeight: 0,
+              }}
+            />
+            <Stack.Screen
+              name='ChatBox'
+              component={ChatBox}
+              options={{
+                headerShown: true,
+                headerTitle: 'Chat',
+                headerStatusBarHeight: 0,
+              }}
             />
           </>
         ) : (

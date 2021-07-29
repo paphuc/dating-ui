@@ -1,11 +1,27 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 import { UserProps } from '../interfaces'
+import {
+  RoomInterface,
+  UserInRoomInterface,
+} from '../redux/reducers/listRoomsMatch'
+
 export type RootStackParamList = {
   List: undefined
   NotFound: undefined
   Register: undefined
   Login: undefined
-  UpdateProfileScreens: { item: UserProps | null} | undefined
+  UpdateProfileScreens:
+    | { item: UserProps | null }
+    | undefined
+  ChatBox:
+    | {
+        room: RoomInterface | undefined
+        userID: string | undefined
+        userTarget:
+          | UserInRoomInterface
+          | undefined
+      }
+    | undefined
   BottomTab: NavigatorScreenParams<BottomTabParamList>
 }
 

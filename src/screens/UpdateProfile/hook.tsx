@@ -33,8 +33,8 @@ export type Props = {
   navigation: ProfileScreenNavigationProp
 }
 
-const cloudName = ''
-const upload_preset = ''
+const cloudName = 'dng1knkia'
+const upload_preset = 'bv6mbjnj'
 
 export default function Hook(props?: Props) {
   const item = props?.route.params?.item
