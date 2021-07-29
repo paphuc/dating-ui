@@ -4,13 +4,14 @@ import authStore from './auth'
 import userListStore from './userList'
 import likedListStore from './likedList'
 import matchedListStore from './matchedList'
-
+import updateUser from './updateUser'
 const appReducers = combineReducers({
   languageStore,
   authStore,
   userListStore,
   likedListStore,
   matchedListStore,
+  updateUser,
 })
 
 export type ApplicationState = ReturnType<

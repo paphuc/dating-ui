@@ -6,10 +6,13 @@ import {
   useDispatch,
 } from 'react-redux'
 import Login from '../screens/Login'
+import UpdateProfile from '../screens/UpdateProfile'
 import Register from '../screens/Register'
 import BottomTab from './BottomTabNavigator'
+import { RootStackParamList } from './types'
 export default function RootNavigator() {
-  const Stack = createStackNavigator<any>()
+  const Stack =
+    createStackNavigator<RootStackParamList>()
   const user = useSelector(
     (value: any) => value.authStore
   )
@@ -26,6 +29,11 @@ export default function RootNavigator() {
             <Stack.Screen
               name='BottomTab'
               component={BottomTab}
+            />
+            <Stack.Screen
+              name='UpdateProfileScreens'
+              component={UpdateProfile}
+              options={{ headerShown: true, headerTitle: "Update Profile"}}
             />
           </>
         ) : (

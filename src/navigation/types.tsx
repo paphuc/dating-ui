@@ -3,6 +3,9 @@ import { UserProps } from '../interfaces'
 export type RootStackParamList = {
   List: undefined
   NotFound: undefined
+  Register: undefined
+  Login: undefined
+  UpdateProfileScreens: { item: UserProps | null} | undefined
   BottomTab: NavigatorScreenParams<BottomTabParamList>
 }
 

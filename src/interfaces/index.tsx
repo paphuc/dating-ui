@@ -38,3 +38,16 @@ export interface UserProps {
   created_at?: Date
   updated_at?: Date
 }
+export interface UserUpdateProps {
+  _id?: string
+  name: string
+  media: string[]
+  birthday: Date | string
+  gender: string
+  sex: string
+  country: string
+  hobby: string[]
+  about: string
+  looking_for: string
+  relationship: string
+}
