@@ -3,11 +3,11 @@ import constants from '../constants/matchList'
 import { UserProps } from '../../interfaces'
 
 export type MatchedListProps = {
-  matchedList: UserProps[] | undefined
+  content: UserProps[] | undefined
 }
 
 const initMatchedListState: MatchedListProps = {
-  matchedList: [],
+  content: [],
 }
 
 export interface ActionType {

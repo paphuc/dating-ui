@@ -24,7 +24,7 @@ export default function Hook() {
   const state = useSelector(
     (value: any) => value.authStore
   )
-  const { likedList } = useSelector(
+  const { content } = useSelector(
     (state: any) => state.likedListStore
   )
   const dispatch = useDispatch()
@@ -48,6 +48,6 @@ export default function Hook() {
   }
   return {
     getAge,
-    likedList,
+    content,
   }
 }

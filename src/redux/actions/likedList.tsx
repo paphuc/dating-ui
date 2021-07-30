@@ -15,9 +15,10 @@ function getListLiked(id: string) {
   return (dispatch: DispatchType) => {
     API.get(`/users/${id}/matches?matched=false`)
       .then(({ data }) => {
+        
         dispatch({
           type: constants.LIKED_USERS_LIST,
-          payload: { likedList: data },
+          payload: { content: data.content },
         })
       })
       .catch((err) => {

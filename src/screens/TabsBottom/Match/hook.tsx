@@ -24,9 +24,10 @@ export default function Hook() {
   const state = useSelector(
     (value: any) => value.authStore
   )
-  const { matchedList } = useSelector(
+  const { content } = useSelector(
     (state: any) => state.matchedListStore
   )
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -48,6 +49,6 @@ export default function Hook() {
   }
   return {
     getAge,
-    matchedList,
+    content,
   }
 }
