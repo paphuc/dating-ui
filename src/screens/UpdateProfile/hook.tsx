@@ -14,8 +14,7 @@ import {
   useDispatch,
 } from 'react-redux'
 import Actions from '../../redux/actions/updateUser'
-import { log } from 'react-native-reanimated'
-import navigation from '../../navigation'
+import CloudinaryService from '../../common/Cloudinary'
 
 type ProfileScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -117,7 +116,7 @@ export default function Hook(props?: Props) {
   const pickImage = async () => {
     if (imageArr.length >= 9) {
       Alert.alert(
-        'Confirm remove picture',
+        'Notification',
         'Max number picture 9',
         [
           {
@@ -153,43 +152,27 @@ export default function Hook(props?: Props) {
             type,
           })
         )
+        setImageArr((previousImageUrl) => [
+          ...previousImageUrl,
+          'loading',
+        ])
 
         const formData = new FormData()
         formData.append('file', dataPicture)
-        formData.append(
-          'upload_preset',
-          upload_preset
-        )
-        formData.append('cloud_name', cloudName)
 
-        updateCould(formData)
+        const url =
+          await CloudinaryService.updateImageCould(
+            formData
+          )
+
+        if (url != 'error') {
+          setImageArr((previousImageUrl) => {
+            previousImageUrl.pop()
+            return [...previousImageUrl, url]
+          })
+        }
       }
     }
-  }
-  // Update image
-  const updateCould = (formData: FormData) => {
-    const url =
-      'https://api.cloudinary.com/v1_1/' +
-      cloudName +
-      '/image/upload'
-    setImageArr((previousImageUrl) => [
-      ...previousImageUrl,
-      'loading',
-    ])
-    axios
-      .post(url, formData)
-      .then((response) => {
-        setImageArr((previousImageUrl) => {
-          previousImageUrl.pop()
-          return [
-            ...previousImageUrl,
-            response.data.url,
-          ]
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 
   const removeItemInArray = (index: number) => {

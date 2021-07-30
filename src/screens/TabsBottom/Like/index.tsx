@@ -16,7 +16,7 @@ import styles from './style'
 export default function LikeScreens({}) {
   const [index, setIndex] =
     React.useState<number>(0)
-  const { likedList, getAge } = useHook()
+  const { content, getAge } = useHook()
 
   const getFooter = () => {
     return (
@@ -38,7 +38,7 @@ export default function LikeScreens({}) {
             ListFooterComponent={getFooter}
             scrollEnabled={true}
             nestedScrollEnabled={true}
-            data={likedList}
+            data={content}
             numColumns={2}
             keyExtractor={(item, index) =>
               index.toString()

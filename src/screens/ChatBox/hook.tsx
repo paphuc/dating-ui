@@ -4,7 +4,7 @@ import React, {
   useCallback,
 } from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
-
+import * as ImagePicker from 'expo-image-picker'
 import { RouteProp } from '@react-navigation/native'
 import {
   GiftedChat,
@@ -14,6 +14,9 @@ import { ImessagesAPI } from '../../interfaces'
 import { RootStackParamList } from '../../navigation/types'
 import Config from '../.../../../../config'
 import Api from '../../common/Api'
+import CloudinaryService from '../../common/Cloudinary'
+
+import { Alert, Platform } from 'react-native'
 
 type ProfileScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -42,7 +45,20 @@ export default function Hook(props?: Props) {
   const websocket = new WebSocket(
     `${Config.WS}:${Config.Port}/ws?id=${roomID?._id}`
   )
+
   useEffect(() => {
+    ;(async () => {
+      if (Platform.OS !== 'web') {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted') {
+          alert(
+            'Sorry, we need camera roll permissions to make this work!'
+          )
+        }
+      }
+    })()
+
     getLastMessage()
     var a = JSON.stringify({
       action: 'join-room',
@@ -54,24 +70,75 @@ export default function Hook(props?: Props) {
       sendSockets(a)
     }
   }, [])
+
+  const handlePickImage = async () => {
+    let result =
+      await ImagePicker.launchImageLibraryAsync({
+        mediaTypes:
+          ImagePicker.MediaTypeOptions.All,
+        quality: 1,
+      })
+    if (result && !result?.cancelled) {
+      const localUri = result.uri
+      const filename = localUri.split('/').pop()
+      if (filename) {
+        const match = /\.(\w+)$/.exec(filename)
+        const type = match
+          ? `image/${match[1]}`
+          : `image`
+
+        const dataPicture = JSON.parse(
+          JSON.stringify({
+            uri: localUri,
+            name: filename,
+            type,
+          })
+        )
+        const formData = new FormData()
+        formData.append('file', dataPicture)
+
+        const url =
+          await CloudinaryService.updateImageCould(
+            formData
+          )
+        var json = JSON.stringify({
+          action: 'send-message',
+          sender_id: userID,
+          content: '',
+          attachments: [url],
+          created_at: new Date().toJSON(),
+        })
+
+        const mess = {
+          _id: url,
+          text: '',
+          createdAt: new Date(
+            new Date().toJSON()
+          ),
+          image: url,
+          user: {
+            _id: 1,
+            name: userTarget?.name,
+            avatar: userTarget?.avatar,
+          },
+        }
+
+        onChange(mess)
+        sendSockets(json)
+      }
+    }
+  }
   websocket.onmessage = (e) => {
     const messagesSocket = JSON.parse(e.data)
     if (messagesSocket.sender_id !== userID) {
-      const mess = {
-        _id: messagesSocket._id,
-        text: messagesSocket.content,
-        createdAt: new Date(
-          messagesSocket.created_at
-        ),
-        user: {
-          _id: messagesSocket.sender_id,
-          name: userTarget?.name,
-          avatar: userTarget?.avatar,
-        },
-      }
-      onChange(mess)
+      onChange(
+        convertSocketMessToMessageList([
+          messagesSocket,
+        ])
+      )
     }
   }
+
   const sendSockets = (JSON: string) => {
     websocket.send(JSON)
   }
@@ -81,39 +148,82 @@ export default function Hook(props?: Props) {
         const messageLast:
           | ImessagesAPI[]
           | undefined = data
-        const messageList: IMessage[] =
-          messageLast
-            ? messageLast.reverse().map((e) => {
-                return {
-                  _id: e._id,
-                  text: e.content,
-                  createdAt: new Date(
-                    e.created_at
-                  ),
-                  user: {
-                    _id:
-                      e.sender_id === userID
-                        ? 1
-                        : e._id,
-                    name:
-                      e._id === userID
-                        ? 'Me'
-                        : userTarget?.name,
-                    avatar: userTarget?.avatar,
-                  },
-                }
-              })
-            : []
+
         setMessages((previousMessages) =>
           GiftedChat.append(
             previousMessages,
-            messageList
+            convertSocketMessToMessageList(
+              messageLast ? messageLast : []
+            ).reverse()
           )
         )
       }
     )
   }
 
+  const convertSocketMessToMessageList = (
+    messageLast: ImessagesAPI[]
+  ) => {
+    let messageList: IMessage[] = []
+    if (messageLast) {
+      for (
+        var i = 0;
+        i < messageLast.length;
+        i++
+      ) {
+        if (
+          messageLast[i].attachments.length > 0
+        ) {
+          var temp: IMessage[] = messageLast[
+            i
+          ].attachments.map((url) => {
+            return {
+              _id: messageLast[i]._id + url,
+              text: messageLast[i].content,
+              createdAt: new Date(
+                messageLast[i].created_at
+              ),
+              image: url,
+              user: {
+                _id:
+                  messageLast[i].sender_id ===
+                  userID
+                    ? 1
+                    : messageLast[i]._id,
+                name:
+                  messageLast[i]._id === userID
+                    ? 'Me'
+                    : userTarget?.name,
+                avatar: userTarget?.avatar,
+              },
+            }
+          })
+          messageList = messageList.concat(temp)
+        } else {
+          messageList.push({
+            _id: messageLast[i]._id,
+            text: messageLast[i].content,
+            createdAt: new Date(
+              messageLast[i].created_at
+            ),
+            user: {
+              _id:
+                messageLast[i].sender_id ===
+                userID
+                  ? 1
+                  : messageLast[i]._id,
+              name:
+                messageLast[i]._id === userID
+                  ? 'Me'
+                  : userTarget?.name,
+              avatar: userTarget?.avatar,
+            },
+          })
+        }
+      }
+    }
+    return messageList
+  }
   const onChange = useCallback(
     (messages = []) => {
       setMessages((previousMessages) =>
@@ -136,7 +246,6 @@ export default function Hook(props?: Props) {
       })
       sendSockets(json)
     })
-
     setMessages((previousMessages) =>
       GiftedChat.append(
         previousMessages,
@@ -150,5 +259,6 @@ export default function Hook(props?: Props) {
     userTarget,
     onSend,
     messages,
+    handlePickImage,
   }
 }

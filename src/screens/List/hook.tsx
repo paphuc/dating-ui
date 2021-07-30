@@ -19,7 +19,7 @@ export type PropsInterface = {
 export default function Hook(
   props?: PropsInterface
 ) {
-  const { listUsers } = useSelector(
+  const { content } = useSelector(
     (value: any) => value.userListStore
   )
   const dispatch = useDispatch()
@@ -47,7 +47,7 @@ export default function Hook(
 
   return {
     getAge,
-    listUsers,
+    content,
     handleNavigate,
   }
 }

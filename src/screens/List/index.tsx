@@ -22,7 +22,7 @@ import styles from './style'
 export default function ListScreen({
   navigation,
 }: PropsInterface) {
-  const { handleNavigate, listUsers, getAge } =
+  const { handleNavigate, content, getAge } =
     useHook({ navigation })
 
   const getFooter = () => {
@@ -65,7 +65,7 @@ export default function ListScreen({
           ListFooterComponent={getFooter}
           scrollEnabled={true}
           nestedScrollEnabled={true}
-          data={listUsers}
+          data={content}
           numColumns={2}
           keyExtractor={(item, index) =>
             index.toString()

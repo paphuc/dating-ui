@@ -3,11 +3,11 @@ import constants from '../constants/likedList'
 import { UserProps } from '../../interfaces'
 
 export type likedListProps = {
-  likedList: UserProps[] | undefined
+  content: UserProps[] | undefined
 }
 
 const initLikedListState: likedListProps = {
-  likedList: [],
+  content: [],
 }
 
 export interface ActionType {

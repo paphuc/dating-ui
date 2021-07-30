@@ -5,13 +5,13 @@ import { UserProps } from '../../interfaces'
 export type initProps = {
   totalPages: number | undefined
   currentPage: number | undefined
-  listUsers: UserProps[] | undefined
+  content: UserProps[] | undefined
 }
 
 const initState: initProps = {
   totalPages: undefined,
   currentPage: undefined,
-  listUsers: [],
+  content: [],
 }
 
 export interface ActionType {

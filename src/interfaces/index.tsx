@@ -36,6 +36,7 @@ export interface UserProps {
   match_id: string[]
   looking_for: string
   relationship: string
+  disable: boolean
   created_at?: Date
   updated_at?: Date
 }
@@ -55,10 +56,9 @@ export interface UserUpdateProps {
 
 export interface ImessagesAPI {
   _id: string
-  attachments: string
+  attachments: string[]
   content: string
   created_at: string
   room_id: string
   sender_id: string
 }
-
