@@ -43,38 +43,10 @@ export default function ChatBox({
         icon={() => (
           <Icon name={'image'} size={20} />
         )}
-        // onSend={(messages) => onSend(messages)}
       />
     )
   }
-  // const renderMessageImage = (props: any) => {
-  //   return (
-  //     <View key={props.currentMessage?._id+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)}>
-  //       <TouchableOpacity
-  //         onPress={() => setIsVisible(true)}
-  //       >
-  //         <Image
-  //           style={{ width: 100, height: 100 }}
-  //           source={{
-  //             uri: props.currentMessage?.image,
-  //           }}
-  //         />
-  //       </TouchableOpacity>
-  //       <ImageView
-  //         animationType={'none'}
-  //         images={[
-  //           { uri: props.currentMessage?.image }
-  //         ]}
-          
-  //         imageIndex={0}
-  //         visible={visible}
-  //         onRequestClose={() =>
-  //           setIsVisible(false)
-  //         }
-  //       />
-  //     </View>
-  //   )
-  // }
+
   return (
     <GiftedChat
       messages={messages}
@@ -83,9 +55,6 @@ export default function ChatBox({
       user={{
         _id: 1,
       }}
-      // renderMessageImage={(props) =>
-      //   renderMessageImage(props)
-      // }
     />
   )
 }
