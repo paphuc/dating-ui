@@ -22,7 +22,7 @@ export default function LikeScreens({ route, navigation }: any) {
   return (
     <View style={styles.Container}>
       <FlatList
-        contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
+        contentContainerStyle={{ padding: 10, backgroundColor: 'white',flex:1 }}
         data={users}
         keyExtractor={(item, idx) => idx.toString()}
         renderItem={({ item, index }) => (

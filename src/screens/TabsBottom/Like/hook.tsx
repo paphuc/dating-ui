@@ -14,8 +14,8 @@ export default function Hook() {
     dispatch(Actions.getList(State.user?._id))
   }
   useEffect(() => {
-    if (Store?.totalItems >= 0) {
-      setUser(Store.listUsers)
+    if (Store?.likedList?.length >= 0) {
+      setUser(Store.likedList)
     }
   }, [Store])
 

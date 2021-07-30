@@ -30,11 +30,11 @@ const App = ({ data, navigation }: Props) => {
         )}`}</Text>
 
         <IconFloatButton
-          name={'heart'}
+          name={'times'}
           containerStyle={{
             right: 10,
             bottom: -22.5,
-            backgroundColor: '#F38BA0',
+            backgroundColor: '#F6AE99',
           }}
         />
       </View>
