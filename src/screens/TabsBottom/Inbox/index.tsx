@@ -10,16 +10,8 @@ import {
 import useHook, { PropsInterface } from './hook'
 import InboxItem from '../../../components/InboxItem'
 
-export default function InboxScreens({
-  navigation,
-}: PropsInterface) {
-  const {
-    listRooms,
-    userID,
-    handleNavigate,
-    onRefresh,
-    isFetching,
-  } = useHook({
+export default function InboxScreens({ navigation }: PropsInterface) {
+  const { listRooms, userID, handleNavigate, onRefresh, isFetching } = useHook({
     navigation,
   })
 
@@ -40,9 +32,7 @@ export default function InboxScreens({
           scrollEnabled={true}
           nestedScrollEnabled={true}
           data={listRooms.reverse()}
-          keyExtractor={(item, index) =>
-            index.toString()
-          }
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <TouchableOpacity
@@ -50,14 +40,9 @@ export default function InboxScreens({
                   marginVertical: 6,
                 }}
                 key={index}
-                onPress={() =>
-                  handleNavigate(item)
-                }
+                onPress={() => handleNavigate(item)}
               >
-                <InboxItem
-                  room={item}
-                  userID={userID}
-                />
+                <InboxItem room={item} userID={userID} />
               </TouchableOpacity>
             )
           }}

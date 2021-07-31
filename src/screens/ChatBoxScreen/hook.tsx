@@ -12,7 +12,7 @@ import {
 } from 'react-native-gifted-chat'
 import { ImessagesAPI } from '../../interfaces'
 import { RootStackParamList } from '../../navigation/types'
-import Config from '../.../../../../config'
+import Config from '../../../config'
 import Api from '../../common/Api'
 import CloudinaryService from '../../common/Cloudinary'
 
@@ -20,13 +20,13 @@ import { Alert, Platform } from 'react-native'
 
 type ProfileScreenRouteProp = RouteProp<
   RootStackParamList,
-  'ChatBox'
+  'ChatBoxScreen'
 >
 
 type ProfileScreenNavigationProp =
   StackNavigationProp<
     RootStackParamList,
-    'ChatBox'
+    'ChatBoxScreen'
   >
 
 export type Props = {
