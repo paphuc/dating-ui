@@ -19,7 +19,7 @@ import {
 } from 'react-native'
 import { Image } from 'react-native-elements'
 
-export default function ChatBox({
+export default function ChatBoxScreen({
   navigation,
   route,
 }: Props) {

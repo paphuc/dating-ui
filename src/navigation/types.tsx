@@ -11,7 +11,7 @@ export type RootStackParamList = {
   Register: undefined
   Login: undefined
   UpdateProfileScreens: { item: IUser | null } | undefined
-  InboxScreen:
+  ChatBoxScreen:
     | {
         room: RoomInterface | undefined
         userID: string | undefined

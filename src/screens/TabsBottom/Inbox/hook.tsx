@@ -52,7 +52,7 @@ export default function Hook(props?: PropsInterface) {
     })
     const userTarget = userTargetArr.length != 1 ? undefined : userTargetArr[0]
 
-    props?.navigation.navigate('InboxScreen', {
+    props?.navigation.navigate('ChatBoxScreen', {
       userTarget: userTarget,
       room: room,
       userID: userID,
