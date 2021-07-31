@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { View, FlatList, StyleSheet, ScrollView } from 'react-native'
 import { Input, Button, Image, Text, Avatar, Chip } from 'react-native-elements'
-import IconButton from '../../components/IconButton'
 import IconFloatButton from '../../components/IconFloatButton'
-import { RouteProp } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import SkeletonContent from 'react-native-skeleton-content'
+import SkeletonImage from '../../components/SkeletonImage'
 import { getAge } from '../../common/Utils'
 import useHook from './hook'
 import styles from './styles'
 import { Divider } from 'react-native-elements/dist/divider/Divider'
+import Colors from '../../constants/Colors'
+import style from '../Login/style'
+import { FontAwesome5 } from '@expo/vector-icons'
+interface Props {
+  route: any
+  navigation: any
+}
 
-const Colors = [
-  '#FF9AA2',
-  '#FFB7B2',
-  '#FFDAC1',
-  '#E2F0CB',
-  '#B5EAD7',
-  '#C7CEEA',
-]
-
-export default function UserDetail({ route, navigation }: any) {
-  const { currentUser, setCurrentUser, handleLike } = useHook()
+export default function UserDetail({ route, navigation }: Props) {
+  const { currentUser, setCurrentUser, handleLike,handleUnlike} = useHook()
 
   useEffect(() => {
     setCurrentUser(route.params.currentUser)
@@ -43,13 +38,59 @@ export default function UserDetail({ route, navigation }: any) {
       />
       <ScrollView style={styles.Container}>
         <View style={styles.ImageContainer}>
-          <SkeletonContent
-            containerStyle={styles.ImageContainer}
-            isLoading={true}
-            layout={[styles.Image]}
-          ></SkeletonContent>
+          <FlatList
+            data={currentUser.media}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <SkeletonImage
+                layout={[styles.Image]}
+                style={styles.Image}
+                source={{ uri: item }}
+              />
+            )}
+            ListEmptyComponent={
+              <SkeletonImage
+                layout={[styles.Image]}
+                style={styles.Image}
+                source={{}}
+              />
+            }
+            horizontal={true}
+            pagingEnabled
+          />
         </View>
         <View style={styles.InfoContainer}>
+          {route.params?.button == 'like' ? (
+            <IconFloatButton
+              name={'heart'}
+              size={40}
+              containerStyle={{
+                backgroundColor: Colors.Rainbows[0],
+                zIndex: 5,
+                right: 15,
+                top: -35,
+              }}
+              onPress={() => {
+                handleLike(currentUser._id)
+                navigation.goBack()
+              }}
+            />
+          ) : (
+            <IconFloatButton
+              name={'times'}
+              size={40}
+              containerStyle={{
+                backgroundColor: Colors.Rainbows[2],
+                zIndex: 5,
+                right: 15,
+                top: -35,
+              }}
+              onPress={() => {
+                handleUnlike(currentUser._id)
+                navigation.goBack()
+              }}
+            />
+          )}
           <Text style={styles.Name}>
             {currentUser.name + ', ' + getAge(currentUser.birthday)}
           </Text>
@@ -60,7 +101,7 @@ export default function UserDetail({ route, navigation }: any) {
                 key={index}
                 title={item}
                 containerStyle={{ margin: 5 }}
-                buttonStyle={{ backgroundColor: Colors[index % 7] }}
+                buttonStyle={{ backgroundColor: Colors.Rainbows[index % 7] }}
                 titleStyle={{ fontSize: 16, fontWeight: 'bold' }}
               />
             )}
@@ -68,31 +109,18 @@ export default function UserDetail({ route, navigation }: any) {
             horizontal
           />
           <Divider />
-          <Text style={styles.About}>
-            {currentUser.about || "Find someone who doesn't have a dick"}
-          </Text>
+          {currentUser.about ? (
+            <Text style={styles.About}>{currentUser.about}</Text>
+          ) : (
+            <FontAwesome5
+              name='question-circle'
+              color={Colors.Grey.Medium}
+              style={{ alignSelf: 'center', marginTop: 10 }}
+              size={40}
+            />
+          )}
         </View>
       </ScrollView>
-      <View style={styles.ButtonContainer}>
-        <IconButton
-          name={'times'}
-          size={30}
-          containerStyle={{
-            backgroundColor: '#F6AE99',
-          }}
-        />
-        <IconButton
-          name={'heart'}
-          size={30}
-          containerStyle={{
-            backgroundColor: '#F38BA0',
-          }}
-          onPress={() => {
-            handleLike(currentUser._id)
-            navigation.goBack()
-          }}
-        />
-      </View>
     </View>
   )
 }

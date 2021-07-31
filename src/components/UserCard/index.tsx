@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { Button, Rating } from 'react-native-elements'
-import SkeletonContent from 'react-native-skeleton-content'
+import { Button, Rating, Image } from 'react-native-elements'
+import SkeletonImage from '../SkeletonImage'
 import { IUser } from './../../interfaces'
 import { getAge } from '../../common/Utils'
 import { FontAwesome5 as Icon } from '@expo/vector-icons'
@@ -11,25 +11,30 @@ import styles from './style'
 type Props = {
   data: IUser
   navigation: any
-  onPress: any
+  onPress: () => void
 }
 
 const App = ({ data, navigation, onPress }: Props) => {
   const handlePress = () => {
-    navigation.navigate('UserDetail', { currentUser: data })
+    navigation.navigate('Modal', {
+      screen: 'UserDetail',
+      params: { currentUser: data , button: 'like'},
+    })
   }
+
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={handlePress}>
       <View style={styles.Container}>
-        <SkeletonContent
-          containerStyle={styles.ImageContainer}
-          isLoading={true}
+        <SkeletonImage
           layout={[styles.Image]}
-        ></SkeletonContent>
+          source={{
+            uri: data.media[0],
+          }}
+          style={styles.Image}
+        />
         <Text style={styles.Name}>{`${data.name}, ${getAge(
           data.birthday
         )}`}</Text>
-
         <IconFloatButton
           name={'heart'}
           containerStyle={{

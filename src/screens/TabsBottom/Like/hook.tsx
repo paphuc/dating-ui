@@ -13,14 +13,18 @@ export default function Hook() {
   const handleRefresh = () => {
     dispatch(Actions.getList(State.user?._id))
   }
+  const handleUnlike = (target: string) => {
+    dispatch(Actions.unlike(State.user?._id, target))
+  }
   useEffect(() => {
-    if (Store?.likedList?.length >= 0) {
-      setUser(Store.likedList)
+    if (Store?.content?.length >= 0) {
+      setUser(Store.content)
     }
   }, [Store])
 
   return {
     handleRefresh,
+    handleUnlike,
     Store,
     users,
   }

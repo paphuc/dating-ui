@@ -18,7 +18,7 @@ export default function Hook() {
 
   useEffect(() => {
     if (UserStore?.totalItems >= 0) {
-      setUsers(UserStore.listUsers)
+      setUsers(UserStore.content)
     }
   }, [UserStore])
 

@@ -6,7 +6,7 @@ import useHook from './hooks'
 import styles from './style'
 
 export default function LoginScreen(props: any) {
-  const { user, setUser, handleLogin, handleRegister } = useHook(props)
+  const { user, setUser, handleLogin, handleRegister,auth } = useHook(props)
 
   return (
     <View style={styles.Container}>
@@ -28,7 +28,7 @@ export default function LoginScreen(props: any) {
           onChangeText={(v: string) => setUser({ ...user, password: v })}
           leftIcon={<Icon name='lock' size={24} color={'grey'} />}
         />
-        <Button title='Login' onPress={handleLogin} />
+        <Button title='Login' onPress={handleLogin} loading={auth.isLoading} />
         <Button
           type='clear'
           onPress={handleRegister}

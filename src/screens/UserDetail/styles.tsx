@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   ImageContainer: {
     flex: 0.5,
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
   },
   InfoContainer: {
     flex: 0.5,

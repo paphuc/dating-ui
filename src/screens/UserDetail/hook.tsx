@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { IUser } from '../../interfaces'
 import { useDispatch, useSelector } from 'react-redux'
 import Actions from '../../redux/actions/user'
+import LikeActions from '../../redux/actions/like'
 
-interface Props {
-  initUser: IUser
-}
 export default function Hook() {
   const [currentUser, setCurrentUser] = useState({} as IUser)
   const [users, setUsers] = useState([] as IUser[])
@@ -15,6 +13,10 @@ export default function Hook() {
 
   const handleLike = (target: string) => {
     dispatch(Actions.like(State.user?._id, target))
+  }
+
+  const handleUnlike = (target: string) => {
+    dispatch(LikeActions.unlike(State.user?._id, target))
   }
   useEffect(() => {
     if (UserStore?.totalItems >= 0) {
@@ -27,6 +29,7 @@ export default function Hook() {
     users,
     dispatch,
     UserStore,
-    handleLike
+    handleLike,
+    handleUnlike,
   }
 }

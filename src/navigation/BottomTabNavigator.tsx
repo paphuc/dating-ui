@@ -23,13 +23,13 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName='Heart'
+      initialRouteName='Home'
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name='Heart'
+        name='Home'
         component={HomeNav}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name='heart' color={color} />,

@@ -32,6 +32,7 @@
     "@react-navigation/material-top-tabs": "^5.3.15",
     "@react-navigation/native": "~5.8.10",
     "@react-navigation/stack": "~5.12.8",
+    "@types/redux-logger": "^3.0.9",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "ex-react-native-i18n": "^0.0.6",
@@ -59,6 +60,7 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "validator": "^13.6.0"
   },

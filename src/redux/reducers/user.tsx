@@ -1,24 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/user'
-import { IUser, IActionType } from '../../interfaces'
+import { IUser, IActionType, IStore } from '../../interfaces'
 
-interface IStoreUser {
-  currentPage?: number
-  filter?: Object
-  listUsers?: Array<IUser>
-  maxItemsPerPage?: number
-  totalItems?: number
-  totalPages?: number
-  [x: string]: any
-}
-
-const initState: IStoreUser = {
+const initState: IStore = {
   isLoading: false,
-  errors: undefined,
+  error: undefined,
   message: undefined,
+
 }
 
-export default function authUserList(state = initState, action: IActionType) {
+export default function authUserList(state = initState, action: IActionType<any>) {
   switch (action.type) {
     case constants.USER_LOADING:
       return { ...state, isLoading: true }
@@ -26,13 +17,13 @@ export default function authUserList(state = initState, action: IActionType) {
       return { ...action.payload, isLoading: false }
     }
     case constants.USER_LIKE: {
-      const users = state.listUsers?.filter(
-        (e) => e._id != (action.payload?.target_user_id || '')
+      const users = state.content?.filter(
+        (e:IUser) => e._id != (action.payload?.target_user_id || '')
       )
-      return { ...state, listUsers: users }
+      return { ...state, content: users }
     }
     case constants.USER_ERROR: {
-      return { errors: action.payload, isLoading: false }
+      return { error: action.payload, isLoading: false }
     }
     default:
       return state

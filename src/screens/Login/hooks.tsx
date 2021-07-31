@@ -21,6 +21,7 @@ export default function Hook(props: any) {
   }
 
   return {
+    auth,
     user,
     setUser,
     handleLogin,

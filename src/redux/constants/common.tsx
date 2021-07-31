@@ -1,0 +1,4 @@
+export default {
+  COMMON_MESSAGE: 'COMMON_MESSAGE',
+  COMMON_ERROR: 'COMMON_ERROR',
+}

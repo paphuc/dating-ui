@@ -7,15 +7,14 @@ export default {
   getListLiked,
 }
 
-export type DispatchType = (args: ActionType) => ActionType
 
 function getListLiked(id: string) {
-  return (dispatch: DispatchType) => {
+  return (dispatch: any) => {
     API.get(`/users/${id}/matches?matched=true`)
       .then(({ data }) => {
         dispatch({
           type: constants.MATCH_USERS_LIST,
-          payload: { matchedList: data },
+          payload: data,
         })
       })
       .catch((err) => {
@@ -23,7 +22,6 @@ function getListLiked(id: string) {
           type: constants.LIST_ERROR,
           payload: { ...err.response.data },
         })
-        Alert.alert('Get failed', JSON.stringify(err.response.data))
       })
   }
 }

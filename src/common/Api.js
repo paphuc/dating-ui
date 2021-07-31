@@ -21,6 +21,7 @@ class axiosService {
             config.headers.Authorization = `Bearer ${token}`
           }
         }
+        console.info(config)
         return config
       },
       (error) => {
@@ -51,7 +52,7 @@ class axiosService {
   }
 
   delete(url, payload) {
-    return this.instance.delete(`${Config.Host}:${Config.Port}${url}`, payload)
+    return this.instance.delete(`${Config.Host}:${Config.Port}${url}`, { data: payload })
   }
 
   upload(url, formData) {

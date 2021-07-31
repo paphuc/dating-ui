@@ -39,7 +39,19 @@ export interface IUser {
   updated_at?: Date
 }
 
-export interface IActionType {
+export interface IActionType<T>{
   type: string
-  payload: any
+  payload:T
+}
+export interface IStore {
+  isLoading: boolean
+  error: string | undefined
+  message: string | undefined
+  currentPage?: number
+  filter?: Object
+  content?: Array<any>
+  maxItemsPerPage?: number
+  totalItems?: number
+  totalPages?: number
+  [x: string]: any
 }

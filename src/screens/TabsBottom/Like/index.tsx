@@ -12,7 +12,7 @@ import useHook from './hook'
 import styles from './style'
 
 export default function LikeScreens({ route, navigation }: any) {
-  const { Store, users, handleRefresh } = useHook()
+  const { Store, users, handleRefresh, handleUnlike } = useHook()
 
   //Run once in init
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function LikeScreens({ route, navigation }: any) {
   return (
     <View style={styles.Container}>
       <FlatList
-        contentContainerStyle={{ padding: 10, backgroundColor: 'white',flex:1 }}
+        contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
         data={users}
         keyExtractor={(item, idx) => idx.toString()}
         renderItem={({ item, index }) => (
@@ -35,7 +35,12 @@ export default function LikeScreens({ route, navigation }: any) {
               alignItems: 'center',
             }}
           >
-            <UserLikedCard key={index} data={item} navigation={navigation} />
+            <UserLikedCard
+              key={index}
+              data={item}
+              navigation={navigation}
+              onPress={() => handleUnlike(item._id)}
+            />
           </View>
         )}
         numColumns={2}

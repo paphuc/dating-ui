@@ -16,6 +16,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   Image: {
+    borderTopRightRadius:10,
+    borderTopLeftRadius:10,
     width: Layout.window.width * 0.4,
     height: Layout.window.width * 0.5,
   },
