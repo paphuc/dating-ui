@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 
 import { IUser, IActionType, IStore } from '../../interfaces'
 
-const initState: IStore = {
+const initState: IStore<any> = {
   isLoading: false,
   error: undefined,
   message: undefined,

@@ -14,7 +14,7 @@ function getListLiked(id: string) {
       .then(({ data }) => {
         dispatch({
           type: constants.MATCH_USERS_LIST,
-          payload: data,
+          payload: { content: data.content },
         })
       })
       .catch((err) => {

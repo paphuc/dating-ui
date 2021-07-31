@@ -4,7 +4,7 @@ import { Image, Text, Header, Avatar, Chip } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import useHook from './hook'
+import useHook, { PropsInterface } from './hook'
 import AuthActions from '../../../redux/actions/auth'
 import styles from './style'
 
@@ -13,10 +13,15 @@ interface ItemProps {
   content: string
 }
 
-export default function ProfileScreen({}) {
+export default function ProfileScreen({
+  navigation,
+}: PropsInterface) {
   const dispatch = useDispatch()
-  const { user, getAge } = useHook()
-  const InfoItem = ({ icon, content }: ItemProps) => {
+  const { user, getAge,handleNavigate } = useHook({ navigation })
+  const InfoItem = ({
+    icon,
+    content,
+  }: ItemProps) => {
     return (
       <View
         style={{
@@ -47,7 +52,7 @@ export default function ProfileScreen({}) {
             containerStyle={styles.AvatarStyle}
             size={100}
             rounded
-            source={{ uri: user?.media[0] }}
+            source={{ uri: user? user?.media[0]: "https://photo-cms-giacngo.zadn.vn/w770/userimages/2011/02/23/1/question_mark_alternate.png" }}
             title={user?.name}
           />
           <Text
@@ -131,7 +136,7 @@ export default function ProfileScreen({}) {
           <View style={{ flexDirection: 'row' }}>
             <Text>Profile </Text>
             <Icon
-              onPress={() => console.log('edit profile')}
+              onPress={()=>handleNavigate(user)}
               name='edit'
               size={24}
               color={'#56BBFF'}

@@ -1,8 +1,23 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 import { IUser } from '../interfaces'
+import {
+  RoomInterface,
+  UserInRoomInterface,
+} from '../redux/reducers/listRoomsMatch'
+
 export type RootStackParamList = {
   List: undefined
   NotFound: undefined
+  Register: undefined
+  Login: undefined
+  UpdateProfileScreens: { item: IUser | null } | undefined
+  InboxScreen:
+    | {
+        room: RoomInterface | undefined
+        userID: string | undefined
+        userTarget: UserInRoomInterface | undefined
+      }
+    | undefined
   BottomTab: NavigatorScreenParams<BottomTabParamList>
 }
 
@@ -13,9 +28,16 @@ export type BottomTabParamList = {
   Profile: undefined
 }
 
+export type ModelParamList = {
+  UserDetail: NavigatorScreenParams<UserDetailParamList>
+}
+
+export type UserDetailParamList = {
+  currentUser: IUser
+  button: 'like' | 'unlike' | 'none'
+}
 export type HomeParamList = {
   Home: undefined
-  UserDetail: { item: IUser }
 }
 export type LikeParamList = {
   Like: undefined

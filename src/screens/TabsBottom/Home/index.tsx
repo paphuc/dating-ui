@@ -33,6 +33,7 @@ export default function HomeScreen({ route, navigation }: Props) {
         keyExtractor={(item, idx) => idx.toString()}
         renderItem={({ item, index }) => (
           <View
+            key={index}
             style={{
               flex: 0.5,
               backgroundColor: 'white',

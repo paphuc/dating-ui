@@ -7,24 +7,55 @@ import { useSelector, useDispatch } from 'react-redux'
 import API from '../../../common/Api'
 import navigation from '../../../navigation'
 
-export default function Hook() {
-  const [user, setUser] = useState<IUser | null>(null)
+export type InboxScreenNavigationProp =
+  StackNavigationProp<
+    RootStackParamList,
+    'BottomTab'
+  >
+
+export type PropsInterface = {
+  navigation: InboxScreenNavigationProp
+}
+
+export default function Hook(
+  props?: PropsInterface
+) {
+  const [user, setUser] =
+    useState<IUser| null>(null)
 
   const state = useSelector((value: any) => value.authStore)
 
   useEffect(() => {
     if (state.isLogged) {
-      var decodedHeader: JwtProps = jwt_decode(state.token)
-      API.get('/users/' + decodedHeader?._id).then(({ data }) => {
+      var decodedHeader: JwtProps = jwt_decode(
+        state.token
+      )
+      API.get(
+        '/users/' + decodedHeader?._id
+      ).then(({ data }) => {
+        
+        if(data.media === null){
+          props?.navigation.navigate(
+            'UpdateProfileScreens', {item: data }
+          )
+        }
         setUser(data)
       })
     }
   }, [state])
+
+  const handleNavigate = (item: IUser| null) => {
+    props?.navigation.navigate(
+      'UpdateProfileScreens', {item: item }
+    )
+  }
+
   const getAge = (age: string): string => {
     return (new Date().getFullYear() - new Date(age).getFullYear()).toString()
   }
   return {
     getAge,
     user,
+    handleNavigate,
   }
 }

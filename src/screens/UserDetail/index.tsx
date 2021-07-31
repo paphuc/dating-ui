@@ -3,6 +3,8 @@ import { View, FlatList, StyleSheet, ScrollView } from 'react-native'
 import { Input, Button, Image, Text, Avatar, Chip } from 'react-native-elements'
 import IconFloatButton from '../../components/IconFloatButton'
 import SkeletonImage from '../../components/SkeletonImage'
+import { RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { getAge } from '../../common/Utils'
 import useHook from './hook'
 import styles from './styles'
@@ -10,16 +12,18 @@ import { Divider } from 'react-native-elements/dist/divider/Divider'
 import Colors from '../../constants/Colors'
 import style from '../Login/style'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { ModelParamList, UserDetailParamList } from '../../navigation/types'
+
 interface Props {
-  route: any
-  navigation: any
+  route: RouteProp<any, 'UserDetail'>
+  navigation: StackNavigationProp<ModelParamList, 'UserDetail'>
 }
 
-export default function UserDetail({ route, navigation }: Props) {
-  const { currentUser, setCurrentUser, handleLike,handleUnlike} = useHook()
+export default function UserDetailScreen({ route, navigation }: Props) {
+  const { currentUser, setCurrentUser, handleLike, handleUnlike } = useHook()
 
   useEffect(() => {
-    setCurrentUser(route.params.currentUser)
+    setCurrentUser(route.params?.currentUser)
   }, [])
 
   return (

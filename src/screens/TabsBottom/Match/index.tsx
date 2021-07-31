@@ -11,7 +11,7 @@ import useHook from './hook'
 import styles from './style'
 
 export default function MatchScreens({}) {
-  const { matchedList, getAge } = useHook()
+  const { content, getAge } = useHook()
 
   const getFooter = () => {
     return (
@@ -33,7 +33,7 @@ export default function MatchScreens({}) {
             ListFooterComponent={getFooter}
             scrollEnabled={true}
             nestedScrollEnabled={true}
-            data={matchedList}
+            data={content}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => {

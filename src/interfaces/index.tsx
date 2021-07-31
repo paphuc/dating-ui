@@ -11,6 +11,7 @@ export interface IRegisterUser {
 }
 
 export interface IConfig {
+  WS: string
   Host: string
   Port: string
 }
@@ -35,6 +36,7 @@ export interface IUser {
   match_id: string[]
   looking_for: string
   relationship: string
+  disable: boolean
   created_at?: Date
   updated_at?: Date
 }
@@ -43,15 +45,38 @@ export interface IActionType<T>{
   type: string
   payload:T
 }
-export interface IStore {
+
+export interface IStore<T> {
   isLoading: boolean
   error: string | undefined
   message: string | undefined
   currentPage?: number
   filter?: Object
-  content?: Array<any>
+  content?: Array<T>
   maxItemsPerPage?: number
   totalItems?: number
   totalPages?: number
   [x: string]: any
+}
+export interface UserUpdateProps {
+  _id?: string
+  name: string
+  media: string[]
+  birthday: Date | string
+  gender: string
+  sex: string
+  country: string
+  hobby: string[]
+  about: string
+  looking_for: string
+  relationship: string
+}
+
+export interface ImessagesAPI {
+  _id: string
+  attachments: string[]
+  content: string
+  created_at: string
+  room_id: string
+  sender_id: string
 }

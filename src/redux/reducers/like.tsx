@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/like'
 import { IUser, IActionType, IStore } from '../../interfaces'
 
-const initState: IStore = {
+const initState: IStore<any> = {
   isLoading: false,
   error: undefined,
   message: undefined,

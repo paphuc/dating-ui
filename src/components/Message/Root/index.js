@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
 
-import Toast from './Toast'
+import Toast from '../Toast'
 
 
 class Root extends Component {
