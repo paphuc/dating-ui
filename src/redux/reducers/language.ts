@@ -4,10 +4,7 @@ var initialState = {
   language: 'vi',
 }
 
-var languageReducer = (
-  state = initialState,
-  action: any
-) => {
+var languageReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case types.CHANGE_LANGUAGE: {
       return { language: action.language }

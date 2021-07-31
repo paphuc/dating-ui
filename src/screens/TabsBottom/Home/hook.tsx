@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { IUser } from '../../../interfaces'
+import { useDispatch, useSelector } from 'react-redux'
+import Actions from '../../../redux/actions/user'
 
 export default function Hook() {
-  const getAge = (age: string): string => {
-    return (
-      new Date().getFullYear() -
-      new Date(age).getFullYear()
-    ).toString()
+  const [users, setUsers] = useState([] as IUser[])
+  const State = useSelector((value: any) => value.authStore)
+  const UserStore = useSelector((value: any) => value.userStore)
+  const dispatch = useDispatch()
+
+  const handleRefresh = () => {
+    dispatch(Actions.getList())
   }
+  const handleLike = (target: string) => {
+    dispatch(Actions.like(State.user?._id, target))
+  }
+
+  useEffect(() => {
+    if (UserStore?.totalItems >= 0) {
+      setUsers(UserStore.content)
+    }
+  }, [UserStore])
+
   return {
-    getAge,
+    users,
+    setUsers,
+    dispatch,
+    UserStore,
+    handleRefresh,
+    State,
+    handleLike
   }
 }

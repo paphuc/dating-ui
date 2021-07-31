@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
-import { UserProps } from '../interfaces'
+import { IUser } from '../interfaces'
 import {
   RoomInterface,
   UserInRoomInterface,
@@ -10,45 +10,38 @@ export type RootStackParamList = {
   NotFound: undefined
   Register: undefined
   Login: undefined
-  UpdateProfileScreens:
-    | { item: UserProps | null }
-    | undefined
-  ChatBox:
+  UpdateProfileScreens: { item: IUser | null } | undefined
+  InboxScreen:
     | {
         room: RoomInterface | undefined
         userID: string | undefined
-        userTarget:
-          | UserInRoomInterface
-          | undefined
+        userTarget: UserInRoomInterface | undefined
       }
     | undefined
   BottomTab: NavigatorScreenParams<BottomTabParamList>
 }
 
 export type BottomTabParamList = {
-  Heart:
-    | NavigatorScreenParams<HomeParamList>
-    | undefined
-  Matched:
-    | NavigatorScreenParams<LikeTabParamList>
-    | undefined
+  Home: NavigatorScreenParams<HomeParamList> | undefined
+  Like: NavigatorScreenParams<LikeParamList> | undefined
   Inbox: undefined
   Profile: undefined
 }
 
-export type HomeParamList = {
-  HomeScreen: { item: UserProps } | undefined
-}
-export type LikeTabScreensParamList = {
-  Like: undefined
-  Match: undefined
-}
-export type LikeTabParamList = {
-  LikeTabScreens:
-    | NavigatorScreenParams<LikeTabScreensParamList>
-    | undefined
+export type ModelParamList = {
+  UserDetail: NavigatorScreenParams<UserDetailParamList>
 }
 
+export type UserDetailParamList = {
+  currentUser: IUser
+  button: 'like' | 'unlike' | 'none'
+}
+export type HomeParamList = {
+  Home: undefined
+}
+export type LikeParamList = {
+  Like: undefined
+}
 export type InboxParamList = {
   InboxScreen: undefined
 }

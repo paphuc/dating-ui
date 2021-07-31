@@ -3,8 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { ProfileScreen } from '../screens/TabsBottom'
 import { ProfileParamList } from './types'
 
-const ProfileStack =
-  createStackNavigator<ProfileParamList>()
+const ProfileStack = createStackNavigator<ProfileParamList>()
 
 export default function TabProfileNavigator() {
   return (

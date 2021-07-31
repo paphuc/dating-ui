@@ -1,4 +1,4 @@
-export interface IUser {
+export interface ILogin {
   email: string
   password: string
 }
@@ -21,8 +21,8 @@ export interface JwtProps {
   email: string
   exp: number
 }
-export interface UserProps {
-  _id?: string
+export interface IUser {
+  _id: string
   name: string
   email: string
   media: string[]
@@ -39,6 +39,24 @@ export interface UserProps {
   disable: boolean
   created_at?: Date
   updated_at?: Date
+}
+
+export interface IActionType<T>{
+  type: string
+  payload:T
+}
+
+export interface IStore<T> {
+  isLoading: boolean
+  error: string | undefined
+  message: string | undefined
+  currentPage?: number
+  filter?: Object
+  content?: Array<T>
+  maxItemsPerPage?: number
+  totalItems?: number
+  totalPages?: number
+  [x: string]: any
 }
 export interface UserUpdateProps {
   _id?: string

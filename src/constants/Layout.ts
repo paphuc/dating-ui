@@ -1,7 +1,4 @@
-import {
-  Dimensions,
-  StyleSheet,
-} from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -13,6 +10,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#90AFC5',
   },
+  Shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
 })
 
 export default {
@@ -21,4 +28,5 @@ export default {
     height,
   },
   isSmallDevice: width < 375,
+  styles,
 }

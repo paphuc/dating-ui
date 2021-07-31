@@ -1,53 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { StackNavigationProp } from '@react-navigation/stack'
 import jwt_decode from 'jwt-decode'
-import { RootStackParamList } from '../../../navigation/types'
-import {
-  JwtProps,
-  UserProps,
-} from '../../../interfaces'
-import {
-  useSelector,
-  useDispatch,
-} from 'react-redux'
-import Actions, {
-  DispatchType,
-} from '../../../redux/actions/likedList'
-import { ApplicationState } from '../../../redux/reducers'
-
-import API from '../../../common/Api'
+import { JwtProps, IUser } from '../../../interfaces'
+import { useSelector, useDispatch } from 'react-redux'
+import Actions from '../../../redux/actions/like'
 
 export default function Hook() {
-  const [user, setUser] =
-    useState<UserProps | null>(null)
-
-  const state = useSelector(
-    (value: any) => value.authStore
-  )
-  const { content } = useSelector(
-    (state: any) => state.likedListStore
-  )
+  const [users, setUser] = useState([] as Array<IUser>)
+  const State = useSelector((value: any) => value.authStore)
+  const Store = useSelector((state: any) => state.likedStore)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (state.isLogged) {
-      var decodedHeader: JwtProps = jwt_decode(
-        state.token
-      )
-      dispatch(
-        Actions.getListLiked(decodedHeader?._id)
-      )
-    }
-  }, [state])
-
-  const getAge = (age: string): string => {
-    return (
-      new Date().getFullYear() -
-      new Date(age).getFullYear()
-    ).toString()
+  const handleRefresh = () => {
+    dispatch(Actions.getList(State.user?._id))
   }
+  const handleUnlike = (target: string) => {
+    dispatch(Actions.unlike(State.user?._id, target))
+  }
+  useEffect(() => {
+    if (Store?.content?.length >= 0) {
+      setUser(Store.content)
+    }
+  }, [Store])
+
   return {
-    getAge,
-    content,
+    handleRefresh,
+    handleUnlike,
+    Store,
+    users,
   }
 }

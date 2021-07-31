@@ -1,23 +1,23 @@
 import { combineReducers } from 'redux'
 import languageStore from './language'
 import authStore from './auth'
-import userListStore from './userList'
-import likedListStore from './likedList'
-import matchedListStore from './matchedList'
-import updateUser from './updateUser'
+import userStore from './user'
+import likedStore from './like'
+import commonStore from './common'
+import matchedStore from './matchedList'
+import  updateUser from './updateUser'
 import listRoomsMatch from './listRoomsMatch'
 const appReducers = combineReducers({
   languageStore,
   authStore,
-  userListStore,
-  likedListStore,
-  matchedListStore,
+  userStore,
+  likedStore,
+  matchedStore,
+  commonStore,
   updateUser,
   listRoomsMatch
 })
 
-export type ApplicationState = ReturnType<
-  typeof appReducers
->
+export type ApplicationState = ReturnType<typeof appReducers>
 
 export default appReducers

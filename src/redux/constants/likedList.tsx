@@ -1,4 +1,0 @@
-export default {
-  LIKED_USERS_LIST: 'LIKED_USERS_LIST',
-  LIST_ERROR: 'LIST_ERROR',
-}

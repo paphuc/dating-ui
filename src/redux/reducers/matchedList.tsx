@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import constants from '../constants/matchList'
-import { UserProps } from '../../interfaces'
+import { IUser, IActionType, IStore} from '../../interfaces'
 
 export type MatchedListProps = {
-  content: UserProps[] | undefined
+  content:IUser[] | undefined
 }
 
 const initMatchedListState: MatchedListProps = {
@@ -17,7 +17,7 @@ export interface ActionType {
 
 export default function matchedList(
   state: Object = initMatchedListState,
-  action: ActionType
+  action:IActionType<MatchedListProps>
 ) {
   switch (action.type) {
     case constants.MATCH_USERS_LIST: {

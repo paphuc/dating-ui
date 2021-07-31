@@ -1,20 +1,7 @@
 import * as React from 'react'
-import {
-  View,
-  ActivityIndicator,
-  Button,
-} from 'react-native'
-import {
-  Image,
-  Text,
-  Header,
-  Avatar,
-  Chip,
-} from 'react-native-elements'
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux'
+import { View, ActivityIndicator, Button } from 'react-native'
+import { Image, Text, Header, Avatar, Chip } from 'react-native-elements'
+import { useDispatch, useSelector } from 'react-redux'
 import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import useHook, { PropsInterface } from './hook'
@@ -75,11 +62,8 @@ export default function ProfileScreen({
               color: '#204761',
             }}
           >
-            {user?.name},{' '}
-            {user
-              ? getAge(user.birthday.toString())
-              : ''}{' '}
-            - {user?.gender}
+            {user?.name}, {user ? getAge(user.birthday.toString()) : ''} -{' '}
+            {user?.gender}
           </Text>
         </View>
         {/* info */}
@@ -92,49 +76,28 @@ export default function ProfileScreen({
             }}
           >
             <Text>
-              <Icon
-                name='info-circle'
-                size={15}
-                color={'#56BBFF'}
-              />{' '}
-              Info
+              <Icon name='info-circle' size={15} color={'#56BBFF'} /> Info
             </Text>
           </View>
           {/* Hobby */}
           <View style={styles.HobbyContainer}>
             {user?.hobby.map((h, i) => {
               return (
-                <View
-                  style={{ margin: 5 }}
-                  key={i}
-                >
-                  <Chip
-                    titleStyle={{ fontSize: 10 }}
-                    title={h}
-                  />
+                <View style={{ margin: 5 }} key={i}>
+                  <Chip titleStyle={{ fontSize: 10 }} title={h} />
                 </View>
               )
             })}
           </View>
+          <InfoItem icon='map-marker' content={user ? user.country : ''} />
+          <InfoItem icon='genderless' content={'Sexual: ' + user?.sex} />
           <InfoItem
-            icon='map-marker'
-            content={user ? user.country : ''}
+            icon='genderless'
+            content={'Status: ' + user?.relationship}
           />
           <InfoItem
             icon='genderless'
-            content={'Sexual: ' + user?.sex}
-          />
-          <InfoItem
-            icon='genderless'
-            content={
-              'Status: ' + user?.relationship
-            }
-          />
-          <InfoItem
-            icon='genderless'
-            content={
-              'Looking For: ' + user?.looking_for
-            }
+            content={'Looking For: ' + user?.looking_for}
           />
           {/* About */}
           <View
@@ -183,9 +146,7 @@ export default function ProfileScreen({
         rightComponent={
           <View>
             <Icon
-              onPress={() =>
-                console.log('setting')
-              }
+              onPress={() => console.log('setting')}
               name='cog'
               size={24}
               style={{ marginLeft: 20 }}
@@ -205,25 +166,17 @@ export default function ProfileScreen({
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          keyExtractor={(item, index) =>
-            index.toString()
-          }
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
-              <View
-                style={
-                  styles.CardListImageContainer
-                }
-              >
+              <View style={styles.CardListImageContainer}>
                 <Image
                   source={{ uri: item }}
                   style={{
                     width: 120,
                     height: 120,
                   }}
-                  PlaceholderContent={
-                    <ActivityIndicator />
-                  }
+                  PlaceholderContent={<ActivityIndicator />}
                 />
               </View>
             )
@@ -231,12 +184,7 @@ export default function ProfileScreen({
         />
       </View>
       <View>
-        <Button
-          title='Logout'
-          onPress={() =>
-            dispatch(AuthActions.logout())
-          }
-        />
+        <Button title='Logout' onPress={() => dispatch(AuthActions.logout())} />
       </View>
     </View>
   )

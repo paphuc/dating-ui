@@ -9,3 +9,7 @@ export function clearLocalStorage() {
 export function getToken(tokenType: string) {
   return AsyncStorage.getItem(tokenType)
 }
+
+export function getAge(date: any): Number {
+  return new Date().getFullYear() - new Date(date).getFullYear()
+}

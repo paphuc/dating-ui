@@ -1,23 +1,16 @@
 import axios from 'axios'
 
-import {
-  clearLocalStorage,
-  getToken,
-} from './Utils'
+import { clearLocalStorage, getToken } from './Utils'
 import Config from '../../config'
 class axiosService {
   constructor() {
     const instance = axios.create({
       headers: {
-        'Content-Type':
-          'application/json;charset=utf-8',
+        'Content-Type': 'application/json;charset=utf-8',
       },
     })
 
-    instance.interceptors.response.use(
-      this.handleSuccess,
-      this.handleError
-    )
+    instance.interceptors.response.use(this.handleSuccess, this.handleError)
 
     instance.interceptors.request.use(
       async (config) => {
@@ -28,6 +21,7 @@ class axiosService {
             config.headers.Authorization = `Bearer ${token}`
           }
         }
+        console.info(config)
         return config
       },
       (error) => {
@@ -46,51 +40,33 @@ class axiosService {
   }
 
   get(url) {
-    return this.instance.get(
-      `${Config.Host}:${Config.Port}${url}`
-    )
+    return this.instance.get(`${Config.Host}:${Config.Port}${url}`)
   }
 
   post(url, payload) {
-    return this.instance.post(
-      `${Config.Host}:${Config.Port}${url}`,
-      payload
-    )
+    return this.instance.post(`${Config.Host}:${Config.Port}${url}`, payload)
   }
 
   put(url, payload) {
-    return this.instance.put(
-      `${Config.Host}:${Config.Port}${url}`,
-      payload
-    )
+    return this.instance.put(`${Config.Host}:${Config.Port}${url}`, payload)
   }
 
   delete(url, payload) {
-    return this.instance.delete(
-      `${Config.Host}:${Config.Port}${url}`,
-      payload
-    )
+    return this.instance.delete(`${Config.Host}:${Config.Port}${url}`, { data: payload })
   }
 
   upload(url, formData) {
-    return this.instance.post(
-      `${Config.Host}:${Config.Port}${url}`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    )
+    return this.instance.post(`${Config.Host}:${Config.Port}${url}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
   }
 
   export(url) {
-    return this.instance.get(
-      `${Config.Host}:${Config.Port}${url}`,
-      {
-        responseType: 'blob',
-      }
-    )
+    return this.instance.get(`${Config.Host}:${Config.Port}${url}`, {
+      responseType: 'blob',
+    })
   }
 }
 
