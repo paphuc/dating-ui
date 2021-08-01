@@ -16,7 +16,7 @@ const InboxItem = ({ room, userID, onPress }: InboxElementProps) => {
   const User: IUser = useSelector((value: any) => value.authStore?.user)
 
   const getTargetUser = (arr: IUserInRoom[]): IUserInRoom | undefined => {
-    return arr.find((u: IUserInRoom) => u._id != User._id)
+    return arr.find((u: IUserInRoom) => u._id != User?._id)
   }
   const targetUser = getTargetUser(room.users)
 
