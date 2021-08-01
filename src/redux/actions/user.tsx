@@ -8,10 +8,10 @@ export default {
   like,
 }
 
-function getList() {
+function getList(id: string) {
   return (dispatch: any) => {
     dispatch({ type: constants.USER_LOADING })
-    API.get('/users')
+    API.get(`/users/${id}/available?size=100`)
       .then(({ data }) => {
         dispatch({
           type: constants.USER_LIST,

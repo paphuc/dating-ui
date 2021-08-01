@@ -19,10 +19,6 @@ function getList(id: string) {
           type: constants.COMMON_ERROR,
           payload: err.response.data,
         })
-        dispatch({
-          type: constants.LIKED_ERROR,
-          payload: { ...err.response.data },
-        })
       })
   }
 }
@@ -42,16 +38,12 @@ function unlike(user: string, target: string) {
 
         dispatch({
           type: constants.LIKED_UNLIKE,
-          payload: { user: user },
+          payload: { user: target },
         })
       })
       .catch((err) => {
         dispatch({
           type: constants.COMMON_ERROR,
-          payload: err.response.data,
-        })
-        dispatch({
-          type: constants.LIKED_ERROR,
           payload: err.response.data,
         })
       })

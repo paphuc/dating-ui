@@ -1,4 +1,0 @@
-export default {
-  MATCH_USERS_LIST: 'MATCH_USERS_LIST',
-  LIST_ERROR: 'LIST_ERROR',
-}

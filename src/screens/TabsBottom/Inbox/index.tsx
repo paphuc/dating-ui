@@ -1,53 +1,60 @@
 import React from 'react'
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  FlatList,
-} from 'react-native'
-import useHook, { PropsInterface } from './hook'
+import { View, FlatList, StyleSheet, RefreshControl } from 'react-native'
+import { ListItem, Avatar, Text, Image } from 'react-native-elements'
+import { Divider } from 'react-native-elements/dist/divider/Divider'
 import InboxItem from '../../../components/InboxItem'
+import UserAvatar from '../../../components/UserAvatar'
+import { IUser } from '../../../interfaces'
+import styles from './style'
+import useHook, { PropsInterface } from './hook'
 
 export default function InboxScreens({ navigation }: PropsInterface) {
-  const { listRooms, userID, handleNavigate, onRefresh, isFetching } = useHook({
+  const {
+    Matched,
+    matches,
+    rooms,
+    AuthUser,
+    handleNavigate,
+    handleConversationRefresh,
+    handleMatchedRefresh,
+    Room,
+  } = useHook({
     navigation,
   })
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text>INBOX</Text>
-
-      <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1, flexDirection: 'column' }}>
+      <View style={{ backgroundColor: 'white' }}>
+        <Text style={styles.Header}>Ghép đôi</Text>
         <FlatList
-          onRefresh={onRefresh}
-          refreshing={isFetching}
-          scrollEnabled={true}
-          nestedScrollEnabled={true}
-          data={listRooms.reverse()}
+          contentContainerStyle={{ margin: 10 }}
+          data={matches}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  marginVertical: 6,
-                }}
-                key={index}
-                onPress={() => handleNavigate(item)}
-              >
-                <InboxItem room={item} userID={userID} />
-              </TouchableOpacity>
-            )
-          }}
+          renderItem={({ item, index }) => (
+            <UserAvatar source={item.media[0]} name={item.name} />
+          )}
+          horizontal
         />
-      </SafeAreaView>
+        <Divider style={{ margin: 10 }} />
+      </View>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <Text style={styles.Header}>Trò chuyện</Text>
+        <FlatList
+          style={{ flex: 1, backgroundColor: 'white' }}
+          data={rooms}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => (
+            <InboxItem
+              onPress={() => handleNavigate(item)}
+              key={index}
+              userID={AuthUser._id}
+              room={item}
+            />
+          )}
+          onRefresh={() => handleConversationRefresh()}
+          refreshing={Room.isLoading}
+        />
+      </View>
     </View>
   )
 }

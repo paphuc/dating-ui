@@ -4,9 +4,9 @@ import authStore from './auth'
 import userStore from './user'
 import likedStore from './like'
 import commonStore from './common'
-import matchedStore from './matchedList'
-import  updateUser from './updateUser'
-import listRoomsMatch from './listRoomsMatch'
+import matchedStore from './match'
+import updateUser from './updateUser'
+import roomStore from './room'
 const appReducers = combineReducers({
   languageStore,
   authStore,
@@ -15,7 +15,7 @@ const appReducers = combineReducers({
   matchedStore,
   commonStore,
   updateUser,
-  listRoomsMatch
+  roomStore,
 })
 
 export type ApplicationState = ReturnType<typeof appReducers>

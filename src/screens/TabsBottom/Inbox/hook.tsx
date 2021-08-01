@@ -5,10 +5,11 @@ import {
   RootStackParamList,
   BottomTabParamList,
 } from '../../../navigation/types'
-import { RoomInterface } from '../../../redux/reducers/listRoomsMatch'
-import { JwtProps } from '../../../interfaces'
+import { IRoom, IUserInRoom } from '../../../interfaces'
 import { useSelector, useDispatch } from 'react-redux'
-import Actions from '../../../redux/actions/listRoomsMatch'
+import { default as ConversationAction } from '../../../redux/actions/room'
+import { default as MatchedAction } from '../../../redux/actions/match'
+import { IUser } from '../../../interfaces'
 
 export type PropsInterface = {
   navigation: StackNavigationProp<RootStackParamList, 'BottomTab'>
@@ -16,57 +17,47 @@ export type PropsInterface = {
 
 export default function Hook(props?: PropsInterface) {
   const dispatch = useDispatch()
-  const listRooms: RoomInterface[] = useSelector(
-    (value: any) => value.listRoomsMatch.roomList
-  )
-  const state = useSelector((value: any) => value.authStore)
-  const [userID, setUserID] = React.useState<string>('')
+  const AuthUser: IUser = useSelector((value: any) => value.authStore?.user)
 
-  const [isFetching, setIsFetching] = React.useState(false)
+  const Matched = useSelector((state: any) => state.matchedStore)
+  const matches = useSelector((state: any) => state.matchedStore.content)
 
-  const fetchData = () => {
-    getListRooms()
-    setIsFetching(false)
+  const Room = useSelector((value: any) => value.roomStore)
+  const rooms: IRoom[] = useSelector((value: any) => value.roomStore?.content)
+
+  const handleConversationRefresh = () => {
+    dispatch(ConversationAction.getList(AuthUser._id))
   }
 
-  const onRefresh = () => {
-    setIsFetching(true)
-    fetchData()
+  const handleMatchedRefresh = () => {
+    console.log('Handle matched')
+    dispatch(MatchedAction.getList(AuthUser._id))
   }
 
-  const getAge = (age: string): string => {
-    return (new Date().getFullYear() - new Date(age).getFullYear()).toString()
+  const getTargetUser = (arr: IUserInRoom[]): IUserInRoom | undefined => {
+    return arr.find((u: IUserInRoom) => u._id != AuthUser._id)
   }
-
-  const getListRooms = () => {
-    if (state.isLogged) {
-      var decodedHeader: JwtProps = jwt_decode(state.token)
-      setUserID(decodedHeader?._id)
-      dispatch(Actions.listRoomsMatched(decodedHeader?._id))
-    }
-  }
-
-  const handleNavigate = (room: RoomInterface) => {
-    const userTargetArr = room.users.filter((predicate) => {
-      return predicate._id != userID
-    })
-    const userTarget = userTargetArr.length != 1 ? undefined : userTargetArr[0]
-
+  const handleNavigate = (room: IRoom) => {
+    const userTarget = getTargetUser(room.users)
     props?.navigation.navigate('ChatBoxScreen', {
       userTarget: userTarget,
       room: room,
-      userID: userID,
+      userID: AuthUser._id,
     })
   }
   useEffect(() => {
-    getListRooms()
+    handleConversationRefresh()
+    handleMatchedRefresh()
   }, [])
 
   return {
-    listRooms,
-    userID,
+    rooms,
+    Room,
+    matches,
+    Matched,
+    AuthUser,
     handleNavigate,
-    onRefresh,
-    isFetching,
+    handleConversationRefresh,
+    handleMatchedRefresh,
   }
 }

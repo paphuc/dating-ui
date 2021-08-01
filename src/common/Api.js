@@ -21,7 +21,6 @@ class axiosService {
             config.headers.Authorization = `Bearer ${token}`
           }
         }
-        console.info(config)
         return config
       },
       (error) => {
