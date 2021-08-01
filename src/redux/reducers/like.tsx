@@ -18,8 +18,6 @@ export default function likeList(state = initState, action: IActionType<any>) {
       const users = state.content?.filter(
         (e) => e._id != (action.payload.user || '')
       )
-      console.log('++++++++++++++', users)
-
       return { ...state, content: users, isLoading: false }
     }
     case constants.LIKED_USERS_LIST: {

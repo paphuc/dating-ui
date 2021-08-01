@@ -13,6 +13,7 @@ export function getToken(tokenType: string) {
 export function getAge(date: any): Number {
   return new Date().getFullYear() - new Date(date).getFullYear()
 }
+
 export function renderDate(date: string): string {
   const d = moment(date)
   const today = moment()
@@ -27,4 +28,31 @@ export function renderDate(date: string): string {
   } else {
     return d.format('hh:mm')
   }
+}
+export function getThumbnailLink(
+  url: string,
+  size: 'tiny' | 'small' | 'medium' | 'large' = 'small'
+): string {
+  const Res = {
+    tiny: {
+      h: 160,
+      w: 90,
+    },
+    small: {
+      h: 320,
+      w: 180,
+    },
+    medium: {
+      h: 640,
+      w: 360,
+    },
+    large: {
+      h: 960,
+      w: 540,
+    },
+  }
+  return url.replace(
+    '/upload/',
+    `/upload/c_fit,h_${Res[size].h},w_${Res[size].w}/`
+  )
 }

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Button, Rating, Image } from 'react-native-elements'
 import SkeletonImage from '../SkeletonImage'
 import { IUser } from '../../interfaces'
-import { getAge } from '../../common/Utils'
+import { getAge, getThumbnailLink } from '../../common/Utils'
 import IconFloatButton from '../IconFloatButton'
 import styles from './style'
 
@@ -17,7 +17,7 @@ const App = ({ data, navigation, onPress }: Props) => {
   const handlePress = () => {
     navigation.navigate('Modal', {
       screen: 'UserDetail',
-      params: { currentUser: data, button:'unlike' },
+      params: { currentUser: data, button: 'unlike' },
     })
   }
   return (
@@ -26,7 +26,7 @@ const App = ({ data, navigation, onPress }: Props) => {
         <SkeletonImage
           layout={[styles.Image]}
           source={{
-            uri: data.media[0],
+            uri: getThumbnailLink(data.media[0]),
           }}
           style={styles.Image}
         />

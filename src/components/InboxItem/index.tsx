@@ -5,7 +5,7 @@ import { IRoom, IUserInRoom, IUser } from '../../interfaces'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesome5 } from '@expo/vector-icons'
 import Colors from '../../constants/Colors'
-import { renderDate } from '../../common/Utils'
+import { getThumbnailLink, renderDate } from '../../common/Utils'
 
 interface InboxElementProps {
   room: IRoom
@@ -34,7 +34,11 @@ const InboxItem = ({ room, userID, onPress }: InboxElementProps) => {
         size='large'
         rounded
         title={targetUser?.name[0]}
-        source={targetUser?.avatar && { uri: targetUser?.avatar }}
+        source={
+          targetUser?.avatar && {
+            uri: getThumbnailLink(targetUser?.avatar, 'small'),
+          }
+        }
       />
 
       <ListItem.Content>
