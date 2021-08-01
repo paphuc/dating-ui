@@ -6,26 +6,26 @@ import Actions from '../../../redux/actions/like'
 
 export default function Hook() {
   const [users, setUser] = useState([] as Array<IUser>)
-  const State = useSelector((value: any) => value.authStore)
-  const Store = useSelector((state: any) => state.likedStore)
+  const Auth = useSelector((value: any) => value.authStore)
+  const Liked = useSelector((state: any) => state.likedStore)
   const dispatch = useDispatch()
 
   const handleRefresh = () => {
-    dispatch(Actions.getList(State.user?._id))
+    dispatch(Actions.getList(Auth.user?._id))
   }
   const handleUnlike = (target: string) => {
-    dispatch(Actions.unlike(State.user?._id, target))
+    dispatch(Actions.unlike(Auth.user?._id, target))
   }
   useEffect(() => {
-    if (Store?.content?.length >= 0) {
-      setUser(Store.content)
+    if (Liked.content) {
+      setUser(Liked.content)
     }
-  }, [Store])
+  }, [Liked])
 
   return {
     handleRefresh,
     handleUnlike,
-    Store,
+    Liked,
     users,
   }
 }

@@ -4,6 +4,7 @@ import { IUser, IActionType, IStore } from '../../interfaces'
 
 const initState: IStore<any> = {
   isLoading: false,
+  content: [],
   error: undefined,
   message: undefined,
 }
@@ -11,13 +12,15 @@ const initState: IStore<any> = {
 export default function likeList(state = initState, action: IActionType<any>) {
   switch (action.type) {
     case constants.LIKED_LOADING: {
-      return { errors: undefined, isLoading: true }
+      return { ...state, errors: undefined, isLoading: true }
     }
     case constants.LIKED_UNLIKE: {
       const users = state.content?.filter(
-        (e) => e._id != (action.payload?.user || '')
+        (e) => e._id != (action.payload.user || '')
       )
-      return { ...state, content: users }
+      console.log('++++++++++++++', users)
+
+      return { ...state, content: users, isLoading: false }
     }
     case constants.LIKED_USERS_LIST: {
       return { ...action.payload, error: undefined, isLoading: false }

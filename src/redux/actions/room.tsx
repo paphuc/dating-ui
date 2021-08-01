@@ -3,27 +3,24 @@ import constants from '../constants'
 import { IRegisterUser, IUser } from '../../interfaces'
 import API from '../../common/Api'
 export default {
-  listRoomsMatched,
+  getList,
 }
 
-function listRoomsMatched(id: string) {
+function getList(id: string) {
   return (dispatch: any) => {
+    dispatch({ type: constants.ROOM_LOADING })
+
     API.get(`/matches/${id}`)
       .then(({ data }) => {
         dispatch({
-          type: constants.LIST_ROOM,
-          payload: { roomList: data },
+          type: constants.ROOM_LIST,
+          payload: { content: data },
         })
       })
       .catch((err) => {
-        console.log(err)
         dispatch({
           type: constants.COMMON_ERROR,
           payload: err.response.data,
-        })
-        dispatch({
-          type: constants.LIST_ERROR,
-          payload: { ...err.response.data },
         })
       })
   }

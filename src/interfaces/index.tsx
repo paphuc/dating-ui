@@ -41,15 +41,13 @@ export interface IUser {
   updated_at?: Date
 }
 
-export interface IActionType<T>{
+export interface IActionType<T> {
   type: string
-  payload:T
+  payload: T
 }
 
 export interface IStore<T> {
   isLoading: boolean
-  error: string | undefined
-  message: string | undefined
   currentPage?: number
   filter?: Object
   content?: Array<T>
@@ -79,4 +77,24 @@ export interface ImessagesAPI {
   created_at: string
   room_id: string
   sender_id: string
+}
+
+export interface IUserInRoom {
+  _id: string
+  name: string
+  avatar: string
+  gender: string
+}
+
+export interface IRoom {
+  _id: string
+  users: [IUserInRoom]
+  last_message?: {
+    _id: string
+    room_id: string
+    sender_id: string
+    content: string
+    attachments: string
+    created_at: string 
+  }
 }

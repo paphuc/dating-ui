@@ -1,57 +1,67 @@
 import React from 'react'
-import { ListItem, Avatar } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { RoomInterface } from '../../redux/reducers/listRoomsMatch'
+import { View } from 'react-native'
+import { ListItem, Avatar, Text } from 'react-native-elements'
+import { IRoom, IUserInRoom, IUser } from '../../interfaces'
+import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesome5 } from '@expo/vector-icons'
+import Colors from '../../constants/Colors'
+import { renderDate } from '../../common/Utils'
 
 interface InboxElementProps {
-  room: RoomInterface
+  room: IRoom
   userID: string
+  onPress: () => void
 }
-const InboxItem = ({ room, userID }: InboxElementProps) => {
-  const userTargetArr = room.users.filter((predicate) => {
-    return predicate._id != userID
-  })
-  const userTarget = userTargetArr.length != 1 ? undefined : userTargetArr[0]
-  console.log(userTarget);
-  
-  const AvatarElement = () => {
-    if (userTarget?.avatar !== '') {
-      return (
-        <>
-          <Avatar
-            rounded
-            source={{
-              uri: userTarget?.avatar,
-            }}
-          />
-        </>
-      )
-    }
-    return (
-      <>
-        <Icon name={'user'} size={20} />
-      </>
+const InboxItem = ({ room, userID, onPress }: InboxElementProps) => {
+  const User: IUser = useSelector((value: any) => value.authStore?.user)
+
+  const getTargetUser = (arr: IUserInRoom[]): IUserInRoom | undefined => {
+    return arr.find((u: IUserInRoom) => u._id != User._id)
+  }
+  const targetUser = getTargetUser(room.users)
+
+  const renderContent = () => {
+    return room.last_message?.attachments.length ? (
+      <FontAwesome5 name='image' color={Colors.Grey.Dark} size={20} />
+    ) : (
+      <Text>{room.last_message?.content || ' '}</Text>
     )
   }
 
   return (
-    <ListItem style={{ width: 800 }}>
-      <AvatarElement />
+    <ListItem style={{}} onPress={onPress}>
+      <Avatar
+        size='large'
+        rounded
+        title={targetUser?.name[0]}
+        source={targetUser?.avatar && { uri: targetUser?.avatar }}
+      />
 
       <ListItem.Content>
         <ListItem.Title
           style={{
             color: 'black',
-            fontWeight: 'bold',
+            fontWeight:
+              targetUser?._id == room.last_message?.sender_id ? 'bold' : '400',
+            marginBottom: 10,
           }}
         >
-          {userTarget?.name}
+          {targetUser?.name}
         </ListItem.Title>
-        <ListItem.Subtitle style={{ color: 'black' }}>
-          {room.last_message?.content}
+        <ListItem.Subtitle>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            {renderContent()}
+            <Text style={{ color: Colors.Grey.Dark }}>
+              {'•' + renderDate(room.last_message?.created_at || 'unknown')}
+            </Text>
+          </View>
         </ListItem.Subtitle>
       </ListItem.Content>
-      <ListItem.Chevron color='black' />
     </ListItem>
   )
 }

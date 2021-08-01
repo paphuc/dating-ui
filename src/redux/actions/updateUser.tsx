@@ -17,7 +17,6 @@ function update(user: UserUpdateProps) {
         })
       })
       .catch((err) => {
-        console.log(err)
         dispatch({
           type: constants.UPDATE_ERROR,
           payload: { ...err.response.data },

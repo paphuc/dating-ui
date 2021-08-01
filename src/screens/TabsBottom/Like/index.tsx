@@ -12,7 +12,7 @@ import useHook from './hook'
 import styles from './style'
 
 export default function LikeScreens({ route, navigation }: any) {
-  const { Store, users, handleRefresh, handleUnlike } = useHook()
+  const { Liked, users, handleRefresh, handleUnlike } = useHook()
 
   //Run once in init
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function LikeScreens({ route, navigation }: any) {
         )}
         numColumns={2}
         onRefresh={() => handleRefresh()}
-        refreshing={Store.isLoading}
+        refreshing={Liked.isLoading}
       />
     </View>
   )

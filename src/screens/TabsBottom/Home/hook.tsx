@@ -10,7 +10,7 @@ export default function Hook() {
   const dispatch = useDispatch()
 
   const handleRefresh = () => {
-    dispatch(Actions.getList())
+    dispatch(Actions.getList(State.user?._id))
   }
   const handleLike = (target: string) => {
     dispatch(Actions.like(State.user?._id, target))
@@ -29,6 +29,6 @@ export default function Hook() {
     UserStore,
     handleRefresh,
     State,
-    handleLike
+    handleLike,
   }
 }

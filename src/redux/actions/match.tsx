@@ -1,15 +1,14 @@
-import { Alert } from 'react-native'
-import constants from '../constants/matchList'
-import { IUser } from '../../interfaces'
+import constants from '../constants'
 import API from '../../common/Api'
-import { ActionType } from '../reducers/matchedList'
 export default {
-  getListLiked,
+  getList,
 }
 
-
-function getListLiked(id: string) {
+function getList(id: string) {
   return (dispatch: any) => {
+    dispatch({
+      type: constants.MATCH_LOADING,
+    })
     API.get(`/users/${id}/matches?matched=true`)
       .then(({ data }) => {
         dispatch({
@@ -19,7 +18,11 @@ function getListLiked(id: string) {
       })
       .catch((err) => {
         dispatch({
-          type: constants.LIST_ERROR,
+          type: constants.MATCH_ERROR,
+          payload: { ...err.response.data },
+        })
+        dispatch({
+          type: constants.COMMON_ERROR,
           payload: { ...err.response.data },
         })
       })
