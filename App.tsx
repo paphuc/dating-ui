@@ -10,7 +10,6 @@ import appReducers from './src/redux/reducers'
 import useCachedResources from './src/hooks/useCachedResources'
 import useColorScheme from './src/hooks/useColorScheme'
 import Navigation from './src/navigation'
-import Container from './src/components/Container'
 import logger from 'redux-logger'
 import { useDispatch, useSelector } from 'react-redux'
 import { Root } from './src/components/Message'
@@ -27,9 +26,7 @@ export default function App() {
       <SafeAreaProvider>
         <Provider store={store}>
           <Root>
-            <Container>
               <Navigation />
-            </Container>
           </Root>
         </Provider>
         <StatusBar style='dark' />

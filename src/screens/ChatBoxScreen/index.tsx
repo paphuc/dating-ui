@@ -1,20 +1,8 @@
 import React from 'react'
-import {
-  GiftedChat,
-  Actions,
-  ActionsProps,
-  MessageImage,
-  IMessage,
-} from 'react-native-gifted-chat'
+import { GiftedChat, Actions, ActionsProps } from 'react-native-gifted-chat'
 import Icon from 'react-native-vector-icons/FontAwesome'
-// import ImageModal,{ImageView} from 'react-native-image-modal';
-import ImageView from 'react-native-image-viewing'
-
-import styles from './style'
-
+import Container from '../../components/Container'
 import useHook, { Props } from './hook'
-import { TouchableOpacity, View } from 'react-native'
-import { Image } from 'react-native-elements'
 
 export default function ChatBoxScreen({ navigation, route }: Props) {
   const { messages, onSend, handlePickImage } = useHook({
@@ -36,13 +24,15 @@ export default function ChatBoxScreen({ navigation, route }: Props) {
   }
 
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      renderActions={renderActions}
-      user={{
-        _id: 1,
-      }}
-    />
+    <Container>
+      <GiftedChat
+        messages={messages}
+        onSend={(messages) => onSend(messages)}
+        renderActions={renderActions}
+        user={{
+          _id: 1,
+        }}
+      />
+    </Container>
   )
 }

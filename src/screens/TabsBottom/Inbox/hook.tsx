@@ -12,7 +12,7 @@ import { default as MatchedAction } from '../../../redux/actions/match'
 import { IUser } from '../../../interfaces'
 
 export type PropsInterface = {
-  navigation: StackNavigationProp<RootStackParamList, 'BottomTab'>
+  navigation: StackNavigationProp<any, 'BottomTab'>
 }
 
 export default function Hook(props?: PropsInterface) {
@@ -39,10 +39,13 @@ export default function Hook(props?: PropsInterface) {
   }
   const handleNavigate = (room: IRoom) => {
     const userTarget = getTargetUser(room.users)
-    props?.navigation.navigate('ChatBoxScreen', {
-      userTarget: userTarget,
-      room: room,
-      userID: AuthUser._id,
+    props?.navigation.navigate('Modal', {
+      screen: 'ChatBoxScreen',
+      params: {
+        userTarget: userTarget,
+        room: room,
+        userID: AuthUser._id,
+      },
     })
   }
   useEffect(() => {

@@ -8,6 +8,7 @@ import Layout from '../../../constants/Layout'
 import useHook from './hook'
 import styles from './style'
 import UserCard from '../../../components/UserCard'
+import Container from '../../../components/Container'
 
 type HomeScreenRouteProp = RouteProp<HomeParamList, 'Home'>
 type HomeScreenNavigationProp = StackNavigationProp<HomeParamList, 'Home'>
@@ -26,36 +27,38 @@ export default function HomeScreen({ route, navigation }: Props) {
   }, [])
 
   return (
-    <View style={styles.Container}>
-      <FlatList
-        contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
-        data={users}
-        keyExtractor={(item, idx) => idx.toString()}
-        renderItem={({ item, index }) => (
-          <View
-            key={index}
-            style={{
-              flex: 0.5,
-              backgroundColor: 'white',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <UserCard
+    <Container>
+      <View style={styles.Container}>
+        <FlatList
+          contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
+          data={users}
+          keyExtractor={(item, idx) => idx.toString()}
+          renderItem={({ item, index }) => (
+            <View
               key={index}
-              data={item}
-              navigation={navigation}
-              onPress={() => {
-                handleLike(item._id)
+              style={{
+                flex: 0.5,
+                backgroundColor: 'white',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
-            />
-          </View>
-        )}
-        numColumns={2}
-        onRefresh={() => handleRefresh()}
-        refreshing={UserStore.isLoading}
-      />
-    </View>
+            >
+              <UserCard
+                key={index}
+                data={item}
+                navigation={navigation}
+                onPress={() => {
+                  handleLike(item._id)
+                }}
+              />
+            </View>
+          )}
+          numColumns={2}
+          onRefresh={() => handleRefresh()}
+          refreshing={UserStore.isLoading}
+        />
+      </View>
+    </Container>
   )
 }

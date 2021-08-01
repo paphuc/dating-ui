@@ -5,8 +5,9 @@ import SkeletonImage from '../SkeletonImage'
 import { IUser } from './../../interfaces'
 import { getAge, getThumbnailLink } from '../../common/Utils'
 import { FontAwesome5 as Icon } from '@expo/vector-icons'
-import IconFloatButton from '../IconFloatButton'
+import IconButton from '../IconButton'
 import styles from './style'
+import Colors from '../../constants/Colors'
 
 type Props = {
   data: IUser
@@ -35,12 +36,13 @@ const App = ({ data, navigation, onPress }: Props) => {
         <Text style={styles.Name}>{`${data.name}, ${getAge(
           data.birthday
         )}`}</Text>
-        <IconFloatButton
+        <IconButton
           name={'heart'}
+          colors={Colors.PinkGradient}
           containerStyle={{
-            right: 10,
-            bottom: -22.5,
-            backgroundColor: '#F38BA0',
+            position: 'absolute',
+            right: 0,
+            bottom: -20,
           }}
           onPress={onPress}
         />

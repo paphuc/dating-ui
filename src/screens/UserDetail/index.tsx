@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { View, FlatList, StyleSheet, ScrollView } from 'react-native'
-import { Input, Button, Image, Text, Avatar, Chip } from 'react-native-elements'
-import IconFloatButton from '../../components/IconFloatButton'
+import React, { useEffect } from 'react'
+import { View, FlatList, ScrollView } from 'react-native'
+import { Text, Avatar, Chip } from 'react-native-elements'
+import IconButton from '../../components/IconButton'
+
 import SkeletonImage from '../../components/SkeletonImage'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -10,10 +11,9 @@ import useHook from './hook'
 import styles from './styles'
 import { Divider } from 'react-native-elements/dist/divider/Divider'
 import Colors from '../../constants/Colors'
-import style from '../Login/style'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { ModelParamList, UserDetailParamList } from '../../navigation/types'
-
+import Container from '../../components/Container'
 interface Props {
   route: RouteProp<any, 'UserDetail'>
   navigation: StackNavigationProp<ModelParamList, 'UserDetail'>
@@ -27,20 +27,23 @@ export default function UserDetailScreen({ route, navigation }: Props) {
   }, [])
 
   return (
-    <View style={styles.Container}>
-      <IconFloatButton
-        name='arrow-left'
-        containerStyle={{
-          backgroundColor: 'rgba(0.5,0.5,0.5,0.3)',
-          zIndex: 5,
-          top: 10,
-          left: 10,
-        }}
-        onPress={() => {
-          navigation.goBack()
-        }}
-      />
+    <Container>
       <ScrollView style={styles.Container}>
+        <IconButton
+          name={'arrow-left'}
+          size={15}
+          colors={['rgba(1,1,1,0)']}
+          containerStyle={{
+            position: 'absolute',
+            left: 10,
+            top: 10,
+            zIndex: 5,
+          }}
+          onPress={() => {
+            console.log('back')
+            navigation.goBack()
+          }}
+        />
         <View style={styles.ImageContainer}>
           <FlatList
             data={currentUser.media}
@@ -65,27 +68,27 @@ export default function UserDetailScreen({ route, navigation }: Props) {
         </View>
         <View style={styles.InfoContainer}>
           {route.params?.button == 'like' ? (
-            <IconFloatButton
+            <IconButton
               name={'heart'}
               size={40}
+              colors={Colors.PinkGradient}
               containerStyle={{
-                backgroundColor: Colors.Rainbows[0],
-                zIndex: 5,
+                position: 'absolute',
                 right: 15,
                 top: -35,
               }}
               onPress={() => {
-                handleLike(currentUser._id)
+                handleUnlike(currentUser._id)
                 navigation.goBack()
               }}
             />
           ) : (
-            <IconFloatButton
+            <IconButton
               name={'times'}
               size={40}
+              colors={Colors.OrangeGradient}
               containerStyle={{
-                backgroundColor: Colors.Rainbows[2],
-                zIndex: 5,
+                position: 'absolute',
                 right: 15,
                 top: -35,
               }}
@@ -113,18 +116,9 @@ export default function UserDetailScreen({ route, navigation }: Props) {
             horizontal
           />
           <Divider />
-          {currentUser.about ? (
-            <Text style={styles.About}>{currentUser.about}</Text>
-          ) : (
-            <FontAwesome5
-              name='question-circle'
-              color={Colors.Grey.Medium}
-              style={{ alignSelf: 'center', marginTop: 10 }}
-              size={40}
-            />
-          )}
+          <Text style={styles.About}>{currentUser?.about}</Text>
         </View>
       </ScrollView>
-    </View>
+    </Container>
   )
 }

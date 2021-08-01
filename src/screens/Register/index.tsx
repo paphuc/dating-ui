@@ -4,12 +4,19 @@ import { Input, Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import useHook from './hooks'
 import styles from './style'
+import { LinearGradient } from 'expo-linear-gradient'
+import Colors from '../../constants/Colors'
 
 export default function LoginScreen(props: any) {
   const { user, setUser, handleLogin, handleRegister } = useHook(props)
 
   return (
-    <View style={styles.Container}>
+    <LinearGradient
+      colors={Colors.MainBlueGradient}
+      style={styles.Container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
       <View></View>
       {/* INPUT FORM */}
       <View style={styles.FormContainer}>
@@ -49,10 +56,21 @@ export default function LoginScreen(props: any) {
           }
           leftIcon={<Icon name='lock' size={24} color={'grey'} />}
         />
-        <Button title='Register' onPress={handleRegister} />
+
+        <Button
+          linearGradientProps={{
+            colors: Colors.OrangeGradient,
+            start: { x: 0, y: 0 },
+            end: { x: 1, y: 1 },
+
+          }}
+          ViewComponent={LinearGradient}
+          title='Register'
+          onPress={handleRegister}
+        />
 
         <Button type='clear' onPress={handleLogin} title='I have account' />
       </View>
-    </View>
+    </LinearGradient>
   )
 }

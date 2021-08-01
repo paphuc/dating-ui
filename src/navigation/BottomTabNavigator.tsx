@@ -11,11 +11,10 @@ import InboxNav from './InboxNavigator'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name']
-  color: string
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />
+function TabBarIcon(props: any) {
+  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} 
+  linear
+  />
 }
 
 export default function BottomTabNavigator() {
@@ -26,6 +25,7 @@ export default function BottomTabNavigator() {
       initialRouteName='Home'
       tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
+        inactiveTintColor: Colors.Grey.Medium
       }}
     >
       <BottomTab.Screen

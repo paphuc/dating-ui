@@ -28,7 +28,10 @@ export default function Hook(props?: PropsInterface) {
   }, [])
 
   const handleNavigate = (destination: string) => {
-    props?.navigation.navigate(destination, { item: Info })
+    props?.navigation.navigate('Modal', {
+      screen: destination,
+      params: { item: Info },
+    })
   }
 
   return {
