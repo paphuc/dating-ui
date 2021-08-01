@@ -13,36 +13,24 @@ import ImageView from 'react-native-image-viewing'
 import styles from './style'
 
 import useHook, { Props } from './hook'
-import {
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Image } from 'react-native-elements'
 
-export default function ChatBoxScreen({
-  navigation,
-  route,
-}: Props) {
-  const { messages, onSend, handlePickImage } =
-    useHook({
-      navigation,
-      route,
-    })
-  const [visible, setIsVisible] =
-    React.useState(false)
+export default function ChatBoxScreen({ navigation, route }: Props) {
+  const { messages, onSend, handlePickImage } = useHook({
+    navigation,
+    route,
+  })
+  const [visible, setIsVisible] = React.useState(false)
 
-  const renderActions = (
-    props: Readonly<ActionsProps>
-  ) => {
+  const renderActions = (props: Readonly<ActionsProps>) => {
     return (
       <Actions
         {...props}
         options={{
           ['Send Image']: handlePickImage,
         }}
-        icon={() => (
-          <Icon name={'image'} size={20} />
-        )}
+        icon={() => <Icon name={'image'} size={20} />}
       />
     )
   }

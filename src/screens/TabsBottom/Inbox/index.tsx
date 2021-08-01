@@ -7,6 +7,7 @@ import UserAvatar from '../../../components/UserAvatar'
 import { IUser } from '../../../interfaces'
 import styles from './style'
 import useHook, { PropsInterface } from './hook'
+import { getThumbnailLink } from '../../../common/Utils'
 
 export default function InboxScreens({ navigation }: PropsInterface) {
   const {
@@ -31,8 +32,13 @@ export default function InboxScreens({ navigation }: PropsInterface) {
           data={matches}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
-            <UserAvatar source={item.media[0]} name={item.name} />
+            <UserAvatar
+              source={getThumbnailLink(item.media[0], 'large')}
+              name={item.name}
+            />
           )}
+          onRefresh={() => handleMatchedRefresh()}
+          refreshing={Matched.isLoading}
           horizontal
         />
         <Divider style={{ margin: 10 }} />

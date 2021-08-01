@@ -1,61 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
-import jwt_decode from 'jwt-decode'
 import { RootStackParamList } from '../../../navigation/types'
-import { JwtProps, IUser } from '../../../interfaces'
+import { IUser } from '../../../interfaces'
 import { useSelector, useDispatch } from 'react-redux'
-import API from '../../../common/Api'
-import navigation from '../../../navigation'
+import Actions from '../../../redux/actions/auth'
 
-export type InboxScreenNavigationProp =
-  StackNavigationProp<
-    RootStackParamList,
-    'BottomTab'
-  >
+export type InboxScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'BottomTab'
+>
 
 export type PropsInterface = {
-  navigation: InboxScreenNavigationProp
+  navigation: any
 }
 
-export default function Hook(
-  props?: PropsInterface
-) {
-  const [user, setUser] =
-    useState<IUser| null>(null)
+export default function Hook(props?: PropsInterface) {
+  const Auth = useSelector((value: any) => value.authStore)
+  const User = useSelector((value: any) => value.authStore.user)
+  const Info = useSelector((value: any) => value.authStore.info)
+  const dispatch = useDispatch()
 
-  const state = useSelector((value: any) => value.authStore)
-
+  const handleLogout = () => {
+    dispatch(Actions.logout())
+  }
   useEffect(() => {
-    if (state.isLogged) {
-      var decodedHeader: JwtProps = jwt_decode(
-        state.token
-      )
-      API.get(
-        '/users/' + decodedHeader?._id
-      ).then(({ data }) => {
-        
-        if(data.media === null){
-          props?.navigation.navigate(
-            'UpdateProfileScreens', {item: data }
-          )
-        }
-        setUser(data)
-      })
-    }
-  }, [state])
+    dispatch(Actions.getMe(User._id))
+  }, [])
 
-  const handleNavigate = (item: IUser| null) => {
-    props?.navigation.navigate(
-      'UpdateProfileScreens', {item: item }
-    )
+  const handleNavigate = (destination: string) => {
+    props?.navigation.navigate(destination, { item: Info })
   }
 
-  const getAge = (age: string): string => {
-    return (new Date().getFullYear() - new Date(age).getFullYear()).toString()
-  }
   return {
-    getAge,
-    user,
+    Auth,
+    User,
+    Info,
     handleNavigate,
+    handleLogout,
   }
 }

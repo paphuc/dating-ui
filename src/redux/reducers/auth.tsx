@@ -6,11 +6,10 @@ import { IUser, IActionType, IStore } from '../../interfaces'
 
 const initState: IStore<any> = {
   isLoading: false,
-  error: undefined,
-  message: undefined,
   isLogged: false,
   token: undefined,
   user: undefined,
+  info: undefined,
 }
 
 export default function authReducer(state: Object = initState, action: any) {
@@ -27,7 +26,16 @@ export default function authReducer(state: Object = initState, action: any) {
         isLoading: false,
       }
     }
+    case constants.AUTH_GET_ME: {
+      return {
+        ...state,
+        isLogged: true,
+        info: action.payload,
+        isLoading: false,
+      }
+    }
     case constants.AUTH_LOGOUT: {
+      AsyncStorage.removeItem('user')
       return initState
     }
     case constants.AUTH_ERROR: {

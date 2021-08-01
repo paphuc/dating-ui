@@ -4,6 +4,7 @@ import { IRegisterUser, ILogin } from '../../interfaces'
 import API from '../../common/Api'
 export default {
   login,
+  getMe,
   register,
   logout,
 }
@@ -16,7 +17,7 @@ function login(user: ILogin) {
       .then(({ data }) => {
         dispatch({
           type: constants.AUTH_LOGIN,
-          payload: { ...data },
+          payload: data,
         })
       })
       .catch((err) => {
@@ -27,7 +28,33 @@ function login(user: ILogin) {
 
         dispatch({
           type: constants.AUTH_ERROR,
-          payload: { ...err.response.data },
+          payload: err.response.data,
+        })
+      })
+  }
+}
+
+function getMe(id: string) {
+  return (dispatch: any) => {
+    dispatch({ type: constants.AUTH_LOADING })
+
+    API.get('/users/' + id)
+      .then(({ data }) => {
+        console.log(data)
+        dispatch({
+          type: constants.AUTH_GET_ME,
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: constants.COMMON_ERROR,
+          payload: err.response.data,
+        })
+
+        dispatch({
+          type: constants.AUTH_ERROR,
+          payload: err.response.data,
         })
       })
   }
@@ -49,8 +76,6 @@ function register(user: IRegisterUser) {
           type: constants.AUTH_ERROR,
           payload: { ...err.response.data },
         })
-
-        Alert.alert('Login failed', JSON.stringify(err.response.data))
       })
   }
 }
