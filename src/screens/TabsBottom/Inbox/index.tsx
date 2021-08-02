@@ -31,7 +31,7 @@ export default function InboxScreens({ navigation }: PropsInterface) {
         <View style={{ backgroundColor: 'white' }}>
           <Text style={styles.Header}>Ghép đôi</Text>
           <FlatList
-            contentContainerStyle={{ margin: 10 }}
+            contentContainerStyle={styles.MatchedContainer}
             data={matches}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
