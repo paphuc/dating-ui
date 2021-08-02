@@ -4,7 +4,7 @@ export default StyleSheet.create({
   Container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'stretch',
   },
   FormContainer: {
@@ -14,6 +14,7 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.6)',
   },
   Logo: {
+    marginTop: 100,
     width: Layout.window.width * 0.9,
     height: Layout.window.width * 0.3,
   },

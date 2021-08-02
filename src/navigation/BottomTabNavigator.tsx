@@ -13,7 +13,22 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
 function TabBarIcon(props: any) {
   return (
-    <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} linear />
+    <FontAwesome
+      size={30}
+      style={{
+        marginBottom: -3,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 1,
+          height: 1,
+        },
+        shadowOpacity: 0.12,
+        shadowRadius: 3.22,
+        elevation: 3,
+      }}
+      {...props}
+      linear
+    />
   )
 }
 
