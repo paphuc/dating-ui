@@ -37,7 +37,7 @@ const InboxItem = ({ room, userID, onPress }: InboxElementProps) => {
         source={
           targetUser?.avatar && {
             uri: getThumbnailLink(targetUser?.avatar, 'small'),
-          } || undefined
+          }
         }
       />
 

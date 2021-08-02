@@ -8,32 +8,26 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import Actions from '../../redux/actions/auth'
 
-type routeProp = RouteProp<RootStackParamList, 'SettingScreen'>
-
-type navigationProp = StackNavigationProp<RootStackParamList, 'SettingScreen'>
-
 export type Props = {
-  route: routeProp
-  navigation: navigationProp
+  route: RouteProp<RootStackParamList, 'SettingScreen'>
+  navigation: StackNavigationProp<RootStackParamList, 'SettingScreen'>
 }
 
-export default function Hook(props?: Props) {
-  const item = props?.route.params?.item
+export default function Hook(props: Props) {
+  const item = props.route.params.item
 
   const dispatch = useDispatch()
   const AuthUser: IUser = useSelector((value: any) => value.authStore?.user)
-  console.log(item?.disable, AuthUser?._id)
 
-  const [disable, setDisabled] = React.useState<boolean | undefined>(false)
+  const [disable, setDisabled] = React.useState(false)
 
   useEffect(() => {
-    setDisabled(item?.disable)
+    setDisabled(item.disable)
   }, [item])
-  const handleChangeDisable =()=>{
-      const value = !disable
-      setDisabled(value)
-      dispatch(Actions.disable(AuthUser?._id, value))
-      dispatch(Actions.getMe(AuthUser?._id))
+  const handleChangeDisable = () => {
+    dispatch(Actions.disable(AuthUser?._id, !disable))
+    setDisabled(!disable)
+    dispatch(Actions.getMe(AuthUser?._id))
   }
 
   return { item, disable, handleChangeDisable }
