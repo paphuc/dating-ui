@@ -71,7 +71,7 @@ export default function UserDetailScreen({ route, navigation }: Props) {
             <IconButton
               name={'heart'}
               size={40}
-              colors={Colors.PinkGradient}
+              colors={Colors.MainBlueGradient}
               containerStyle={{
                 position: 'absolute',
                 right: 15,

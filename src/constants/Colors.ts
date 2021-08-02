@@ -25,6 +25,6 @@ export default {
   MainBlueGradient: ['#1fa2ff', '#12d8fa', '#a6ffcb'],
   RedGradient: ['#f12711', '#f5af19'],
   OrangeGradient: ['#fdc830', '#f37335'],
-  GreyGradient: ['#dedede', '#f7f7f7'],
+  GreyGradient: ['#dedede', '#b5b5b5', '#f7f7f7'],
   PinkGradient: ['#f857a6', '#ff5858'],
 }

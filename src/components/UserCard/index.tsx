@@ -38,7 +38,7 @@ const App = ({ data, navigation, onPress }: Props) => {
         )}`}</Text>
         <IconButton
           name={'heart'}
-          colors={Colors.PinkGradient}
+          colors={Colors.MainBlueGradient}
           containerStyle={{
             position: 'absolute',
             right: 0,
