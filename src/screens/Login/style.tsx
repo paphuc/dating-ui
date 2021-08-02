@@ -16,6 +16,7 @@ export default StyleSheet.create({
   Logo: {
     marginTop: 100,
     width: Layout.window.width * 0.9,
-    height: Layout.window.width * 0.3,
+    height: Layout.window.width * 0.4,
+    ...Layout.styles.Shadow
   },
 })

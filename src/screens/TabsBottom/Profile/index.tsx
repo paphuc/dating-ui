@@ -23,7 +23,7 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
         renderPlaceholderContent={<ActivityIndicator />}
         containerStyle={styles.Avatar}
       />
-      <Text style={styles.Name}>{User?.name}</Text>
+      <Text style={styles.Name}>{Info?.name}</Text>
       <View style={styles.ButtonContainer}>
         <IconButton size={50} name={'cog'} colors={Colors.GreyGradient} />
         <IconButton

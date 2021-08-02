@@ -28,6 +28,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   ButtonContainer: {
+    marginTop: 20,
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-around',

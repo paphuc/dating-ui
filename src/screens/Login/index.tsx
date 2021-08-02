@@ -27,6 +27,7 @@ export default function LoginScreen(props: any) {
     >
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Image
+        resizeMode={"stretch"}
           source={require('../../../assets/images/logo.png')}
           style={styles.Logo}
         />
