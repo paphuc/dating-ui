@@ -7,6 +7,7 @@ export default {
   getMe,
   register,
   logout,
+  disable
 }
 
 function login(user: ILogin) {
@@ -75,6 +76,24 @@ function register(user: IRegisterUser) {
         dispatch({
           type: constants.AUTH_ERROR,
           payload: { ...err.response.data },
+        })
+      })
+  }
+}
+
+function disable(id: string, disable: boolean) {
+  return (dispatch: any) => {
+    API.patch(`/users/${id}/disable`, { disable: disable })
+      .then(({ data }) => {
+        dispatch({
+          type: constants.COMMON_MESSAGE,
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: constants.COMMON_ERROR,
+          payload: err.response.data,
         })
       })
   }

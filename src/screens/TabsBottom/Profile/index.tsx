@@ -31,6 +31,7 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
           containerStyle={{
             backgroundColor: Colors.Rainbows[5],
           }}
+          onPress={() => handleNavigate('SettingScreen')}
         />
         <IconButton
           size={60}

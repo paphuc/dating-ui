@@ -24,7 +24,7 @@ export default function Hook(props?: PropsInterface) {
     dispatch(Actions.logout())
   }
   useEffect(() => {
-    dispatch(Actions.getMe(User._id))
+    dispatch(Actions.getMe(User?._id))
   }, [])
 
   const handleNavigate = (destination: string) => {

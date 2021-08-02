@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Login from '../screens/Login'
 import UpdateProfile from '../screens/UpdateProfile'
 import ChatBoxScreen from '../screens/ChatBoxScreen'
+import SettingScreen from '../screens/SettingScreen'
 import Register from '../screens/Register'
 import BottomTab from './BottomTabNavigator'
 import ModelNavigator from './ModalNavigator'
@@ -54,6 +55,15 @@ export default function RootNavigator() {
               options={{
                 headerShown: true,
                 headerTitle: 'Chat',
+                headerStatusBarHeight: 0,
+              }}
+            />
+             <Stack.Screen
+              name='SettingScreen'
+              component={SettingScreen}
+              options={{
+                headerShown: true,
+                headerTitle: 'Setting',
                 headerStatusBarHeight: 0,
               }}
             />
