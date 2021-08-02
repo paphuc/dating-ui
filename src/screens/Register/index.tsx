@@ -59,10 +59,15 @@ export default function LoginScreen(props: any) {
 
         <Button
           linearGradientProps={{
-            colors: Colors.OrangeGradient,
+            colors: Colors.MainBlueGradient,
             start: { x: 0, y: 0 },
-            end: { x: 1, y: 1 },
-
+            end: { x: 1, y: 0.1 },
+          }}
+          buttonStyle={{ borderRadius: 5 }}
+          containerStyle={{
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: 'white',
           }}
           ViewComponent={LinearGradient}
           title='Register'

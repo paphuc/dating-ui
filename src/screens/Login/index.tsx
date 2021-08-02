@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Input, Button, Text } from 'react-native-elements'
+import { Input, Button, Text, Image } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import useHook from './hooks'
 import styles from './style'
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '../../constants/Colors'
+import Layout from '../../constants/Layout'
 
 export default function LoginScreen(props: any) {
   const { user, setUser, handleLogin, handleRegister, auth } = useHook(props)
@@ -17,7 +18,12 @@ export default function LoginScreen(props: any) {
       start={{ x: 0, y: 0.2 }}
       end={{ x: 1, y: 1 }}
     >
-      <View></View>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Image
+          source={require('../../../assets/images/logo.png')}
+          style={styles.Logo}
+        />
+      </View>
       {/* INPUT FORM */}
       <View style={styles.FormContainer}>
         <Input
@@ -37,9 +43,15 @@ export default function LoginScreen(props: any) {
         />
         <Button
           linearGradientProps={{
-            colors: Colors.RedGradient,
+            colors: Colors.MainBlueGradient,
             start: { x: 0, y: 0 },
-            end: { x: 1, y: 1 },
+            end: { x: 1, y: 0.1 },
+          }}
+          buttonStyle={{ borderRadius: 5 }}
+          containerStyle={{
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: 'white',
           }}
           ViewComponent={LinearGradient}
           disabled={auth.isLoading}

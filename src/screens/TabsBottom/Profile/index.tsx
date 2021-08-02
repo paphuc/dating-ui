@@ -25,7 +25,7 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
       />
       <Text style={styles.Name}>{User?.name}</Text>
       <View style={styles.ButtonContainer}>
-        <IconButton size={50} name={'cog'} colors={Colors.OrangeGradient} />
+        <IconButton size={50} name={'cog'} colors={Colors.GreyGradient} />
         <IconButton
           size={60}
           name={'pencil'}
@@ -33,7 +33,7 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
         />
         <IconButton
           size={50}
-          colors={Colors.OrangeGradient}
+          colors={Colors.GreyGradient}
           name={'sign-out'}
           onPress={() => handleLogout()}
         />
