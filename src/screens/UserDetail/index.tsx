@@ -32,7 +32,7 @@ export default function UserDetailScreen({ route, navigation }: Props) {
         <IconButton
           name={'arrow-left'}
           size={15}
-          colors={['rgba(1,1,1,0)']}
+          colors={['rgba(1,1,1,0)','rgba(1,1,1,0)']}
           containerStyle={{
             position: 'absolute',
             left: 10,
@@ -78,7 +78,7 @@ export default function UserDetailScreen({ route, navigation }: Props) {
                 top: -35,
               }}
               onPress={() => {
-                handleUnlike(currentUser._id)
+                handleLike(currentUser._id)
                 navigation.goBack()
               }}
             />
