@@ -19,6 +19,7 @@ export default function InboxScreens({ navigation }: PropsInterface) {
     handleNavigate,
     handleConversationRefresh,
     handleMatchedRefresh,
+    handleNavigateToChat,
     Room,
   } = useHook({
     navigation,
@@ -37,6 +38,7 @@ export default function InboxScreens({ navigation }: PropsInterface) {
               <UserAvatar
                 source={getThumbnailLink(item.media[0], 'large')}
                 name={item.name}
+                onPress={() => handleNavigateToChat(item)}
               />
             )}
             onRefresh={() => handleMatchedRefresh()}
