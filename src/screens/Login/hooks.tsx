@@ -3,6 +3,7 @@ import { ILogin } from '../../interfaces'
 import Actions from '../../redux/actions/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Keyboard } from 'react-native'
 
 export default function Hook(props: any) {
   const [user, setUser] = useState<ILogin>({
@@ -13,6 +14,7 @@ export default function Hook(props: any) {
   const auth = useSelector((value: any) => value.authStore)
 
   const handleLogin = () => {
+    Keyboard.dismiss()
     dispatch(Actions.login(user))
   }
 
