@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements'
 import { Picker } from '@react-native-picker/picker'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './style'
-type GendersType = 'Male' | 'Female' | 'Other'
+type GendersType = 'Male' | 'Female' | 'Both'
 
 interface GenderPickerProps {
   gender: string | GendersType
@@ -45,8 +45,8 @@ export default function GenderPicker({
           value='Female'
         />
         <Picker.Item
-          label='Other'
-          value='Other'
+          label='Both'
+          value='Both'
         />
       </Picker>
     </View>

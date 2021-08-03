@@ -53,7 +53,7 @@ export default function InboxScreens({ navigation }: PropsInterface) {
             <InboxItem
               onPress={() => handleNavigate(item)}
               key={index}
-              userID={AuthUser._id}
+              userID={AuthUser?._id}
               room={item}
             />
           )}
