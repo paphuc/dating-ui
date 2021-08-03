@@ -8,6 +8,8 @@ import { Alert, Platform } from 'react-native'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import Actions from '../../redux/actions/updateUser'
+import ActionsAuth from '../../redux/actions/auth'
+
 import CloudinaryService from '../../common/Cloudinary'
 
 type ProfileScreenRouteProp = RouteProp<
@@ -70,11 +72,7 @@ export default function Hook(props?: Props) {
           text: 'OK',
           onPress: () => {
             dispatch(Actions.init())
-            props?.navigation.pop()
-            props?.navigation.reset({
-              index: 1,
-              routes: [{ name: 'BottomTab' }],
-            })
+            props?.navigation.goBack();
           },
         },
       ])
@@ -191,6 +189,7 @@ export default function Hook(props?: Props) {
         relationship: relationship,
       }
       dispatch(Actions.update(userUpdate))
+      dispatch(ActionsAuth.getMe(item._id))
     }
   }
 

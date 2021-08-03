@@ -5,6 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+    position:'relative',
+    zIndex:1,
   },
   ScrollContainer: {
     flex: 0.9,

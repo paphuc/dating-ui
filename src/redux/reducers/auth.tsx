@@ -36,7 +36,10 @@ export default function authReducer(state: Object = initState, action: any) {
     }
     case constants.AUTH_LOGOUT: {
       AsyncStorage.removeItem('user')
-      return initState
+      return {
+        ...state,
+        isLogged: false,
+      }
     }
     case constants.AUTH_ERROR: {
       return {

@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { Text, Image } from 'react-native-elements'
 import UserLikedCard from '../../../components/UserLikedCard'
+import Container from '../../../components/Container'
 import useHook from './hook'
 import styles from './style'
 
@@ -20,33 +21,35 @@ export default function LikeScreens({ route, navigation }: any) {
   }, [])
 
   return (
-    <View style={styles.Container}>
-      <FlatList
-        contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
-        data={users}
-        keyExtractor={(item, idx) => idx.toString()}
-        renderItem={({ item, index }) => (
-          <View
-            style={{
-              flex: 0.5,
-              backgroundColor: 'white',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <UserLikedCard
-              key={index}
-              data={item}
-              navigation={navigation}
-              onPress={() => handleUnlike(item._id)}
-            />
-          </View>
-        )}
-        numColumns={2}
-        onRefresh={() => handleRefresh()}
-        refreshing={Liked.isLoading}
-      />
-    </View>
+    <Container>
+      <View style={styles.Container}>
+        <FlatList
+          contentContainerStyle={{ padding: 10, backgroundColor: 'white' }}
+          data={users}
+          keyExtractor={(item, idx) => idx.toString()}
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                flex: 0.5,
+                backgroundColor: 'white',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <UserLikedCard
+                key={index}
+                data={item}
+                navigation={navigation}
+                onPress={() => handleUnlike(item._id)}
+              />
+            </View>
+          )}
+          numColumns={2}
+          onRefresh={() => handleRefresh()}
+          refreshing={Liked.isLoading}
+        />
+      </View>
+    </Container>
   )
 }

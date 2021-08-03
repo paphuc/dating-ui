@@ -8,6 +8,7 @@ import { IUser } from '../../../interfaces'
 import styles from './style'
 import useHook, { PropsInterface } from './hook'
 import { getThumbnailLink } from '../../../common/Utils'
+import Container from '../../../components/Container'
 
 export default function InboxScreens({ navigation }: PropsInterface) {
   const {
@@ -18,49 +19,53 @@ export default function InboxScreens({ navigation }: PropsInterface) {
     handleNavigate,
     handleConversationRefresh,
     handleMatchedRefresh,
+    handleNavigateToChat,
     Room,
   } = useHook({
     navigation,
   })
 
   return (
-    <View style={{ flex: 1, flexDirection: 'column' }}>
-      <View style={{ backgroundColor: 'white' }}>
-        <Text style={styles.Header}>Ghép đôi</Text>
-        <FlatList
-          contentContainerStyle={{ margin: 10 }}
-          data={matches}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <UserAvatar
-              source={getThumbnailLink(item.media[0], 'large')}
-              name={item.name}
-            />
-          )}
-          onRefresh={() => handleMatchedRefresh()}
-          refreshing={Matched.isLoading}
-          horizontal
-        />
-        <Divider style={{ margin: 10 }} />
+    <Container>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ backgroundColor: 'white' }}>
+          <Text style={styles.Header}>Ghép đôi</Text>
+          <FlatList
+            contentContainerStyle={styles.MatchedContainer}
+            data={matches}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <UserAvatar
+                source={getThumbnailLink(item.media[0], 'large')}
+                name={item.name}
+                onPress={() => handleNavigateToChat(item)}
+              />
+            )}
+            onRefresh={() => handleMatchedRefresh()}
+            refreshing={Matched.isLoading}
+            horizontal
+          />
+          <Divider style={{ margin: 10 }} />
+        </View>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+          <Text style={styles.Header}>Trò chuyện</Text>
+          <FlatList
+            style={{ flex: 1, backgroundColor: 'white' }}
+            data={rooms}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <InboxItem
+                onPress={() => handleNavigate(item)}
+                key={index}
+                userID={AuthUser._id}
+                room={item}
+              />
+            )}
+            onRefresh={() => handleConversationRefresh()}
+            refreshing={Room.isLoading}
+          />
+        </View>
       </View>
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <Text style={styles.Header}>Trò chuyện</Text>
-        <FlatList
-          style={{ flex: 1, backgroundColor: 'white' }}
-          data={rooms}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <InboxItem
-              onPress={() => handleNavigate(item)}
-              key={index}
-              userID={AuthUser?._id}
-              room={item}
-            />
-          )}
-          onRefresh={() => handleConversationRefresh()}
-          refreshing={Room.isLoading}
-        />
-      </View>
-    </View>
+    </Container>
   )
 }

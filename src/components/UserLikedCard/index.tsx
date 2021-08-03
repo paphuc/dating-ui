@@ -4,8 +4,9 @@ import { Button, Rating, Image } from 'react-native-elements'
 import SkeletonImage from '../SkeletonImage'
 import { IUser } from '../../interfaces'
 import { getAge, getThumbnailLink } from '../../common/Utils'
-import IconFloatButton from '../IconFloatButton'
+import IconButton from '../IconButton'
 import styles from './style'
+import Colors from '../../constants/Colors'
 
 type Props = {
   data: IUser
@@ -34,12 +35,13 @@ const App = ({ data, navigation, onPress }: Props) => {
           data.birthday
         )}`}</Text>
 
-        <IconFloatButton
+        <IconButton
           name={'times'}
+          colors={Colors.OrangeGradient}
           containerStyle={{
-            right: 10,
-            bottom: -22.5,
-            backgroundColor: '#F6AE99',
+            position: 'absolute',
+            right: 0,
+            bottom: -20,
           }}
           onPress={onPress}
         />

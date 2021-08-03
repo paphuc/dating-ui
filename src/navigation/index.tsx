@@ -3,13 +3,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
 import Login from '../screens/Login'
-import UpdateProfile from '../screens/UpdateProfile'
-import ChatBoxScreen from '../screens/ChatBoxScreen'
-import SettingScreen from '../screens/SettingScreen'
 import Register from '../screens/Register'
 import BottomTab from './BottomTabNavigator'
 import ModelNavigator from './ModalNavigator'
 import { Toast } from '../components/Message'
+import Container from '../components/Container'
 
 export default function RootNavigator() {
   const Stack = createStackNavigator<any>()
@@ -40,33 +38,6 @@ export default function RootNavigator() {
           <>
             <Stack.Screen name='BottomTab' component={BottomTab} />
             <Stack.Screen name='Modal' component={ModelNavigator} />
-            <Stack.Screen
-              name='UpdateProfileScreens'
-              component={UpdateProfile}
-              options={{
-                headerShown: true,
-                headerTitle: 'Update Profile',
-                headerStatusBarHeight: 0,
-              }}
-            />
-            <Stack.Screen
-              name='ChatBoxScreen'
-              component={ChatBoxScreen}
-              options={{
-                headerShown: true,
-                headerTitle: 'Chat',
-                headerStatusBarHeight: 0,
-              }}
-            />
-             <Stack.Screen
-              name='SettingScreen'
-              component={SettingScreen}
-              options={{
-                headerShown: true,
-                headerTitle: 'Setting',
-                headerStatusBarHeight: 0,
-              }}
-            />
           </>
         ) : (
           <>

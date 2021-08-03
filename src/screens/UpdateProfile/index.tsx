@@ -3,6 +3,8 @@ import { ScrollView, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Picker } from '@react-native-picker/picker'
 import Icon from 'react-native-vector-icons/FontAwesome'
+
+import Container from '../../components/Container'
 import {
   ImageElement,
   InputElement,
@@ -36,7 +38,7 @@ export default function UpdateProfileScreens({ navigation, route }: Props) {
   const [gender, setGender] = React.useState<string | undefined>(user?.gender)
 
   return (
-    <View style={styles.ContainerFlex}>
+    <Container>
       <ScrollView style={styles.ContainerFlex}>
         <View>
           <View style={styles.MediaContainer}>
@@ -118,6 +120,6 @@ export default function UpdateProfileScreens({ navigation, route }: Props) {
         </View>
         <Button title='Update' onPress={updateHandler}></Button>
       </ScrollView>
-    </View>
+    </Container>
   )
 }
