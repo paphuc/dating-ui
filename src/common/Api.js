@@ -45,6 +45,10 @@ class axiosService {
   post(url, payload) {
     return this.instance.post(`${Config.Host}:${Config.Port}${url}`, payload)
   }
+  
+  patch(url, payload) {
+    return this.instance.patch(`${Config.Host}:${Config.Port}${url}`, payload)
+  }
 
   put(url, payload) {
     return this.instance.put(`${Config.Host}:${Config.Port}${url}`, payload)

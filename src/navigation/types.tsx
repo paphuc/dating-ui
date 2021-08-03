@@ -14,6 +14,7 @@ export type RootStackParamList = {
         userTarget: IUserInRoom | undefined
       }
     | undefined
+  SettingScreen: { item: IUser }
   BottomTab: NavigatorScreenParams<BottomTabParamList>
 }
 

@@ -27,16 +27,16 @@ export default function Hook(props?: PropsInterface) {
   const rooms: IRoom[] = useSelector((value: any) => value.roomStore?.content)
 
   const handleConversationRefresh = () => {
-    dispatch(ConversationAction.getList(AuthUser._id))
+    dispatch(ConversationAction.getList(AuthUser?._id))
   }
 
   const handleMatchedRefresh = () => {
     console.log('Handle matched')
-    dispatch(MatchedAction.getList(AuthUser._id))
+    dispatch(MatchedAction.getList(AuthUser?._id))
   }
 
   const getTargetUser = (arr: IUserInRoom[]): IUserInRoom | undefined => {
-    return arr.find((u: IUserInRoom) => u._id != AuthUser._id)
+    return arr.find((u: IUserInRoom) => u._id != AuthUser?._id)
   }
   const handleNavigateToChat = (user: IUser) => {
     const room = rooms.find((r) => r.users.find((u) => u._id == user._id))
@@ -66,6 +66,7 @@ export default function Hook(props?: PropsInterface) {
         room: room,
         userID: AuthUser._id,
       },
+
     })
   }
   useEffect(() => {

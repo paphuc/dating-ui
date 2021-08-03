@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector, useDispatch } from 'react-redux'
 import Login from '../screens/Login'
-
 import Register from '../screens/Register'
 import BottomTab from './BottomTabNavigator'
 import ModelNavigator from './ModalNavigator'
@@ -39,7 +38,6 @@ export default function RootNavigator() {
           <>
             <Stack.Screen name='BottomTab' component={BottomTab} />
             <Stack.Screen name='Modal' component={ModelNavigator} />
-         
           </>
         ) : (
           <>

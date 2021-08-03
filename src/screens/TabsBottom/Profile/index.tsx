@@ -25,7 +25,14 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
       />
       <Text style={styles.Name}>{Info?.name}</Text>
       <View style={styles.ButtonContainer}>
-        <IconButton size={50} name={'cog'} colors={Colors.GreyGradient} />
+        <IconButton
+          size={50}
+          name={'cog'}
+          containerStyle={{
+            backgroundColor: Colors.Rainbows[5],
+          }}
+          onPress={() => handleNavigate('SettingScreen')}
+        />
         <IconButton
           size={60}
           name={'pencil'}

@@ -93,6 +93,8 @@ export default function Hook(props?: Props) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
+      allowsEditing: true,
+      aspect: [9, 16],
     })
 
     if (result && !result?.cancelled) {
