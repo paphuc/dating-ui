@@ -13,11 +13,10 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   FormContainer: {
-    width: Layout.window.width * 0.85 > 300 ? 270 : Layout.window.width * 0.85,
+    width: Layout.window.width * 0.85 > 300 ? 300 : Layout.window.width * 0.85,
     padding: 20,
     borderRadius: 10,
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    position: 'absolute',
+    backgroundColor: 'rgba(255,255,255,0.5)',
     bottom: 10,
     zIndex: 1,
   },
@@ -31,11 +30,11 @@ export default StyleSheet.create({
   Button: {
     width: Layout.window.width * 0.9 > 300 ? 300 : Layout.window.width * 0.9,
     borderRadius: 30,
-    zIndex: 4,
     marginBottom: 10,
     backgroundColor: 'white',
     borderColor: 'white',
-    borderWidth: 0.5,
+    borderWidth: 1,
+    zIndex: 4,
     ...Layout.styles.Shadow,
   },
   SocialButton: {

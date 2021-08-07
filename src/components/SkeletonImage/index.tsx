@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { Image } from 'react-native-elements'
 import { FontAwesome5 as Icon } from '@expo/vector-icons'
 import SkeletonContent from 'react-native-skeleton-content'
@@ -32,10 +32,19 @@ export default function SkeletonImage(props: Props) {
         isLoading ? (
           <ActivityIndicator />
         ) : (
-          <Icon name='exclamation' size={30} color={'grey'} />
+          <View
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icon name='exclamation' size={30} color={'white'} />
+          </View>
         )
       }
-      placeholderStyle={{ backgroundColor: '#e6e6e6' }}
+      placeholderStyle={{ backgroundColor: '#2e2e2e' }}
     />
   )
 }

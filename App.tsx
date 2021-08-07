@@ -17,7 +17,6 @@ export const store = createStore(appReducers, applyMiddleware(thunk))
 
 export default function App() {
   const isLoadingComplete = useCachedResources()
-  const colorScheme = useColorScheme()
 
   if (!isLoadingComplete) {
     return null

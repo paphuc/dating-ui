@@ -1,5 +1,5 @@
-const tintColorLight = '#1fa2ff'
-const tintColorDark = '#1fa2ff'
+const tintColorLight = '#f857a6'
+const tintColorDark = '#f857a6'
 
 export default {
   light: {
@@ -22,9 +22,10 @@ export default {
     Medium: '#dedede',
     Dark: '#b5b5b5',
   },
-  MainBlueGradient: ['#1fa2ff', '#12d8fa', '#a6ffcb'],
+  // MainBlueGradient: ['#1fa2ff', '#12d8fa', '#a6ffcb'],
   RedGradient: ['#f12711', '#f5af19'],
   OrangeGradient: ['#fdc830', '#f37335'],
   GreyGradient: ['#dedede', '#b5b5b5', '#f7f7f7'],
   PinkGradient: ['#f857a6', '#ff5858'],
+  MainBlueGradient: ['#f857a6', '#ff5858'],
 }
