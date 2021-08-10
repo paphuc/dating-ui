@@ -26,9 +26,7 @@ export default function Hook(props?: PropsInterface) {
   useEffect(() => {
     dispatch(Actions.getMe(User?._id))
   }, [])
-  useEffect(() => {
-    dispatch(Actions.getMe(User._id))
-  },[User])
+
   const handleNavigate = (destination: string) => {
     props?.navigation.navigate('Modal', {
       screen: destination,

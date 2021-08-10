@@ -15,17 +15,12 @@ import useHook from './hooks'
 import styles from './style'
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '../../constants/Colors'
-import Layout from '../../constants/Layout'
 import { withAnchorPoint } from 'react-native-anchor-point'
 
 export default function LoginScreen(props: any) {
   const { user, setUser, handleLogin, handleRegister, auth } = useHook(props)
   const loginAnim = useRef(new Animated.Value(0)).current
-  const [logo, setLogo] = useState(1)
   const [push, setPush] = useState(false)
-  useEffect(() => {
-    loginAnim.addListener(({ value }) => setLogo(1.5 - value))
-  }, [])
 
   React.useEffect(() => {
     Animated.timing(loginAnim, {
@@ -37,16 +32,6 @@ export default function LoginScreen(props: any) {
     }).start()
   }, [push])
 
-  const getTransform = () => {
-    let transform = {
-      transform: [{ scaleY: loginAnim }],
-    }
-    return withAnchorPoint(
-      transform,
-      { x: 1, y: 0.9 },
-      { width: 270, height: 270 }
-    )
-  }
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -55,7 +40,7 @@ export default function LoginScreen(props: any) {
       }}
     >
       <LinearGradient
-        colors={Colors.MainBlueGradient}
+        colors={Colors.PinkGradient}
         style={styles.Container}
         start={{ x: 0, y: 0.2 }}
         end={{ x: 1, y: 1 }}
@@ -64,7 +49,10 @@ export default function LoginScreen(props: any) {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            opacity: logo,
+            opacity: loginAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0.5],
+            }),
           }}
         >
           <Image
@@ -81,17 +69,20 @@ export default function LoginScreen(props: any) {
         >
           <View style={{ alignItems: 'center' }}>
             <View style={[styles.LoginContainer]}>
-              <Animated.View style={[styles.FormContainer, getTransform()]}>
+              <Animated.View
+                style={[
+                  styles.FormContainer,
+                  { transform: [{ scale: loginAnim }] },
+                ]}
+              >
                 <Input
                   placeholder='email@adress.com'
-                  label='Your email'
                   value={user.email}
                   onChangeText={(v: string) => setUser({ ...user, email: v })}
                   leftIcon={<Icon name='envelope' size={24} color={'grey'} />}
                 />
                 <Input
                   placeholder='Password'
-                  label='Password'
                   secureTextEntry
                   value={user.password}
                   onChangeText={(v: string) =>
@@ -102,9 +93,9 @@ export default function LoginScreen(props: any) {
               </Animated.View>
               <Button
                 linearGradientProps={{
-                  colors: Colors.MainBlueGradient,
-                  start: { x: 0, y: 0 },
-                  end: { x: 1, y: 0.1 },
+                  colors: Colors.PinkGradient,
+                  end: { x: 0, y: 0 },
+                  start: { x: 0.8, y: 0.1 },
                 }}
                 buttonStyle={{ padding: 15 }}
                 containerStyle={[styles.Button]}
@@ -119,8 +110,8 @@ export default function LoginScreen(props: any) {
                 loading={auth.isLoading}
               />
             </View>
-            <SocialIcon type='facebook' style={styles.SocialButton} />
-            <SocialIcon type='google' style={styles.SocialButton} />
+            {/* <SocialIcon type='facebook' style={styles.SocialButton} />
+            <SocialIcon type='google' style={styles.SocialButton} /> */}
           </View>
         </KeyboardAvoidingView>
         <Text style={styles.Copyright}>© 2021 Internal app of TMA corp.</Text>

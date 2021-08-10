@@ -2,7 +2,6 @@ import * as React from 'react'
 import { View, ActivityIndicator, Button } from 'react-native'
 import { Image, Text, Header, Avatar, Chip } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import useHook, { PropsInterface } from './hook'
 import AuthActions from '../../../redux/actions/auth'
@@ -28,9 +27,7 @@ export default function ProfileScreen({ navigation }: PropsInterface) {
         <IconButton
           size={50}
           name={'cog'}
-          containerStyle={{
-            backgroundColor: Colors.Rainbows[5],
-          }}
+          colors={Colors.GreyGradient}
           onPress={() => handleNavigate('SettingScreen')}
         />
         <IconButton
