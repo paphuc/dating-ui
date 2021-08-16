@@ -1,14 +1,39 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from "react-native";
+import Layout from '../../../constants/Layout'
 
 export default StyleSheet.create({
-  Title: {
-    fontSize: 15,
-    color: 'silver',
-    margin: 10,
-  },
-  ActivityIndicator: {
-    width: 125,
-    height: 150,
-    borderRadius: 10,
-  },
+    Container: {
+
+    },
+    TitleView: {
+        
+    },
+    Title: {
+        fontSize: 15,
+        color: 'silver',
+        fontWeight: 'bold'
+    },
+    OptionGroup: {
+        width: Layout.window.width * 0.85,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+    },
+    OptionView: {
+        marginTop: 10,
+        width: Layout.window.width * 0.35,
+        height: Layout.window.width * 0.35,
+        justifyContent: 'center',
+        borderRadius: 20
+    },
+    GenderlabelView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+    Icon: {
+
+    },
+    GenderText: {
+        fontSize: 20
+    }
 })

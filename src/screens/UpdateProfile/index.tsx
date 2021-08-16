@@ -6,119 +6,62 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Container from '../../components/Container'
 import {
-  ImageElement,
+  AvatarPicker,
   InputElement,
-  DatePicker,
-  GenderPicker,
+  Genderpicker,
+  DatePicker
 } from '../../components/UpdateProfile'
 import styles from './style'
 
-import useHook, { Props } from './hook'
+import useHook from './hook'
 
-type GendersType = 'Male' | 'Female' | 'Other'
-
-export default function UpdateProfileScreens({ navigation, route }: Props) {
+export default function UpdateProfileScreens(props: any) {
   const {
     user,
     imageArr,
     pickImage,
-    removeItemInArray,
-    updateHandler,
-
     setNameHandler,
     setGenderHandler,
-    setBirthdayHandler,
-    setCountryHandler,
-    setRelationshipHandler,
-    setLookingForHandler,
-    setSexHandler,
-    setAboutHandler,
-    setHobbyHandler,
-  } = useHook({ navigation, route })
-  const [gender, setGender] = React.useState<string | undefined>(user?.gender)
+    setBirthdayHandler
+  } = useHook(props)
 
   return (
     <Container>
-      <ScrollView style={styles.ContainerFlex}>
-        <View>
+      <ScrollView style={styles.Container}>
+        <View style={styles.ProfileContainer}>
           <View style={styles.MediaContainer}>
-            {imageArr.map((url, i) => {
-              return (
-                <View key={i} style={styles.ViewContainerImage}>
-                  <ImageElement url={url} />
-                  <View style={styles.DelButtonContainer}>
-                    <Button
-                      style={{
-                        borderRadius: 20,
-                      }}
-                      icon={
-                        <Icon name='times-circle' size={15} color='white' />
-                      }
-                      onPress={() => removeItemInArray(i)}
-                    ></Button>
-                  </View>
-                </View>
-              )
-            })}
+              <AvatarPicker
+                onClick={pickImage}
+                imageUrl={imageArr[imageArr.length - 1]}
+              />
           </View>
-          <View style={styles.PickButtonContainer}>
-            <Button
-              title='Pick an image from device'
-              buttonStyle={styles.PickButton}
-              onPress={pickImage}
+        
+          <View style={styles.InputView}>
+            <InputElement
+              title={'Name'}
+              onChange={setNameHandler}
+              defaultValue={user?.name}
             />
           </View>
-        </View>
-        <View>
-          <InputElement
-            title={'Name'}
-            onChange={setNameHandler}
-            defaultValue={user?.name}
-          />
-          <GenderPicker
-            onChange={setGenderHandler}
-            gender={user ? user?.gender : ''}
-          />
-          <View>
+
+          <View style={styles.InputView}>
+            <Genderpicker
+              title='Gender'
+              defaultValue={user?.gender}
+              onChange={setGenderHandler}
+            />
+          </View>
+
+          <View style={styles.InputView}>
             <DatePicker
+              title='Birthday'
+              defaultValue={user?.birthday}
               onChange={setBirthdayHandler}
-              birthday={user?.birthday}
             />
           </View>
-          <InputElement
-            title={'Country'}
-            onChange={setCountryHandler}
-            defaultValue={user?.country}
-          />
-          <InputElement
-            title={'Hobby'}
-            onChange={setHobbyHandler}
-            multiline
-            defaultValue={user?.hobby.join(', ')}
-          />
-          <InputElement
-            title={'Relationship'}
-            onChange={setRelationshipHandler}
-            defaultValue={user?.relationship}
-          />
-          <InputElement
-            title={'Looking for'}
-            onChange={setLookingForHandler}
-            defaultValue={user?.looking_for}
-          />
-          <InputElement
-            title={'Sex'}
-            onChange={setSexHandler}
-            defaultValue={user?.sex}
-          />
-          <InputElement
-            title={'About'}
-            onChange={setAboutHandler}
-            defaultValue={user?.about}
-            multiline
-          />
+          
+
         </View>
-        <Button title='Update' onPress={updateHandler}></Button>
       </ScrollView>
     </Container>
   )

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   ActivityIndicator,
   View,
+  TextInput
 } from 'react-native'
 import {
   Image,
@@ -9,43 +10,21 @@ import {
 } from 'react-native-elements'
 import { Input } from 'react-native-elements/dist/input/Input'
 import styles from './style'
-
-interface InputElementProps {
-  multiline?: boolean
-  defaultValue?: string
-  title: string
-  onChange?: (value: string) => void
-}
-const InputElement = ({
-  onChange,
-  defaultValue,
-  title,
-  multiline = false,
-}: InputElementProps) => {
-  const [value, setValue] =
-    React.useState<string>(
-      defaultValue ? defaultValue : ''
-    )
+export default function InputElement(props: any) {  
 
   return (
-    <View>
-      <View>
-        <Text style={styles.Title}>{title}</Text>
+    <View style={styles.Container}>
+      <View style={styles.TitleView}>
+          <Text style={styles.Title}>{props.title}</Text>
       </View>
-      <Input
-        multiline
-        placeholder={title}
-        defaultValue={defaultValue}
-        value={value}
-        onChangeText={(e) => {
-          setValue(e)
-          if(onChange){
-            onChange(e)
-          }
-        }}
+      <TextInput
+        editable={props.editable}
+        style={styles.TextInput}
+        multiline={props.multiline? true : false}
+        defaultValue={props.defaultValue}
+        onChangeText={props.onChange}
+        onTouchEnd={props.onPress}
       />
     </View>
   )
 }
-
-export default InputElement
