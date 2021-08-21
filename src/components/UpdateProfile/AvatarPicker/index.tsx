@@ -1,15 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     View,
     TouchableOpacity,
 } from 'react-native'
-import { Input, Button, Text, Image, SocialIcon } from 'react-native-elements'
+import {Image} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './style'
 import Colors from '../../../constants/Colors'
 import { ActivityIndicator } from 'react-native'
 
-export default function AvatarPicker(props: any) {
+interface IAvatarPicker {
+    imageUrl: string
+    onClick: () => void
+}
+
+export default function AvatarPicker(props: IAvatarPicker) {
     const [avatar, setAvatar] = useState(props.imageUrl)
     const isLoading = avatar === 'loading' || avatar === undefined ? true : false
 

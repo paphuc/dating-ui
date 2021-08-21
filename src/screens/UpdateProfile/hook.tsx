@@ -28,30 +28,25 @@ export type Props = {
 }
 
 export default function Hook(props?: Props) {
-  const item = props?.route.params?.item
-
   const dispatch = useDispatch()
 
   const [imageArr, setImageArr] = useState<string[]>([])
 
-  const [name, setName] = useState<string>(item ? item.name : '')
-  const [gender, setGender] = useState<string>(item ? item.gender : '')
-  const [birthday, setBirthday] = useState<Date | string>(
-    item ? item.birthday : ''
-  )
-  const [country, setCountry] = useState<string>(item ? item.country : '')
-  const [hobby, setHobby] = useState<string>(item ? item.hobby.join(', ') : '')
-  const [relationship, setRelationship] = useState<string>(
-    item ? item.relationship : ''
-  )
-  const [lookingFor, setLookingFor] = useState<string>(
-    item ? item.looking_for : ''
-  )
-  const [sex, setSex] = useState<string>(item ? item.sex : '')
-  const [about, setAbout] = useState<string>(item ? item.about : '')
   const [user, setUser] = useState<IUser | null | undefined>(
     props?.route.params?.item
   )
+
+  const [info, setInfo] = useState({
+    name: user?.name || '',
+    gender: user?.gender || '',
+    birthday: user?.birthday || '',
+    country: user?.country || '',
+    hobby: user?.hobby || [],
+    relationship: user?.relationship || '',
+    lookingFor: user?.looking_for || '',
+    sex: user?.sex || '',
+    about: user?.about || '',
+  })
 
   const update = useSelector((value: any) => value.updateUser)
 
@@ -142,54 +137,78 @@ export default function Hook(props?: Props) {
     ])
   }
 
-  const getAge = (age: string): string => {
-    return (new Date().getFullYear() - new Date(age).getFullYear()).toString()
-  }
   const setNameHandler = (value: string) => {
-    setName(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      name: value
+    }))
   }
   const setGenderHandler = (value: string) => {
-    setGender(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      gender: value
+    }))
   }
-  const setBirthdayHandler = (value: string | Date) => {
-    setBirthday(value)
+  const setBirthdayHandler = (value: Date) => {
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      birthday: value
+    }))
   }
   const setCountryHandler = (value: string) => {
-    setCountry(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      country: value
+    }))
   }
   const setRelationshipHandler = (value: string) => {
-    setRelationship(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      relationship: value
+    }))
   }
   const setLookingForHandler = (value: string) => {
-    setLookingFor(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      lookingFor: value
+    }))
   }
   const setSexHandler = (value: string) => {
-    setSex(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      sex: value
+    }))
   }
   const setAboutHandler = (value: string) => {
-    setAbout(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      about: value
+    }))
   }
   const setHobbyHandler = (value: string) => {
-    setHobby(value)
+    setInfo(prevInfo => ({
+      ...prevInfo,
+      hobby: value.split(',')?.map(item => item.trim()) || []
+    }))
   }
 
   const updateHandler = () => {
-    if (item) {
+    if (user) {
       const userUpdate: UserUpdateProps = {
-        _id: item._id,
-        name: name,
-        birthday: birthday,
-        gender: gender,
+        _id: user._id,
+        name: info.name,
+        birthday: info.birthday,
+        gender: info.gender,
         media: imageArr,
-        country: country,
-        hobby: hobby.split(', '),
-        sex: sex,
-        about: about,
-        looking_for: lookingFor,
-        relationship: relationship,
+        country: info.country,
+        hobby: info.hobby,
+        sex: info.sex,
+        about: info.about,
+        looking_for: info.lookingFor,
+        relationship: info.relationship,
       }
       dispatch(Actions.update(userUpdate))
-      dispatch(ActionsAuth.getMe(item._id))
+      dispatch(ActionsAuth.getMe(user._id))
     }
   }
 
@@ -200,7 +219,6 @@ export default function Hook(props?: Props) {
     imageArr,
     removeItemInArray,
     updateHandler,
-
     setNameHandler,
     setGenderHandler,
     setBirthdayHandler,

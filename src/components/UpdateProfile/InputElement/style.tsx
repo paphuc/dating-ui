@@ -9,9 +9,9 @@ export default StyleSheet.create({
         
   },
   Title: {
-      fontSize: 15,
-      color: 'silver',
-      fontWeight: 'bold',
+    fontSize: 15,
+    color: 'silver',
+    fontWeight: 'bold',
   },
   TextInput: {
     fontSize: 20,
@@ -19,6 +19,5 @@ export default StyleSheet.create({
     paddingBottom: 8,
     borderBottomColor: 'silver',
     borderBottomWidth: 1,
-    
   }
 })

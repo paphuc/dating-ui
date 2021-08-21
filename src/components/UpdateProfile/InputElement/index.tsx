@@ -1,17 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {
-  ActivityIndicator,
   View,
   TextInput
 } from 'react-native'
 import {
-  Image,
   Text,
 } from 'react-native-elements'
-import { Input } from 'react-native-elements/dist/input/Input'
 import styles from './style'
-export default function InputElement(props: any) {  
 
+interface IInputElement {
+  title: string
+  editable?: boolean
+  multiline?: boolean
+  defaultValue: string | undefined
+  onChange: (value: string) => void
+}
+
+export default function InputElement(props: IInputElement) {  
   return (
     <View style={styles.Container}>
       <View style={styles.TitleView}>
@@ -20,10 +25,9 @@ export default function InputElement(props: any) {
       <TextInput
         editable={props.editable}
         style={styles.TextInput}
-        multiline={props.multiline? true : false}
+        multiline={props.multiline}
         defaultValue={props.defaultValue}
         onChangeText={props.onChange}
-        onTouchEnd={props.onPress}
       />
     </View>
   )

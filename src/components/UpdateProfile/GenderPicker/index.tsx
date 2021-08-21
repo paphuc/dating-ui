@@ -9,7 +9,14 @@ import styles from './style'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Colors from '../../../constants/Colors'
 
-export default function GenderPicker(props: any) {
+interface IGenderPicker {
+    title: string
+    defaultValue: string | undefined
+    allowBoth?: boolean
+    onChange: (value: string) => void  
+}
+
+export default function GenderPicker(props: IGenderPicker) {
     const FEMALE = 'Female'
     const MALE = 'Male'
     const BOTH = 'Both'
@@ -17,33 +24,34 @@ export default function GenderPicker(props: any) {
     const [genderState, setGenderState] = useState(props.defaultValue? props.defaultValue : NONE)
     const [iconSize, setIconSize] = useState(0)
 
-    useEffect(() => {
-        props.onChange(genderState)
-    }, [genderState])
-
-
     const genderHandler = (gender : string, allowBoth : boolean) => {
         let otherGender = NONE
+        let updatedGender
         gender == MALE ? otherGender = FEMALE : otherGender = MALE  
-        if (genderState == BOTH) {
-            setGenderState(otherGender)
+        if (genderState == NONE) {
+            updatedGender = gender
+        }
+        else if (genderState == BOTH) {
+            updatedGender=  otherGender
         } else if (gender == genderState) {
-            setGenderState(NONE)
+            updatedGender = NONE
         } else {
             if (allowBoth) {
-                setGenderState(BOTH)
+                updatedGender = BOTH
             } else {
-                setGenderState(gender)
+                updatedGender = gender
             }
         }
+        setGenderState(updatedGender)
+        props.onChange(updatedGender)
     }
 
     const femalePress = () => {
-        genderHandler(FEMALE, props.allowBoth)
+        genderHandler(FEMALE, props.allowBoth ? props.allowBoth : false)
     }
 
     const malePress = () => {
-        genderHandler(MALE, props.allowBoth)
+        genderHandler(MALE, props.allowBoth ? props.allowBoth : false)
     }
     
     return (
