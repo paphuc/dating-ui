@@ -8,11 +8,14 @@ import BottomTab from './BottomTabNavigator'
 import ModelNavigator from './ModalNavigator'
 import { Toast } from '../components/Message'
 import Container from '../components/Container'
+import { RemotePushController } from './Notification'
+import Actions from '../redux/actions/notification'
 
 export default function RootNavigator() {
   const Stack = createStackNavigator<any>()
   const user = useSelector((value: any) => value.authStore)
   const Common = useSelector((value: any) => value.commonStore)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (Common?.message) {
@@ -29,10 +32,17 @@ export default function RootNavigator() {
       })
     }
   }, [Common])
-  //restore tokens in here
-
+  // send token devices to server
+  useEffect(() => {
+    ;(async () => {
+      if (user.isLogged) {
+        dispatch(Actions.registerDevice(user.user._id))
+      }
+    })()
+  }, [user?.isLogged])
   return (
     <NavigationContainer>
+      <RemotePushController />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user?.isLogged ? (
           <>

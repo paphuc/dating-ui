@@ -2,7 +2,10 @@ export interface ILogin {
   email: string
   password: string
 }
-
+export interface INotiDevice{
+  user_id: string
+  token_device: string
+}
 export interface IRegisterUser {
   name: string
   email: string
