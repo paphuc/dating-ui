@@ -4,7 +4,7 @@ import { IRegisterUser, IUser } from '../../interfaces'
 import API from '../../common/Api'
 export default {
   getList,
-  UpdateList
+  UpdateList,
 }
 
 function getList(id: string) {
@@ -28,9 +28,11 @@ function getList(id: string) {
 }
 function UpdateList(message: any) {
   return (dispatch: any) => {
-        dispatch({
-          type: constants.ROOM_UPDATE,
-          payload: { data: message },
-        })
+    dispatch({
+      type: constants.ROOM_UPDATE,
+      payload: { data: message },
+    })
   }
 }
+
+
