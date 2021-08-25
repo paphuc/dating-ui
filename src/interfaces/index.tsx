@@ -14,6 +14,7 @@ export interface IConfig {
   WS: string
   Host: string
   Port: string
+  BigRoomID: string
 }
 export interface JwtProps {
   _id: string
@@ -97,4 +98,5 @@ export interface IRoom {
     attachments: string
     created_at: string 
   }
+  read: boolean 
 }

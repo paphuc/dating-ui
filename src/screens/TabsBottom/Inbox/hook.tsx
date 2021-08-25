@@ -11,15 +11,22 @@ import { default as ConversationAction } from '../../../redux/actions/room'
 import { default as MatchedAction } from '../../../redux/actions/match'
 import { IUser } from '../../../interfaces'
 import { Toast } from '../../../components/Message'
+import Config from '../../../../config'
 
 export type PropsInterface = {
   navigation: StackNavigationProp<any, 'BottomTab'>
 }
 
 export default function Hook(props?: PropsInterface) {
+  
+
   const dispatch = useDispatch()
   const AuthUser: IUser = useSelector((value: any) => value.authStore?.user)
-
+  
+  const websocket = new WebSocket(
+    `${Config.WS}:${Config.Port}/ws?room=${Config.BigRoomID}&user=${AuthUser._id}`
+  )
+ 
   const Matched = useSelector((state: any) => state.matchedStore)
   const matches = useSelector((state: any) => state.matchedStore.content)
 
@@ -72,8 +79,23 @@ export default function Hook(props?: PropsInterface) {
   useEffect(() => {
     handleConversationRefresh()
     handleMatchedRefresh()
-  }, [])
 
+    var a = JSON.stringify({
+      action: 'join-room',
+      sender_id: AuthUser._id,
+    })
+
+    websocket.onopen = () => {
+      sendSockets(a)
+    }
+  }, [])
+  websocket.onmessage = (e) => {
+    const messagesSocket = JSON.parse(e.data)
+    dispatch(ConversationAction.UpdateList(messagesSocket))
+  }
+  const sendSockets = (JSON: string) => {
+    websocket.send(JSON)
+  }
   return {
     rooms,
     Room,

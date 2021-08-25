@@ -8,6 +8,8 @@ import { RootStackParamList } from '../../navigation/types'
 import Config from '../../../config'
 import Api from '../../common/Api'
 import CloudinaryService from '../../common/Cloudinary'
+import { default as ConversationAction } from '../../redux/actions/room'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Alert, Platform } from 'react-native'
 
@@ -29,9 +31,9 @@ export default function Hook(props?: Props) {
   const userTarget = props?.route.params?.userTarget
   const [messages, setMessages] = useState<IMessage[]>([])
   const websocket = new WebSocket(
-    `${Config.WS}:${Config.Port}/ws?id=${roomID?._id}`
+    `${Config.WS}:${Config.Port}/ws?room=${roomID?._id}&user=${userID}`
   )
-
+  const dispatch = useDispatch()
   useEffect(() => {
     ;(async () => {
       if (Platform.OS !== 'web') {
@@ -171,13 +173,19 @@ export default function Hook(props?: Props) {
   }, [])
 
   const onSend = useCallback((messages = []) => {
+    console.log('s', messages)
     messages.map((a: any) => {
-      var json = JSON.stringify({
+      const message = {
         action: 'send-message',
         sender_id: userID,
         content: a.text,
+        receiver_id: userTarget?._id,
+        attachments: [],
+        room_id: roomID?._id,
         created_at: new Date().toJSON(),
-      })
+      }
+      dispatch(ConversationAction.UpdateList(message))
+      var json = JSON.stringify(message)
       sendSockets(json)
     })
     setMessages((previousMessages) =>

@@ -17,7 +17,9 @@ export function getAge(date: any): Number {
 export function renderDate(date: string): string {
   const d = moment(date)
   const today = moment()
-  if (!d.isSame(today, 'year')) {
+  if(date == "unknown"){
+    return date
+  }else if (!d.isSame(today, 'year')) {
     return d.format('MM-YYYY')
   } else if (!d.isSame(today, 'month')) {
     return d.format('DD-MM')
