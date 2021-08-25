@@ -184,7 +184,7 @@ export default function Hook(props?: Props) {
         room_id: roomID?._id,
         created_at: new Date().toJSON(),
       }
-      dispatch(ConversationAction.UpdateList(message))
+      dispatch(ConversationAction.updateList(message))
       var json = JSON.stringify(message)
       sendSockets(json)
     })

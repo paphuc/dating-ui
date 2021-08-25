@@ -18,15 +18,13 @@ export type PropsInterface = {
 }
 
 export default function Hook(props?: PropsInterface) {
-  
-
   const dispatch = useDispatch()
   const AuthUser: IUser = useSelector((value: any) => value.authStore?.user)
-  
+
   const websocket = new WebSocket(
     `${Config.WS}:${Config.Port}/ws?room=${Config.BigRoomID}&user=${AuthUser._id}`
   )
- 
+
   const Matched = useSelector((state: any) => state.matchedStore)
   const matches = useSelector((state: any) => state.matchedStore.content)
 
@@ -73,25 +71,24 @@ export default function Hook(props?: PropsInterface) {
         room: room,
         userID: AuthUser._id,
       },
-
     })
   }
   useEffect(() => {
     handleConversationRefresh()
     handleMatchedRefresh()
 
-    var a = JSON.stringify({
+    var payload = JSON.stringify({
       action: 'join-room',
       sender_id: AuthUser._id,
     })
 
     websocket.onopen = () => {
-      sendSockets(a)
+      sendSockets(payload)
     }
   }, [])
   websocket.onmessage = (e) => {
     const messagesSocket = JSON.parse(e.data)
-    dispatch(ConversationAction.UpdateList(messagesSocket))
+    dispatch(ConversationAction.updateList(messagesSocket))
   }
   const sendSockets = (JSON: string) => {
     websocket.send(JSON)

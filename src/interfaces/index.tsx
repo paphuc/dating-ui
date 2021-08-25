@@ -98,5 +98,5 @@ export interface IRoom {
     attachments: string
     created_at: string 
   }
-  read: boolean 
+  isRead: boolean 
 }
