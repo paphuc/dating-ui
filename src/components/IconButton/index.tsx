@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { FontAwesome as Icon } from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import Layout from '../../constants/Layout'
-import { LinearGradient } from 'expo-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient'
+
 import Colors from '../../constants/Colors'
 export default function ({
   name,

@@ -11,7 +11,8 @@ import styles from './styles'
 import Colors from '../../constants/Colors'
 import { ModelParamList, UserDetailParamList } from '../../navigation/types'
 import Container from '../../components/Container'
-import { FontAwesome5 as Icon } from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 interface Props {
   route: RouteProp<any, 'UserDetail'>
   navigation: StackNavigationProp<ModelParamList, 'UserDetail'>

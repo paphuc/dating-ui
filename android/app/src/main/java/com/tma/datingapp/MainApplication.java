@@ -6,6 +6,11 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -18,10 +23,10 @@ import org.unimodules.adapters.react.ModuleRegistryAdapter;
 import org.unimodules.adapters.react.ReactModuleRegistryProvider;
 import org.unimodules.core.interfaces.Package;
 import org.unimodules.core.interfaces.SingletonModule;
-import expo.modules.constants.ConstantsPackage;
-import expo.modules.permissions.PermissionsPackage;
-import expo.modules.filesystem.FileSystemPackage;
-import expo.modules.updates.UpdatesController;
+// import expo.modules.constants.ConstantsPackage;
+// import expo.modules.permissions.PermissionsPackage;
+// import expo.modules.filesystem.FileSystemPackage;
+// import expo.modules.updates.UpdatesController;
 
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
@@ -59,23 +64,23 @@ public class MainApplication extends Application implements ReactApplication {
       return new ReanimatedJSIModulePackage();
     }
 
-    @Override
-    protected @Nullable String getJSBundleFile() {
-      if (BuildConfig.DEBUG) {
-        return super.getJSBundleFile();
-      } else {
-        return UpdatesController.getInstance().getLaunchAssetFile();
-      }
-    }
+    // @Override
+    // protected @Nullable String getJSBundleFile() {
+    //   if (BuildConfig.DEBUG) {
+    //     return super.getJSBundleFile();
+    //   } else {
+    //     return UpdatesController.getInstance().getLaunchAssetFile();
+    //   }
+    // }
 
-    @Override
-    protected @Nullable String getBundleAssetName() {
-      if (BuildConfig.DEBUG) {
-        return super.getBundleAssetName();
-      } else {
-        return UpdatesController.getInstance().getBundleAssetName();
-      }
-    }
+    // @Override
+    // protected @Nullable String getBundleAssetName() {
+    //   if (BuildConfig.DEBUG) {
+    //     return super.getBundleAssetName();
+    //   } else {
+    //     return UpdatesController.getInstance().getBundleAssetName();
+    //   }
+    // }
   };
 
   @Override
@@ -88,9 +93,9 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
 
-    if (!BuildConfig.DEBUG) {
-      UpdatesController.initialize(this);
-    }
+    // if (!BuildConfig.DEBUG) {
+    //   UpdatesController.initialize(this);
+    // }
 
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }

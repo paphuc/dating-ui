@@ -18,4 +18,14 @@ target 'datingui' do
   #     flipper_post_install(installer)
   #   end
   # end
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
 end

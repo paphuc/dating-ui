@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { FontAwesome } from '@expo/vector-icons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
 import { BottomTabParamList } from './types'
 import HomeNav from './HomeNavigator'
 import ProfileNav from './ProfileNavigator'
@@ -33,13 +33,13 @@ function TabBarIcon(props: any) {
 }
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme()
+  // const colorScheme = useColorScheme()
 
   return (
     <BottomTab.Navigator
       initialRouteName='Home'
       tabBarOptions={{
-        activeTintColor: Colors[colorScheme].tint,
+        activeTintColor: Colors.light.tint,
         inactiveTintColor: Colors.Grey.Medium,
         style: {
           borderTopColor: 'white', //Change Like This
