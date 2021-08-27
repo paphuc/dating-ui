@@ -1,32 +1,38 @@
 import { StyleSheet } from 'react-native'
+import Layout from '../../constants/Layout'
 
 export default StyleSheet.create({
-  ContainerFlex: {
+  Container: {
     flex: 1,
+  },
+  keyboardContainer: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  ProfileContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 20,
   },
   MediaContainer: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    // justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
-  ViewContainerImage: {
-    width: 125,
-    height: 150,
-    margin: 5,
-    borderRadius: 10,
-  },
-  DelButtonContainer: {
-    position: 'absolute',
-    right: 0,
-  },
-  PickButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 5,
+    margin: 20
   },
-  PickButton: {
-    width: 300,
+  InputView: {
+    marginTop: 10,
+    marginBottom: 10
+  },
+  Button: {
+    width: Layout.window.width * 0.9,
     borderRadius: 30,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    zIndex: 4,
+    ...Layout.styles.Shadow,
   },
 })

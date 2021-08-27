@@ -1,14 +1,23 @@
 import { StyleSheet } from 'react-native'
+import Layout from '../../../constants/Layout'
 
 export default StyleSheet.create({
+  Container: {
+    width: Layout.window.width * 0.85,
+  },
+  TitleView: {
+        
+  },
   Title: {
     fontSize: 15,
     color: 'silver',
-    margin: 10,
+    fontWeight: 'bold',
   },
-  ActivityIndicator: {
-    width: 125,
-    height: 150,
-    borderRadius: 10,
-  },
+  TextInput: {
+    fontSize: 20,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderBottomColor: 'silver',
+    borderBottomWidth: 1,
+  }
 })

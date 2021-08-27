@@ -19,13 +19,18 @@ export default StyleSheet.create({
         borderBottomColor: 'silver',
         borderBottomWidth: 1,
     },
+    EmptyInputValue: {
+        fontSize: 20,
+        color: 'white'
+    },
     InputValue: {
         fontSize: 20,
+        color: 'black'
     },
     Modal: {
         
     },
-    DatePickerContainer: {
+    PickerContainer: {
         height: 250,
         marginTop: Layout.window.height - 250,
         backgroundColor: 'white',
@@ -35,11 +40,7 @@ export default StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
-    DatePicker: {
+    Picker: {
         height: 250,
-        // shadowColor: 'black', 
-        // shadowRadius: 3, 
-        // shadowOpacity: 1, 
-        // shadowOffset: { height: 0, width: 0 }
-    }
+    },
 })

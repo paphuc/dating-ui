@@ -1,93 +1,97 @@
-import React from 'react'
-import {
-  ActivityIndicator,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native'
-import {
-  Image,
-  Button,
-} from 'react-native-elements'
-import DateTimePicker, {
-  WindowsDatePickerChangeEvent,
-} from '@react-native-community/datetimepicker'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React, { useState } from 'react'
 import styles from './style'
-interface DatePickerProps {
-  birthday?: Date
-  onChange?: (value: string) => void
+import {
+    View,
+    TouchableOpacity,
+    Modal,
+    Platform,
+    Text,
+} from 'react-native'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment'
+
+interface IDatePicker {
+    title: string
+    defaultValue: Date  | undefined
+    onChange: (value: Date) => void
 }
 
-export default function DatePicker({
-  birthday,
-  onChange,
-}: DatePickerProps) {
-  const [date, setDate] = React.useState(
-    new Date(birthday ? birthday : '')
-  )
-  const [show, setShow] = React.useState(false)
+interface ICustomedPicker {
+    isIOS: boolean
+    date: Date
+    pickerHandler: (event: any, selectedDate: any) => void
+}
 
-  const onChangeInElement = (
-    event: any,
-    selectedDate: any
-  ) => {
-    if (onChange) {
-      onChange(selectedDate?.toJSON())
-    }
-    const currentDate = selectedDate || date
-    setShow(Platform.OS === 'ios')
-    setDate(currentDate)
-  }
-
-  const showMode = () => {
-    setShow(true)
-  }
-
-  return (
-    <View>
-      <View>
-        <Text style={styles.Title}>Birthday</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          // flexWrap: "wrap",
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              fontSize: 20,
-            }}
-          >
-            {' '}
-            {date?.getDate()}/
-            {date
-              ? Number(date.getMonth()) + 1
-              : ''}
-            /{date?.getFullYear()}{' '}
-          </Text>
+const CustomedPicker = (props: ICustomedPicker) => {
+    return (
+        <View style={styles.DatePickerContainer}>
+            <DateTimePicker
+                style={styles.DatePicker}
+                value={moment(props.date).toDate()}
+                mode='date'
+                display={props.isIOS ? 'spinner' : 'default'}
+                onChange={props.pickerHandler}
+                textColor='black'
+            />
         </View>
-        <Button
-          onPress={showMode}
-          buttonStyle={{ width: 100 }}
-          title='change'
-        />
-      </View>
-      {show && (
-        <DateTimePicker
-          testID='dateTimePicker'
-          value={date}
-          mode='date'
-          is24Hour={true}
-          display='default'
-          onChange={onChangeInElement}
-        />
-      )}
-    </View>
-  )
+    )
+}
+
+export default function DatePicker(props: IDatePicker) {
+    const [date, setDate] = useState(props.defaultValue || new Date())
+    const [show, setShow] = useState(false)
+    const isIOS = Platform.OS === 'ios'
+
+    const pickerHandler = (event: Event, selectedDate: Date) => {
+        setDate(selectedDate)
+        props.onChange(selectedDate)
+        !isIOS ? changeShow : null
+    }
+
+    const changeShow = () => {
+        setShow(!show)
+    }
+
+
+    return (
+        <View style={styles.Container}>
+            <View style={styles.TitleView}>
+                <Text style={styles.Title}>{props.title}</Text>
+                <TouchableOpacity onPress={changeShow}>
+                    <View style={styles.InputContainer}>
+                        <Text style={styles.InputValue}>{moment(date).format('DD/MM/YYYY')}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+
+            
+            {isIOS ?
+                <Modal
+                    style={styles.Modal}
+                    animationType='slide'
+                    visible={show}
+                    transparent={true}
+                >
+                    <TouchableOpacity
+                        onPressOut={changeShow}
+                    >
+                        <CustomedPicker
+                            isIOS={isIOS}
+                            date={date}
+                            pickerHandler={pickerHandler}
+                        />
+                    </TouchableOpacity>
+                </Modal> :
+                (show && (
+                    <CustomedPicker
+                    isIOS={isIOS}
+                    date={date}
+                    pickerHandler={pickerHandler}
+                    />
+                )) 
+                
+            }
+
+        </View>
+    )
 }
