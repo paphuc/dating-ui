@@ -99,7 +99,7 @@ export interface IRoom {
     sender_id: string
     content: string
     attachments: string
-    created_at: string 
+    created_at: string
   }
   isRead: boolean 
 }

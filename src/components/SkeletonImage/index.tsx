@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { Image } from 'react-native-elements'
-import { FontAwesome5 as Icon } from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import SkeletonContent from 'react-native-skeleton-content'
 import { DefaultImage } from '../../constants/Image'
 interface Props {

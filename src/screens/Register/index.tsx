@@ -4,7 +4,8 @@ import { Input, Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import useHook from './hooks'
 import styles from './style'
-import { LinearGradient } from 'expo-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient';
+
 import Colors from '../../constants/Colors'
 
 export default function LoginScreen(props: any) {

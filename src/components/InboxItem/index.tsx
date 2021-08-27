@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { ListItem, Avatar, Text } from 'react-native-elements'
 import { IRoom, IUserInRoom, IUser } from '../../interfaces'
 import { useSelector, useDispatch } from 'react-redux'
-import { FontAwesome5 } from '@expo/vector-icons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Colors from '../../constants/Colors'
 import { getThumbnailLink, renderDate } from '../../common/Utils'
 
@@ -35,9 +35,10 @@ const InboxItem = ({ room, userID, onPress }: InboxElementProps) => {
         rounded
         title={targetUser?.name[0]}
         source={
-          targetUser?.avatar && {
+          (targetUser?.avatar && {
             uri: getThumbnailLink(targetUser?.avatar, 'small'),
-          }
+          }) ||
+          undefined
         }
       />
 
