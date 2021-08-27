@@ -7,6 +7,8 @@ import commonStore from './common'
 import matchedStore from './match'
 import updateUser from './updateUser'
 import roomStore from './room'
+import notification from './notification'
+
 const appReducers = combineReducers({
   languageStore,
   authStore,
@@ -16,6 +18,7 @@ const appReducers = combineReducers({
   commonStore,
   updateUser,
   roomStore,
+  notification
 })
 
 export type ApplicationState = ReturnType<typeof appReducers>

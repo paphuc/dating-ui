@@ -14,6 +14,12 @@ import logger from 'redux-logger'
 import { useDispatch, useSelector } from 'react-redux'
 import { Root } from './src/components/Message'
 export const store = createStore(appReducers, applyMiddleware(thunk))
+import messaging from '@react-native-firebase/messaging';
+
+//receive notification when close app
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
 
 export default function App() {
   const isLoadingComplete = useCachedResources()

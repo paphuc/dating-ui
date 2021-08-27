@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import moment from 'moment'
 export function clearLocalStorage() {
-  ;['user'].forEach((item) => {
+  ;['user','token_device'].forEach((item) => {
     AsyncStorage.removeItem(item)
   })
 }

@@ -4,6 +4,7 @@ import { RootStackParamList } from '../../../navigation/types'
 import { IUser } from '../../../interfaces'
 import { useSelector, useDispatch } from 'react-redux'
 import Actions from '../../../redux/actions/auth'
+import ActionNotification from '../../../redux/actions/notification'
 
 export type InboxScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -20,7 +21,8 @@ export default function Hook(props?: PropsInterface) {
   const Info = useSelector((value: any) => value.authStore.info)
   const dispatch = useDispatch()
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await dispatch(ActionNotification.unregisterDevice(User?._id))
     dispatch(Actions.logout())
   }
   useEffect(() => {
