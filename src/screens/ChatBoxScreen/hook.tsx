@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
-import * as ImagePicker from 'expo-image-picker'
+import ImagePicker from 'react-native-image-crop-picker'
 import { RouteProp } from '@react-navigation/native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { ImessagesAPI } from '../../interfaces'
@@ -33,15 +33,7 @@ export default function Hook(props?: Props) {
   )
 
   useEffect(() => {
-    ;(async () => {
-      if (Platform.OS !== 'web') {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!')
-        }
-      }
-    })()
+    ;(async () => {})()
 
     getLastMessage()
     var a = JSON.stringify({
@@ -56,22 +48,18 @@ export default function Hook(props?: Props) {
   }, [])
 
   const handlePickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      quality: 1,
+    let result = await ImagePicker.openPicker({
+      cropping: true,
     })
-    if (result && !result?.cancelled) {
-      const localUri = result.uri
+    if (result) {
+      const localUri = result.path
       const filename = localUri.split('/').pop()
       if (filename) {
-        const match = /\.(\w+)$/.exec(filename)
-        const type = match ? `image/${match[1]}` : `image`
-
         const dataPicture = JSON.parse(
           JSON.stringify({
             uri: localUri,
             name: filename,
-            type,
+            type: result.mime,
           })
         )
         const formData = new FormData()
