@@ -1,4 +1,5 @@
 export default {
   ROOM_LIST : 'ROOM_LIST',
+  ROOM_UPDATE : 'ROOM_UPDATE',
   ROOM_LOADING:'ROOM_LOADING',
 }
