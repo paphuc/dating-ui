@@ -80,7 +80,10 @@ export interface ImessagesAPI {
   content: string
   created_at: string
   room_id: string
-  sender_id: string
+  sender:{
+    _id: string,
+    name: string,
+  }
 }
 
 export interface IUserInRoom {

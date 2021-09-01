@@ -58,7 +58,7 @@ export default function Hook(props?: PropsInterface) {
       params: {
         userTarget: userTarget,
         room: room,
-        userID: AuthUser._id,
+        user: AuthUser,
       },
     })
   }
@@ -69,7 +69,7 @@ export default function Hook(props?: PropsInterface) {
       params: {
         userTarget: userTarget,
         room: room,
-        userID: AuthUser._id,
+        AuthUser: AuthUser,
       },
     })
   }

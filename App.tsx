@@ -11,22 +11,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Root } from './src/components/Message'
 import { StatusBar } from 'react-native'
 export const store = createStore(appReducers, applyMiddleware(thunk))
-import messaging from '@react-native-firebase/messaging';
-
-//receive notification when close app
-messaging().setBackgroundMessageHandler(async remoteMessage => {
-  console.log('Message handled in the background!', remoteMessage);
-});
 
 export default function App() {
-    return (
-      <SafeAreaProvider>
-        <Provider store={store}>
-          <Root>
-            <Navigation />
-          </Root>
-        </Provider>
-        <StatusBar backgroundColor='transparent' translucent={true} barStyle="dark-content" />
-      </SafeAreaProvider>
-    )
+  return (
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <Root>
+          <Navigation />
+        </Root>
+      </Provider>
+      <StatusBar
+        backgroundColor='transparent'
+        translucent={true}
+        barStyle='dark-content'
+      />
+    </SafeAreaProvider>
+  )
 }
