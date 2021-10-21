@@ -10,8 +10,10 @@ import Colors from '../../../constants/Colors'
 import { ActivityIndicator } from 'react-native'
 
 interface IAvatarPicker {
+    index: number;
     imageUrl: string
-    onClick: () => void
+    isExist: boolean;
+    onClick: (index: number) => void;
 }
 
 export default function AvatarPicker(props: IAvatarPicker) {
@@ -21,10 +23,9 @@ export default function AvatarPicker(props: IAvatarPicker) {
     useEffect(() => {
         setAvatar(props.imageUrl);
     }, [props.imageUrl])
-
     return (
         <View style={styles.TouchableView}>
-            <TouchableOpacity onPress={props.onClick}>
+            <TouchableOpacity onPress={()=>props.onClick(props.index)}>
                 {isLoading ?
                     <View style={styles.ImageContainer}>
                         <View style={styles.EmptyImage}>
@@ -34,14 +35,14 @@ export default function AvatarPicker(props: IAvatarPicker) {
                     :
                     <View>
                         <View style={styles.ImageContainer}>
-                            <Image 
+                            {props.isExist?(<Image 
                             resizeMode={'cover'}
                             source={{uri: avatar}}
-                            style={styles.Image}/>
+                            style={styles.Image}/>):(<View style={styles.Image}></View>)}
                         </View>
-                        <View style={styles.EditView}>
+                        <View style={props.isExist?styles.EditView:styles.AddView}>
                             <View style={styles.EditCircle}>
-                                <Icon name='pencil' size={20} style={styles.Icon} />
+                                <Icon name={props.isExist ? "remove": 'plus'} size={20} style={styles.Icon} />
                             </View>
                         </View>
                     </View>

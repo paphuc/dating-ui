@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Button } from 'react-native-elements'
@@ -24,7 +24,6 @@ import {
 import styles from './style'
 
 import useHook from './hook'
-
 export default function UpdateProfileScreens(props: any) {
   const {
     user,
@@ -39,9 +38,9 @@ export default function UpdateProfileScreens(props: any) {
     setLookingForHandler,
     setSexHandler,
     setAboutHandler,
-    updateHandler
+    updateHandler,
+    removeItemInArray,
   } = useHook(props)
-
   return (
     <Container>
       <KeyboardAvoidingView
@@ -52,12 +51,19 @@ export default function UpdateProfileScreens(props: any) {
         <ScrollView style={styles.Container}>
           <View style={styles.ProfileContainer}>
             <View style={styles.MediaContainer}>
-              <AvatarPicker
-                onClick={pickImage}
-                imageUrl={imageArr[0]}
-              />
+              {[...Array(9)].map((url, index) => {
+                return (
+                  <View style={styles.ImageContainer} key={index}>
+                    <AvatarPicker
+                      isExist={!!imageArr[index]}
+                      onClick={imageArr[index] ? removeItemInArray : pickImage}
+                      imageUrl={imageArr[index] ? imageArr[index] : 'none'}
+                      index={index}
+                    />
+                  </View>
+                )
+              })}
             </View>
-
             <View style={styles.InputView}>
               <InputElement
                 title={'Name'}
@@ -103,7 +109,15 @@ export default function UpdateProfileScreens(props: any) {
                 title={'Relationship'}
                 onChange={setRelationshipHandler}
                 defaultValue={user?.relationship}
-                options={['Single', 'In RelationShip', 'Divorced', 'Engaged', 'Married', 'Widowed', 'In Complicated Relationship']}
+                options={[
+                  'Single',
+                  'In RelationShip',
+                  'Divorced',
+                  'Engaged',
+                  'Married',
+                  'Widowed',
+                  'In Complicated Relationship',
+                ]}
               />
             </View>
 

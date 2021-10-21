@@ -68,27 +68,19 @@ export default function Hook(props?: Props) {
     }
   }, [update])
 
-  const pickImage = async () => {
+  const pickImage = async (index: number) => {
+    console.log(index);
+    
     if (imageArr.length >= 9) {
       Alert.alert('Notification', 'Max number picture 9', [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => console.log('Cancel Pressed',index),
           style: 'cancel',
         },
       ])
       return
     }
-    let options = {
-      title: 'Select Image',
-      customButtons: [
-        { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
-      ],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
     let result = await ImagePicker.openPicker({
       cropping: true,
     })
