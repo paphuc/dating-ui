@@ -30,6 +30,8 @@ export default function Hook(props?: Props) {
   const roomID = props?.route.params?.room
   const userTarget = props?.route.params?.userTarget
   const [messages, setMessages] = useState<IMessage[]>([])
+  const [page, setPage] = useState<number>(1)
+
   const websocket = new WebSocket(
     `${Config.WS}:${Config.Port}/ws?room=${roomID?._id}&user=${userID}`
   )
@@ -47,7 +49,7 @@ export default function Hook(props?: Props) {
     websocket.onopen = () => {
       sendSockets(a)
     }
-  }, [])
+  }, [page])
 
   const handlePickImage = async () => {
     let result = await ImagePicker.openPicker({
@@ -104,18 +106,27 @@ export default function Hook(props?: Props) {
     websocket.send(JSON)
   }
   const getLastMessage = () => {
-    Api.get('/messages/' + roomID?._id).then(({ data }) => {
-      const messageLast: ImessagesAPI[] | undefined = data
+    // '/messages/' + roomID?._id +
 
-      setMessages((previousMessages) =>
-        GiftedChat.append(
-          previousMessages,
-          convertSocketMessToMessageList(
-            messageLast ? messageLast : []
-          ).reverse()
+    Api.get(`/messages/${roomID?._id}?page=${page}&size=20`).then(
+      ({ data }) => {
+        console.log(data)
+
+        const messageLast: ImessagesAPI[] | undefined = data.content
+
+        setMessages((previousMessages) =>
+          page === 1
+            ? GiftedChat.append(
+                previousMessages,
+                convertSocketMessToMessageList(messageLast ? messageLast : [])
+              )
+            : GiftedChat.append(
+                convertSocketMessToMessageList(messageLast ? messageLast : []),
+                previousMessages
+              )
         )
-      )
-    })
+      }
+    )
   }
 
   const convertSocketMessToMessageList = (messageLast: ImessagesAPI[]) => {
@@ -159,7 +170,20 @@ export default function Hook(props?: Props) {
       GiftedChat.append(previousMessages, messages)
     )
   }, [])
-
+  const isCloseToTop = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }: any) => {
+    const paddingToTop = 0
+    return (
+      contentSize.height - layoutMeasurement.height - paddingToTop <=
+      contentOffset.y
+    )
+  }
+  const scrollTop = () => {
+      setPage(previousPage=> previousPage+1)
+  }
   const onSend = useCallback((messages = []) => {
     console.log('s', messages)
     messages.map((a: any) => {
@@ -181,6 +205,7 @@ export default function Hook(props?: Props) {
     )
   }, [])
   return {
+    scrollTop,
     userID,
     roomID,
     userTarget,

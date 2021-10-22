@@ -5,7 +5,7 @@ import Container from '../../components/Container'
 import useHook, { Props } from './hook'
 
 export default function ChatBoxScreen({ navigation, route }: Props) {
-  const { messages, onSend, handlePickImage } = useHook({
+  const { messages, onSend, handlePickImage,scrollTop } = useHook({
     navigation,
     route,
   })
@@ -22,7 +22,6 @@ export default function ChatBoxScreen({ navigation, route }: Props) {
       />
     )
   }
-
   return (
     <Container>
       <GiftedChat
@@ -31,6 +30,10 @@ export default function ChatBoxScreen({ navigation, route }: Props) {
         renderActions={renderActions}
         user={{
           _id: 1,
+        }}
+        inverted={true}
+        listViewProps={{
+          onEndReached: () => scrollTop()
         }}
       />
     </Container>

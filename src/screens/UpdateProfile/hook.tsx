@@ -36,7 +36,7 @@ export default function Hook(props?: Props) {
     props?.route.params?.item
   )
 
-  const [info, setInfo] = useState({
+  const [ info, setInfo] = useState({
     name: user?.name || '',
     gender: user?.gender || '',
     birthday: user?.birthday || '',
