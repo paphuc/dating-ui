@@ -12,14 +12,21 @@ export default StyleSheet.create({
   ProfileContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 20,
+    // margin: 20,
   },
   MediaContainer: {
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20
+    margin: 10
+  },
+  ImageContainer: {
+    // flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // margin: 20
   },
   InputView: {
     marginTop: 10,
