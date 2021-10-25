@@ -32,11 +32,12 @@ const RemotePushController = () => {
 
       // (required) Called when a remote or local notification is opened or received
       onNotification: function (notification: any) {
-        console.log('REMOTE NOTIFICATION ==>', notification)
         // process the notification here
       },
+      // onAction:  
       popInitialNotification: true,
       requestPermissions: true,
+      
     })
   }, [])
 

@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
-import { IUser, IUserInRoom, IRoom } from '../interfaces'
+import { IUser, IUserInRoom, IRoom, JwtProps } from '../interfaces'
 
 export type RootStackParamList = {
   List: undefined
@@ -10,7 +10,7 @@ export type RootStackParamList = {
   ChatBoxScreen:
     | {
         room: IRoom | undefined
-        userID: string | undefined
+        AuthUser: JwtProps | undefined
         userTarget: IUserInRoom | undefined
       }
     | undefined

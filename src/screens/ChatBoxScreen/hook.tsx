@@ -26,13 +26,15 @@ export type Props = {
 }
 
 export default function Hook(props?: Props) {
-  const userID = props?.route.params?.userID
+  const AuthUser = props?.route.params?.AuthUser
   const roomID = props?.route.params?.room
   const userTarget = props?.route.params?.userTarget
   const [messages, setMessages] = useState<IMessage[]>([])
   const websocket = new WebSocket(
-    `${Config.WS}:${Config.Port}/ws?room=${roomID?._id}&user=${userID}`
+    `${Config.WS}:${Config.Port}/ws?room=${roomID?._id}&user=${AuthUser?._id}`
   )
+  console.log(AuthUser)
+
   const dispatch = useDispatch()
   useEffect(() => {
     ;(async () => {})()
@@ -41,7 +43,10 @@ export default function Hook(props?: Props) {
     var a = JSON.stringify({
       action: 'join-room',
       room_id: roomID?._id,
-      sender_id: userID,
+      sender: {
+        _id: AuthUser?._id,
+        name: AuthUser?.name,
+      },
     })
 
     websocket.onopen = () => {
@@ -70,7 +75,10 @@ export default function Hook(props?: Props) {
         const url = await CloudinaryService.updateImageCould(formData)
         var json = JSON.stringify({
           action: 'send-message',
-          sender_id: userID,
+          sender: {
+            _id: AuthUser?._id,
+            name: AuthUser?.name,
+          },
           content: '',
           attachments: [url],
           created_at: new Date().toJSON(),
@@ -95,7 +103,7 @@ export default function Hook(props?: Props) {
   }
   websocket.onmessage = (e) => {
     const messagesSocket = JSON.parse(e.data)
-    if (messagesSocket.sender_id !== userID) {
+    if (messagesSocket.sender._id !== AuthUser?._id) {
       onChange(convertSocketMessToMessageList([messagesSocket]))
     }
   }
@@ -131,8 +139,13 @@ export default function Hook(props?: Props) {
               image: url,
               user: {
                 _id:
-                  messageLast[i].sender_id === userID ? 1 : messageLast[i]._id,
-                name: messageLast[i]._id === userID ? 'Me' : userTarget?.name,
+                  messageLast[i].sender._id === AuthUser?._id
+                    ? 1
+                    : messageLast[i]._id,
+                name:
+                  messageLast[i]._id === AuthUser?._id
+                    ? 'Me'
+                    : userTarget?.name,
                 avatar: userTarget?.avatar,
               },
             }
@@ -144,8 +157,12 @@ export default function Hook(props?: Props) {
             text: messageLast[i].content,
             createdAt: new Date(messageLast[i].created_at),
             user: {
-              _id: messageLast[i].sender_id === userID ? 1 : messageLast[i]._id,
-              name: messageLast[i]._id === userID ? 'Me' : userTarget?.name,
+              _id:
+                messageLast[i].sender._id === AuthUser?._id
+                  ? 1
+                  : messageLast[i]._id,
+              name:
+                messageLast[i]._id === AuthUser?._id ? 'Me' : userTarget?.name,
               avatar: userTarget?.avatar,
             },
           })
@@ -165,7 +182,10 @@ export default function Hook(props?: Props) {
     messages.map((a: any) => {
       const message = {
         action: 'send-message',
-        sender_id: userID,
+        sender: {
+          _id: AuthUser?._id,
+          name: AuthUser?.name,
+        },
         content: a.text,
         receiver_id: userTarget?._id,
         attachments: [],
@@ -173,6 +193,8 @@ export default function Hook(props?: Props) {
         created_at: new Date().toJSON(),
       }
       dispatch(ConversationAction.updateList(message))
+      console.log(message, AuthUser)
+
       var json = JSON.stringify(message)
       sendSockets(json)
     })
@@ -181,7 +203,7 @@ export default function Hook(props?: Props) {
     )
   }, [])
   return {
-    userID,
+    AuthUser,
     roomID,
     userTarget,
     onSend,
